@@ -53,9 +53,11 @@
 
 ---
 
-## 4. Qué queda pendiente
-- **Aprobación final del usuario** para commit local en `dev` y merge/push a `main`.
-- **Fase B (Post-Presentación)**:
-  - Migrar llamadas de InsForge a endpoint serverless seguro.
-  - Modularización de componentes de `admin.astro`.
-  - Conexión del dominio oficial y Google Search Console.
+## 4. Qué queda pendiente (Para próximas sesiones / Post-Presentación)
+- **Fase B (Seguridad y Arquitectura de Servidor)**:
+  - Migrar llamadas directas con clave de InsForge a endpoints serverless en Astro / Edge Functions.
+  - Modularización de componentes de `admin.astro` (dividir las 3.500 líneas en submódulos).
+  - Unificación de lógica común entre `carta.astro` y `vinos.astro`.
+- **Dominio Oficial & Google Search Console**:
+  - Conexión de dominio definitivo y verificación DNS en Google Search Console.
+  - Enlace oficial en Google Business Profile (Google Maps).
