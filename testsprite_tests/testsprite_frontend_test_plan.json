@@ -1,8 +1,8 @@
 [
   {
     "id": "TC001",
-    "title": "Complete a reservation end to end",
-    "description": "A guest can complete the full reservation flow with party size, date, seating preference, service time, contact details, policy acceptance, and confirmation.",
+    "title": "Complete a reservation with valid details",
+    "description": "A guest can choose booking options, enter contact details, and receive a reservation confirmation.",
     "category": "Landing Page & Brand Experience",
     "steps": [
       {
@@ -11,7 +11,7 @@
       },
       {
         "type": "action",
-        "description": "Select a party size"
+        "description": "Select the number of guests"
       },
       {
         "type": "action",
@@ -23,27 +23,23 @@
       },
       {
         "type": "action",
-        "description": "Select a service time"
+        "description": "Select a service turn"
       },
       {
         "type": "action",
-        "description": "Fill in the name field with Alex Rivera"
+        "description": "Fill in the name field with Ana Perez"
       },
       {
         "type": "action",
-        "description": "Fill in the phone field with 600123123"
+        "description": "Fill in the email field with ana.perez@example.com"
       },
       {
         "type": "action",
-        "description": "Fill in the email field with alex.rivera@example.com"
+        "description": "Fill in the phone field with 612345678"
       },
       {
         "type": "action",
-        "description": "Accept the reservation policy"
-      },
-      {
-        "type": "action",
-        "description": "Submit the reservation"
+        "description": "Submit the reservation form"
       },
       {
         "type": "assertion",
@@ -54,8 +50,57 @@
   },
   {
     "id": "TC002",
-    "title": "Complete a reservation with all required details",
-    "description": "Verifies that a guest can finish the full reservation flow and receive a booking confirmation with the submitted summary.",
+    "title": "Authenticate and update a menu item in the admin backoffice",
+    "description": "A staff manager can log into the admin backoffice, edit a menu item, save the change, and see the updated menu state persisted.",
+    "category": "Admin Menu Management & Dish Editor",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /login"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the admin email with buonappetitoandratx@gmail.com"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the admin password with admin"
+      },
+      {
+        "type": "action",
+        "description": "Submit the login form"
+      },
+      {
+        "type": "action",
+        "description": "Navigate to /admin"
+      },
+      {
+        "type": "action",
+        "description": "Open an existing menu item for editing"
+      },
+      {
+        "type": "action",
+        "description": "Update the item title, description, price, and availability"
+      },
+      {
+        "type": "action",
+        "description": "Save the menu changes"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the updated menu item is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the saved change is reflected in the admin view"
+      }
+    ],
+    "priority": "High"
+  },
+  {
+    "id": "TC003",
+    "title": "Complete a reservation and receive confirmation",
+    "description": "A guest diner can finish the reservation flow end-to-end and receive a booking confirmation with the entered summary.",
     "category": "Interactive Table Booking Engine",
     "steps": [
       {
@@ -76,23 +121,15 @@
       },
       {
         "type": "action",
-        "description": "Choose a lunch or dinner service"
+        "description": "Choose a service turn and time slot"
       },
       {
         "type": "action",
-        "description": "Select an available time slot"
+        "description": "Fill in the contact details and special requests"
       },
       {
         "type": "action",
-        "description": "Fill in the contact details"
-      },
-      {
-        "type": "action",
-        "description": "Accept the policy terms"
-      },
-      {
-        "type": "action",
-        "description": "Submit the reservation form"
+        "description": "Submit the reservation"
       },
       {
         "type": "assertion",
@@ -100,15 +137,15 @@
       },
       {
         "type": "assertion",
-        "description": "Verify the reservation summary is displayed"
+        "description": "Verify the reservation summary is visible"
       }
     ],
     "priority": "High"
   },
   {
-    "id": "TC003",
+    "id": "TC004",
     "title": "Explore the homepage and start a reservation",
-    "description": "A guest can review the homepage highlights and reach the reservation flow from the main entry page.",
+    "description": "A guest can learn about the restaurant on the homepage and reach the reservation flow from there.",
     "category": "Landing Page & Brand Experience",
     "steps": [
       {
@@ -117,93 +154,28 @@
       },
       {
         "type": "action",
-        "description": "Scroll to the brand story and gallery section"
+        "description": "Scroll through the homepage sections"
       },
       {
         "type": "action",
-        "description": "Open the interactive gallery"
+        "description": "Interact with the circular gallery"
       },
       {
         "type": "action",
-        "description": "Scroll to the reviews section"
-      },
-      {
-        "type": "action",
-        "description": "Scroll to the location and opening hours section"
-      },
-      {
-        "type": "action",
-        "description": "Click the reservation call to action"
+        "description": "Click the reservation path from the homepage"
       },
       {
         "type": "assertion",
-        "description": "Verify the reservation page is displayed"
-      }
-    ],
-    "priority": "High"
-  },
-  {
-    "id": "TC004",
-    "title": "Preserve reservation progress while switching languages",
-    "description": "Verifies that a guest can switch the reservation language mid-flow and continue booking without losing entered information or the ability to submit.",
-    "category": "Interactive Table Booking Engine",
-    "steps": [
-      {
-        "type": "action",
-        "description": "Navigate to /reservar"
-      },
-      {
-        "type": "action",
-        "description": "Select a party size"
-      },
-      {
-        "type": "action",
-        "description": "Select a reservation date"
-      },
-      {
-        "type": "action",
-        "description": "Switch the reservation language"
-      },
-      {
-        "type": "action",
-        "description": "Choose a seating preference"
-      },
-      {
-        "type": "action",
-        "description": "Choose a lunch or dinner service"
-      },
-      {
-        "type": "action",
-        "description": "Select an available time slot"
-      },
-      {
-        "type": "action",
-        "description": "Fill in the contact details"
-      },
-      {
-        "type": "action",
-        "description": "Accept the policy terms"
-      },
-      {
-        "type": "action",
-        "description": "Submit the reservation form"
-      },
-      {
-        "type": "assertion",
-        "description": "Verify a booking confirmation is visible"
-      },
-      {
-        "type": "assertion",
-        "description": "Verify the reservation summary is displayed"
+        "description": "Verify the booking experience is displayed"
       }
     ],
     "priority": "High"
   },
   {
     "id": "TC005",
-    "title": "Complete a reservation after exploring the homepage",
-    "description": "Verifies that a guest can explore the homepage brand story and then proceed to the reservation flow without breaking navigation.",
-    "category": "Interactive Table Booking Engine",
+    "title": "Start booking from the homepage",
+    "description": "A visitor can discover the brand on the homepage and open the reservation flow from the booking call to action.",
+    "category": "Homepage Discovery",
     "steps": [
       {
         "type": "action",
@@ -211,7 +183,115 @@
       },
       {
         "type": "action",
-        "description": "Scroll to the brand story section"
+        "description": "Scroll to the reservation call to action"
+      },
+      {
+        "type": "action",
+        "description": "Click the reservation call to action"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the reservation flow is displayed"
+      }
+    ],
+    "priority": "High"
+  },
+  {
+    "id": "TC006",
+    "title": "Browse the menu by category and language",
+    "description": "A diner can explore the digital menu, switch languages, and navigate through dish categories successfully.",
+    "category": "Digital Food Menu Browsing",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /carta"
+      },
+      {
+        "type": "action",
+        "description": "Switch the menu language"
+      },
+      {
+        "type": "action",
+        "description": "Select a food category"
+      },
+      {
+        "type": "action",
+        "description": "Select another food category"
+      },
+      {
+        "type": "action",
+        "description": "Verify the menu items update for the selected category"
+      },
+      {
+        "type": "action",
+        "description": "Verify the translated menu content is visible"
+      }
+    ],
+    "priority": "High"
+  },
+  {
+    "id": "TC007",
+    "title": "Browse menu categories and inspect dishes",
+    "description": "A guest can navigate food categories on the menu and review dish details and dietary indicators.",
+    "category": "Digital Food Menu with Multilingual Support & Filters",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /carta"
+      },
+      {
+        "type": "action",
+        "description": "Click a menu category"
+      },
+      {
+        "type": "action",
+        "description": "Click a dish to view its details"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify dish details and dietary information are displayed"
+      }
+    ],
+    "priority": "High"
+  },
+  {
+    "id": "TC008",
+    "title": "Browse wine selections and view tasting details",
+    "description": "A guest can explore the wine cellar, inspect tasting notes and pairings, and review the curated selection.",
+    "category": "Wine & Beverage Cellar",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /vinos"
+      },
+      {
+        "type": "action",
+        "description": "Scroll through the wine sections"
+      },
+      {
+        "type": "action",
+        "description": "Click a wine item to inspect its details"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify tasting notes and pairing suggestions are displayed"
+      }
+    ],
+    "priority": "High"
+  },
+  {
+    "id": "TC009",
+    "title": "Review the homepage story gallery and location details",
+    "description": "A visitor can learn the brand story, review social proof, inspect the gallery, and view the location details from the homepage.",
+    "category": "Homepage Discovery",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /"
+      },
+      {
+        "type": "action",
+        "description": "Scroll to the story section"
       },
       {
         "type": "action",
@@ -223,167 +303,23 @@
       },
       {
         "type": "action",
-        "description": "Scroll to the location and opening hours section"
-      },
-      {
-        "type": "action",
-        "description": "Click the reservation call to action"
+        "description": "Scroll to the location details section"
       },
       {
         "type": "assertion",
-        "description": "Verify the reservation page is displayed"
+        "description": "Verify the story content is visible"
       },
       {
         "type": "assertion",
-        "description": "Verify the booking flow is available"
-      }
-    ],
-    "priority": "High"
-  },
-  {
-    "id": "TC006",
-    "title": "Select a reservation date and available time slot",
-    "description": "Verifies that a guest can choose a valid date and see an available time slot become selectable for booking.",
-    "category": "Interactive Table Booking Engine",
-    "steps": [
-      {
-        "type": "action",
-        "description": "Navigate to /reservar"
-      },
-      {
-        "type": "action",
-        "description": "Select a party size"
-      },
-      {
-        "type": "action",
-        "description": "Select a reservation date"
-      },
-      {
-        "type": "action",
-        "description": "Choose a lunch or dinner service"
-      },
-      {
-        "type": "assertion",
-        "description": "Verify available time slots are displayed"
-      }
-    ],
-    "priority": "High"
-  },
-  {
-    "id": "TC007",
-    "title": "Browse the food menu categories and inspect a dish",
-    "description": "A guest can browse the food menu, open a category, and inspect dish details with pricing and allergen information.",
-    "category": "Digital Food Menu with Multilingual Support & Filter",
-    "steps": [
-      {
-        "type": "action",
-        "description": "Navigate to /carta"
-      },
-      {
-        "type": "action",
-        "description": "Open a food category"
-      },
-      {
-        "type": "action",
-        "description": "Open a dish entry"
-      },
-      {
-        "type": "action",
-        "description": "Toggle the allergen or dietary information"
-      },
-      {
-        "type": "assertion",
-        "description": "Verify dish details and pricing are displayed"
-      },
-      {
-        "type": "assertion",
-        "description": "Verify allergen information is displayed"
-      }
-    ],
-    "priority": "High"
-  },
-  {
-    "id": "TC008",
-    "title": "Browse the wine list and inspect pairing details",
-    "description": "A guest can browse the wine list, open a wine entry, and review its origin, tasting notes, and pairing guidance.",
-    "category": "Bodega & Wine Cellar List",
-    "steps": [
-      {
-        "type": "action",
-        "description": "Navigate to /vinos"
-      },
-      {
-        "type": "action",
-        "description": "Open a wine section"
-      },
-      {
-        "type": "action",
-        "description": "Open a wine entry"
-      },
-      {
-        "type": "assertion",
-        "description": "Verify wine origin and tasting notes are displayed"
-      },
-      {
-        "type": "assertion",
-        "description": "Verify pairing information is displayed"
-      }
-    ],
-    "priority": "High"
-  },
-  {
-    "id": "TC009",
-    "title": "Require policy acceptance before completing a reservation",
-    "description": "Verifies that a guest cannot complete the reservation flow until the policy terms have been accepted.",
-    "category": "Interactive Table Booking Engine",
-    "steps": [
-      {
-        "type": "action",
-        "description": "Navigate to /reservar"
-      },
-      {
-        "type": "action",
-        "description": "Select a party size"
-      },
-      {
-        "type": "action",
-        "description": "Select a reservation date"
-      },
-      {
-        "type": "action",
-        "description": "Choose a seating preference"
-      },
-      {
-        "type": "action",
-        "description": "Choose a lunch or dinner service"
-      },
-      {
-        "type": "action",
-        "description": "Select an available time slot"
-      },
-      {
-        "type": "action",
-        "description": "Fill in the contact details"
-      },
-      {
-        "type": "action",
-        "description": "Submit the reservation form"
-      },
-      {
-        "type": "assertion",
-        "description": "Verify a policy acceptance requirement is visible"
-      },
-      {
-        "type": "assertion",
-        "description": "Verify the booking is not confirmed"
+        "description": "Verify the location details are visible"
       }
     ],
     "priority": "High"
   },
   {
     "id": "TC010",
-    "title": "Browse the homepage navigation and open the menu page",
-    "description": "A guest can use the homepage navigation to reach the menu experience and continue exploring the site.",
+    "title": "Discover the restaurant story and location details",
+    "description": "A guest can review the homepage story, testimonials, and location information before deciding to book or browse the menu.",
     "category": "Landing Page & Brand Experience",
     "steps": [
       {
@@ -392,90 +328,28 @@
       },
       {
         "type": "action",
-        "description": "Open the site navigation menu"
+        "description": "Scroll through the story and featured sections"
       },
       {
         "type": "action",
-        "description": "Choose the menu destination"
+        "description": "Scroll to the testimonials section"
+      },
+      {
+        "type": "action",
+        "description": "Scroll to the location details"
       },
       {
         "type": "assertion",
-        "description": "Verify the menu page is displayed"
+        "description": "Verify restaurant story and location information are displayed"
       }
     ],
     "priority": "High"
   },
   {
     "id": "TC011",
-    "title": "Keep homepage navigation accessible while switching site language",
-    "description": "Verifies that changing language on the homepage preserves access to the main navigation destinations and reservation entry point.",
+    "title": "Switch reservation language and complete booking",
+    "description": "A guest diner can change the reservation language and still complete a successful booking.",
     "category": "Interactive Table Booking Engine",
-    "steps": [
-      {
-        "type": "action",
-        "description": "Navigate to /"
-      },
-      {
-        "type": "action",
-        "description": "Switch the site language"
-      },
-      {
-        "type": "action",
-        "description": "Click the link to the food menu"
-      },
-      {
-        "type": "action",
-        "description": "Return to the homepage"
-      },
-      {
-        "type": "action",
-        "description": "Click the link to the wine list"
-      },
-      {
-        "type": "action",
-        "description": "Return to the homepage"
-      },
-      {
-        "type": "action",
-        "description": "Click the reservation call to action"
-      },
-      {
-        "type": "assertion",
-        "description": "Verify the reservation page is displayed"
-      },
-      {
-        "type": "assertion",
-        "description": "Verify the main navigation remains available"
-      }
-    ],
-    "priority": "High"
-  },
-  {
-    "id": "TC012",
-    "title": "Reserve a table from the food menu",
-    "description": "A guest can move from the food menu to the reservation flow using the menu call to action.",
-    "category": "Digital Food Menu with Multilingual Support & Filter",
-    "steps": [
-      {
-        "type": "action",
-        "description": "Navigate to /carta"
-      },
-      {
-        "type": "action",
-        "description": "Click the reservation call to action from the menu"
-      },
-      {
-        "type": "assertion",
-        "description": "Verify the reservation page is displayed"
-      }
-    ],
-    "priority": "High"
-  },
-  {
-    "id": "TC013",
-    "title": "Switch the reservation language without losing entered details",
-    "description": "A guest can change the reservation page language and keep the current form state while the interface updates consistently.",
-    "category": "Landing Page & Brand Experience",
     "steps": [
       {
         "type": "action",
@@ -483,36 +357,86 @@
       },
       {
         "type": "action",
+        "description": "Switch the reservation language"
+      },
+      {
+        "type": "action",
         "description": "Select a party size"
       },
       {
         "type": "action",
-        "description": "Fill a valid date into the date field"
+        "description": "Select a reservation date"
       },
       {
         "type": "action",
-        "description": "Fill in the name field with Alex Rivera"
+        "description": "Choose a seating preference"
       },
       {
         "type": "action",
-        "description": "Switch the page language to German"
+        "description": "Fill in valid contact details"
+      },
+      {
+        "type": "action",
+        "description": "Submit the reservation"
       },
       {
         "type": "assertion",
-        "description": "Verify the reservation form remains populated"
+        "description": "Verify a booking confirmation is visible"
+      }
+    ],
+    "priority": "High"
+  },
+  {
+    "id": "TC012",
+    "title": "Continue to reservation from the menu",
+    "description": "A guest can move from the food menu into the reservation flow without losing the booking intent.",
+    "category": "Digital Food Menu with Multilingual Support & Filters",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /carta"
+      },
+      {
+        "type": "action",
+        "description": "Click the reservation path from the menu"
       },
       {
         "type": "assertion",
-        "description": "Verify the language has changed across the page"
+        "description": "Verify the booking experience is displayed"
+      }
+    ],
+    "priority": "High"
+  },
+  {
+    "id": "TC013",
+    "title": "Open the menu from the homepage",
+    "description": "A guest can discover the menu entry point on the homepage and proceed to the digital menu.",
+    "category": "Landing Page & Brand Experience",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /"
+      },
+      {
+        "type": "action",
+        "description": "Scroll through the homepage sections"
+      },
+      {
+        "type": "action",
+        "description": "Click the link to view the menu"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the menu experience is displayed"
       }
     ],
     "priority": "High"
   },
   {
     "id": "TC014",
-    "title": "Browse the food menu and open reservation from the menu",
-    "description": "Verifies that a guest can browse the food menu, inspect category content, and reach the reservation flow from the menu experience.",
-    "category": "Interactive Table Booking Engine",
+    "title": "Filter dishes by dietary needs and continue to booking",
+    "description": "A diner can filter the menu by dietary or allergen needs, review the filtered results, and jump to the reservation flow.",
+    "category": "Digital Food Menu Browsing",
     "steps": [
       {
         "type": "action",
@@ -520,19 +444,11 @@
       },
       {
         "type": "action",
-        "description": "Open a menu category"
+        "description": "Apply a dietary or allergen filter"
       },
       {
         "type": "action",
-        "description": "Inspect a dish detail"
-      },
-      {
-        "type": "action",
-        "description": "Toggle dietary or allergen information"
-      },
-      {
-        "type": "action",
-        "description": "Switch the menu language"
+        "description": "Verify the filtered dishes are displayed"
       },
       {
         "type": "action",
@@ -540,20 +456,16 @@
       },
       {
         "type": "assertion",
-        "description": "Verify the reservation page is displayed"
-      },
-      {
-        "type": "assertion",
-        "description": "Verify the selected menu content remains accessible"
+        "description": "Verify the reservation flow is displayed"
       }
     ],
     "priority": "High"
   },
   {
     "id": "TC015",
-    "title": "Jump from the wine list to reservations",
-    "description": "A guest can move from the wine list directly into the reservation flow using the wine page call to action.",
-    "category": "Bodega & Wine Cellar List",
+    "title": "Start a reservation from the wine page",
+    "description": "A guest can move from the wine cellar to the reservation flow from within the beverage experience.",
+    "category": "Wine & Beverage Cellar",
     "steps": [
       {
         "type": "action",
@@ -561,20 +473,20 @@
       },
       {
         "type": "action",
-        "description": "Click the reservation call to action from the wine page"
+        "description": "Click the reservation path from the wine page"
       },
       {
         "type": "assertion",
-        "description": "Verify the reservation page is displayed"
+        "description": "Verify the booking experience is displayed"
       }
     ],
     "priority": "High"
   },
   {
     "id": "TC016",
-    "title": "Switch the food menu language and keep browsing",
-    "description": "A guest can change the menu language and continue browsing categories without breaking the menu experience.",
-    "category": "Digital Food Menu with Multilingual Support & Filter",
+    "title": "Switch the menu language",
+    "description": "A guest can change the menu language and continue browsing in the selected language.",
+    "category": "Digital Food Menu with Multilingual Support & Filters",
     "steps": [
       {
         "type": "action",
@@ -582,126 +494,19 @@
       },
       {
         "type": "action",
-        "description": "Open a food category"
-      },
-      {
-        "type": "action",
-        "description": "Switch the menu language to English"
-      },
-      {
-        "type": "action",
-        "description": "Open another food category"
+        "description": "Select a different menu language"
       },
       {
         "type": "assertion",
-        "description": "Verify the menu content is displayed in the selected language"
-      },
-      {
-        "type": "assertion",
-        "description": "Verify category navigation still works"
+        "description": "Verify the menu content updates to the selected language"
       }
     ],
     "priority": "High"
   },
   {
     "id": "TC017",
-    "title": "Browse the wine list and reach reservations from the cellar pages",
-    "description": "Verifies that a guest can review wine sections, tasting and pairing information, and continue to reservation from the wine experience.",
-    "category": "Interactive Table Booking Engine",
-    "steps": [
-      {
-        "type": "action",
-        "description": "Navigate to /vinos"
-      },
-      {
-        "type": "action",
-        "description": "Open a wine section"
-      },
-      {
-        "type": "action",
-        "description": "Inspect tasting notes"
-      },
-      {
-        "type": "action",
-        "description": "Inspect pairing information"
-      },
-      {
-        "type": "action",
-        "description": "Switch the wine language"
-      },
-      {
-        "type": "action",
-        "description": "Click the reservation call to action"
-      },
-      {
-        "type": "assertion",
-        "description": "Verify the reservation page is displayed"
-      },
-      {
-        "type": "assertion",
-        "description": "Verify wine section content remains accessible"
-      }
-    ],
-    "priority": "High"
-  },
-  {
-    "id": "TC018",
-    "title": "Switch the wine list language while browsing",
-    "description": "A guest can change the wine list language and continue browsing the cellar content with labels remaining consistent.",
-    "category": "Bodega & Wine Cellar List",
-    "steps": [
-      {
-        "type": "action",
-        "description": "Navigate to /vinos"
-      },
-      {
-        "type": "action",
-        "description": "Open a wine section"
-      },
-      {
-        "type": "action",
-        "description": "Switch the wine list language to German"
-      },
-      {
-        "type": "action",
-        "description": "Open another wine entry"
-      },
-      {
-        "type": "assertion",
-        "description": "Verify the wine list content is displayed in the selected language"
-      },
-      {
-        "type": "assertion",
-        "description": "Verify wine browsing remains available"
-      }
-    ],
-    "priority": "Medium"
-  },
-  {
-    "id": "TC019",
-    "title": "Return to the homepage from the food menu",
-    "description": "A guest can leave the food menu and return to the homepage from the menu experience.",
-    "category": "Digital Food Menu with Multilingual Support & Filter",
-    "steps": [
-      {
-        "type": "action",
-        "description": "Navigate to /carta"
-      },
-      {
-        "type": "action",
-        "description": "Click the return to home control"
-      },
-      {
-        "type": "assertion",
-        "description": "Verify the homepage is displayed"
-      }
-    ],
-    "priority": "Medium"
-  },
-  {
-    "id": "TC020",
-    "title": "Show validation feedback for invalid contact details",
-    "description": "Verifies that invalid name, phone, or email input on the reservation form is rejected with visible validation feedback.",
+    "title": "Show validation feedback for invalid reservation details",
+    "description": "A guest diner sees inline validation when entering invalid contact details and can correct them to complete the booking.",
     "category": "Interactive Table Booking Engine",
     "steps": [
       {
@@ -718,44 +523,36 @@
       },
       {
         "type": "action",
-        "description": "Choose a seating preference"
+        "description": "Fill in an invalid name or email"
       },
       {
         "type": "action",
-        "description": "Choose a lunch or dinner service"
-      },
-      {
-        "type": "action",
-        "description": "Select an available time slot"
-      },
-      {
-        "type": "action",
-        "description": "Fill in invalid contact details"
-      },
-      {
-        "type": "action",
-        "description": "Accept the policy terms"
-      },
-      {
-        "type": "action",
-        "description": "Submit the reservation form"
+        "description": "Submit the reservation"
       },
       {
         "type": "assertion",
-        "description": "Verify contact validation feedback is visible"
+        "description": "Verify a validation error is visible"
+      },
+      {
+        "type": "action",
+        "description": "Correct the contact details"
+      },
+      {
+        "type": "action",
+        "description": "Submit the reservation"
       },
       {
         "type": "assertion",
-        "description": "Verify the reservation is not submitted"
+        "description": "Verify a booking confirmation is visible"
       }
     ],
-    "priority": "Medium"
+    "priority": "High"
   },
   {
-    "id": "TC021",
-    "title": "Return to the homepage from the wine list",
-    "description": "A guest can leave the wine list and return to the homepage from the cellar experience.",
-    "category": "Bodega & Wine Cellar List",
+    "id": "TC018",
+    "title": "Switch wine cellar language",
+    "description": "A guest can change the wine page language and continue browsing the cellar content in the selected language.",
+    "category": "Wine & Beverage Cellar",
     "steps": [
       {
         "type": "action",
@@ -763,7 +560,164 @@
       },
       {
         "type": "action",
-        "description": "Click the return to home control"
+        "description": "Select a different wine page language"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the wine cellar content updates to the selected language"
+      }
+    ],
+    "priority": "High"
+  },
+  {
+    "id": "TC019",
+    "title": "Explore wine cellar sections and switch language",
+    "description": "A diner can browse the wine cellar sections, view tasting and pairing details, and change the displayed language.",
+    "category": "Wine Cellar Browsing",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /vinos"
+      },
+      {
+        "type": "action",
+        "description": "Switch the wine list language"
+      },
+      {
+        "type": "action",
+        "description": "Select a wine section"
+      },
+      {
+        "type": "action",
+        "description": "Select another wine section"
+      },
+      {
+        "type": "action",
+        "description": "Verify tasting notes and pairing details are displayed"
+      },
+      {
+        "type": "action",
+        "description": "Verify translated wine content is visible"
+      }
+    ],
+    "priority": "High"
+  },
+  {
+    "id": "TC020",
+    "title": "Filter the menu by dietary needs",
+    "description": "A guest can filter the food menu by allergen or dietary preferences and see matching dishes only.",
+    "category": "Digital Food Menu with Multilingual Support & Filters",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /carta"
+      },
+      {
+        "type": "action",
+        "description": "Select a dietary filter"
+      },
+      {
+        "type": "action",
+        "description": "Select an allergen filter"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify matching dishes are displayed"
+      }
+    ],
+    "priority": "Medium"
+  },
+  {
+    "id": "TC021",
+    "title": "Use admin search and category tabs to find a menu item",
+    "description": "A staff manager can authenticate, search across menu items, and switch tabs to narrow down the item list.",
+    "category": "Admin Menu Management & Dish Editor",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /login"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the admin email with buonappetitoandratx@gmail.com"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the admin password with admin"
+      },
+      {
+        "type": "action",
+        "description": "Submit the login form"
+      },
+      {
+        "type": "action",
+        "description": "Navigate to /admin"
+      },
+      {
+        "type": "action",
+        "description": "Enter a search term for a menu item"
+      },
+      {
+        "type": "action",
+        "description": "Switch to another menu tab"
+      },
+      {
+        "type": "action",
+        "description": "Apply a category filter"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the filtered menu results are displayed"
+      }
+    ],
+    "priority": "Medium"
+  },
+  {
+    "id": "TC022",
+    "title": "Validate reservation fields before submission",
+    "description": "A guest sees validation feedback when required reservation details are incomplete or invalid.",
+    "category": "Landing Page & Brand Experience",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /reservar"
+      },
+      {
+        "type": "action",
+        "description": "Submit the reservation form"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify reservation validation errors are visible"
+      }
+    ],
+    "priority": "Medium"
+  },
+  {
+    "id": "TC023",
+    "title": "Jump from the wine cellar to reservation or home",
+    "description": "A diner can move from the wine cellar to the reservation flow or back to the homepage through the available calls to action.",
+    "category": "Wine Cellar Browsing",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /vinos"
+      },
+      {
+        "type": "action",
+        "description": "Click the reservation call to action"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the reservation flow is displayed"
+      },
+      {
+        "type": "action",
+        "description": "Navigate back to /vinos"
+      },
+      {
+        "type": "action",
+        "description": "Click the home call to action"
       },
       {
         "type": "assertion",
@@ -773,10 +727,101 @@
     "priority": "Medium"
   },
   {
-    "id": "TC022",
-    "title": "Read the legal notice page",
-    "description": "A guest can open the legal notice page and view the company registration and legal information.",
-    "category": "Legal Pages",
+    "id": "TC024",
+    "title": "View admin operational metrics and audit logs",
+    "description": "A staff manager can inspect operational metrics and review recent content changes in the admin backoffice.",
+    "category": "Admin Menu Management & Dish Editor",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /login"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the admin email with buonappetitoandratx@gmail.com"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the admin password with admin"
+      },
+      {
+        "type": "action",
+        "description": "Submit the login form"
+      },
+      {
+        "type": "action",
+        "description": "Navigate to /admin"
+      },
+      {
+        "type": "action",
+        "description": "Scroll to the operational metrics section"
+      },
+      {
+        "type": "action",
+        "description": "Scroll to the audit logs section"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the operational metrics are visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the audit log entries are visible"
+      }
+    ],
+    "priority": "Medium"
+  },
+  {
+    "id": "TC025",
+    "title": "Switch reservation language and keep booking options available",
+    "description": "A guest can change the reservation language and continue using the booking controls in the new language.",
+    "category": "Landing Page & Brand Experience",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /reservar"
+      },
+      {
+        "type": "action",
+        "description": "Select a different reservation language"
+      },
+      {
+        "type": "action",
+        "description": "Select the number of guests"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the reservation form remains available in the selected language"
+      }
+    ],
+    "priority": "Medium"
+  },
+  {
+    "id": "TC026",
+    "title": "Handle an empty menu filter result",
+    "description": "A diner sees an empty state when a menu filter produces no matching dishes.",
+    "category": "Digital Food Menu Browsing",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /carta"
+      },
+      {
+        "type": "action",
+        "description": "Apply a filter that yields no matches"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify an empty state message is visible"
+      }
+    ],
+    "priority": "Low"
+  },
+  {
+    "id": "TC027",
+    "title": "Open the legal notice page",
+    "description": "A guest can access the legal notice page from the site and review the company information.",
+    "category": "Landing Page & Brand Experience",
     "steps": [
       {
         "type": "action",
@@ -790,10 +835,10 @@
     "priority": "Low"
   },
   {
-    "id": "TC023",
-    "title": "Read the privacy policy page",
-    "description": "A guest can open the privacy page and view the data protection terms.",
-    "category": "Legal Pages",
+    "id": "TC028",
+    "title": "Open the privacy policy page",
+    "description": "A guest can access the privacy policy page and review the data protection information.",
+    "category": "Landing Page & Brand Experience",
     "steps": [
       {
         "type": "action",
@@ -807,10 +852,10 @@
     "priority": "Low"
   },
   {
-    "id": "TC024",
-    "title": "Read the cookie policy page",
-    "description": "A guest can open the cookie policy page and view the tracking consent disclosure.",
-    "category": "Legal Pages",
+    "id": "TC029",
+    "title": "Open the cookie policy page",
+    "description": "A guest can access the cookie policy page and review the tracking disclosure.",
+    "category": "Landing Page & Brand Experience",
     "steps": [
       {
         "type": "action",
@@ -819,6 +864,39 @@
       {
         "type": "assertion",
         "description": "Verify the cookie policy content is displayed"
+      }
+    ],
+    "priority": "Low"
+  },
+  {
+    "id": "TC030",
+    "title": "Show the legal and privacy policy pages",
+    "description": "A visitor can open the legal notice, privacy policy, and cookie policy pages from the site routes.",
+    "category": "Legal and Policy Pages",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /aviso-legal"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the legal notice content is visible"
+      },
+      {
+        "type": "action",
+        "description": "Navigate to /privacidad"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the privacy policy content is visible"
+      },
+      {
+        "type": "action",
+        "description": "Navigate to /cookies"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the cookie policy content is visible"
       }
     ],
     "priority": "Low"

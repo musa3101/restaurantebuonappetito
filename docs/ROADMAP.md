@@ -14,29 +14,31 @@
   - Bloqueo de doble toque zoom en iOS Safari (`touch-action: manipulation`).
   - Modal para añadir comida, bebidas o vinos con selector de carta segmentado y categorías dinámicas.
   - Pantalla completa de Ajustes con guía PWA visual e historial de cambios con fecha y hora exacta.
-- [x] Auditoría técnica completa Mobile-First: 0 desbordamientos horizontales en todas las rutas y base de datos protegida.
+- [x] Auditoría técnica y corrección de guardado/edición de platos en panel de administración:
+  - Eliminación de control bloqueante invisible en el formulario de platos.
+  - Corrección de listeners táctiles en modo PWA Safari.
+  - 100% de tests aprobados en Playwright CLI y TestSprite (`TC002 PASSED`).
 - [x] Integración de reservas con Bavoli:
   - Enlaces de "Ver Menú" y "Reservar Mesa" del Hero con scroll suave a `#menu` y `#donde-estamos`.
   - Botón oficial en Dónde Estamos conectado a `https://www.bavoli.com/book/buon-appetito` en pestaña independiente.
+  - Configuración del panel de Bavoli en Chrome: 28 mesas reales (26 en Terraza, 2 en Salón Interior), reglas de rotación (90 min) y notificaciones WhatsApp activadas al $0 (Plan Gratuito).
 - [x] Optimización de rendimiento con principios Vercel React Best Practices (`client:visible`, `lazy state init`, `passive listeners`).
-- [x] Solución integral de vídeo Hero para Desktop y Tablet:
-  - Vídeo 16:9 con fondo atmosférico panorámico nítido al 100% en ordenadores y tablets.
-  - Unificación de fuente única que elimina el botón de play nativo de Safari.
-  - Vídeo vertical nativo 9:16 preservado intacto en móviles.
-- [x] Barra de navegación editorial refinada en Desktop:
-  - Eliminación de cápsulas y píldoras artificiales.
-  - Subrayado dinámico scroll-spy en dorado italiano `#E8C547`.
-  - Selector de idioma en texto plano desplegable suavemente hacia la izquierda.
-- [x] Perfeccionamiento de la infografía "Il Nostro Calzone": arcos simétricos y orientados con precisión en escritorio y tablet sin tocar móvil.
-- [x] Fusión autorizada de rama `dev` a `main` y sincronización con GitHub.
+- [x] Solución integral de vídeo Hero para Desktop y Tablet con render panorámico 16:9 ambiental sin botón de play de Safari.
+- [x] Barra de navegación editorial refinada en Desktop (sin píldoras, con scroll-spy dorado y selector de idioma limpio).
+- [x] Perfeccionamiento de la infografía "Il Nostro Calzone" con arcos simétricos en pantallas grandes.
 
 ---
 
-## Tareas en progreso
-- [ ] Verificación de despliegue en producción (`https://restaurantebuonappetito.pages.dev`).
+## Tareas en progreso / Próxima sesión
+- [ ] **SEO Técnico y Metadatos en Código**:
+  - [ ] Implementar Schema.org / JSON-LD para restaurante (`Restaurant`, menú, ubicación en el puerto, teléfono y link de reservas).
+  - [ ] Configurar generación automática de `sitemap.xml` y `robots.txt` en Astro.
+  - [ ] Optimizar etiquetas Open Graph (OG tags) para previsualizaciones atractivas en WhatsApp, Telegram y redes sociales.
 
 ---
 
-## Próximas mejoras prioritarias
-1. **Comprobación en sala con código QR real impreso.**
-2. **SEO local y metadatos Schema.org (`Restaurant`, `Menu`).**
+## Próximas mejoras prioritarias (Post-Dominio)
+1. **Compra y conexión del dominio definitivo** (ej. `buonappetitopuerto.es`).
+2. **Alta y verificación DNS en Google Search Console**.
+3. **Vinculación con Google Business Profile (Google Maps)** con link a la web y reservas de Bavoli.
+4. **Comprobación en sala con código QR real impreso en las mesas.**

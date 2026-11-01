@@ -1883,7 +1883,7 @@
         <input type="hidden" id="dishOrder">
         <input type="hidden" id="dishImageUrl">
         <input type="file" id="dishImageFile" accept="image/*" style="display: none;">
-        <select id="dishCategory" required style="display: none;"></select>
+        <input type="hidden" id="dishCategory" name="dishCategory">
 
         <!-- SECCIÓN 1: TIPO DE CARTA Y CATEGORÍA (PERMITE SUBIR COMIDA, BEBIDAS O BODEGA) -->
         <div class="form-card-section">
@@ -2366,16 +2366,9 @@
     const saveText = document.getElementById('saveText');
 
     // ========================================================
-    // PREVENCIÓN ESTRICTA DE DOBLE TOQUE ZOOM EN SAFARI IPHONE
+    // CONTROL NATIVO DE INTERACCIÓN TÁCTIL (PWA & SAFARI)
+    // El doble toque zoom se previene limpiamente en CSS (touch-action: manipulation)
     // ========================================================
-    let lastTouchEnd = 0;
-    document.addEventListener('touchend', (e) => {
-      const now = Date.now();
-      if (now - lastTouchEnd <= 300) {
-        e.preventDefault();
-      }
-      lastTouchEnd = now;
-    }, { passive: false });
 
     // ========================================================
     // AUTENTICACIÓN & RECORDAR SESIÓN (PWA)
@@ -3193,6 +3186,10 @@
       }
       if (isNaN(price) || price < 0) {
         showToast('Introduce un precio válido', true);
+        return;
+      }
+      if (!category_id) {
+        showToast('Selecciona una categoría para el elemento', true);
         return;
       }
 

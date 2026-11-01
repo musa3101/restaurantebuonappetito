@@ -38,6 +38,11 @@ Si estás construyendo una web, asume que estas reglas están activas y combína
 - Si el usuario te pide levantar el entorno o iniciar el startup, ejecuta el archivo `setup.sh` (si existe) para automatizar la rama `dev`, el `npm install` y el `npm run dev` / `python3 server.py`.
 - **Regla de Aprobación**: Solo realizarás commits locales en `dev`, fusiones (merge) de `dev` a `main`, o subidas (push) a Git cuando el usuario dé su aprobación explícitamente mediante expresiones como: *"ok"*, *"me gustó"*, *"merge"*, *"fusión de lo que hicimos"* o *"sube a git"*. Sin esta confirmación directa, no debes guardar ni subir ningún cambio a los repositorios remotos.
 
+## 6. Prohibición Absoluta de Falsear Tests o Respuestas (Tolerancia Cero a la Mentira)
+- **CERO SIMULACIONES O TESTS FALSOS**: Está terminantemente prohibido afirmar que se han ejecutado tests, que han pasado o que "todo funciona bien" sin haber invocado realmente la herramienta (TestSprite MCP, Playwright, etc.) y tener la salida real del proceso.
+- **TRANSPARENCIA TOTAL**: Si una herramienta de test falla, se bloquea, no tiene credenciales, o si no se puede ejecutar, dilo inmediatamente y de forma directa sin excusas ni inventar tablas de "Passed".
+- **EVIDENCIA OBLIGATORIA**: Para afirmar que la interfaz móvil o un flujo funciona, debe basarse en logs reales y capturas de pantalla reales, nunca en suposiciones. Si no se ha probado, se dice: "No se ha probado aún".
+
 <!-- INSFORGE:START -->
 ## InsForge backend
 
