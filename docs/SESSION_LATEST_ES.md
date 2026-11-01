@@ -15,6 +15,7 @@
    - Generación de `sitemap-index.xml` con `@astrojs/sitemap`.
 3. **Banner de Cookies Responsivo 100% Gratuito (21st.dev / Shadcn)**:
    - Banner de cookies no intrusivo (`AlertCookieNotice.tsx`) que solo aparece tras desplazarse a la segunda sección (`#sobre-nosotros`), sin bloquear el vídeo del Hero.
+   - **Persistencia Permanente (1 Año)**: Corrección de captura de closure en scroll. Ahora guarda consentimiento tanto en `localStorage` como en `document.cookie` (365 días) y desengancha inmediatamente los observadores de scroll. Una vez aceptado o rechazado, **nunca vuelve a aparecer** en ninguna página ni al recargar.
    - Botones Aceptar / Rechazar, enlace a `/cookies` y reactivación mediante el botón "Configurar cookies" del footer.
 4. **Corrección de Contraste en Páginas Legales**:
    - Reparado el fondo oscuro que bloqueaba la lectura en `/aviso-legal`, `/cookies` y `/privacidad`.

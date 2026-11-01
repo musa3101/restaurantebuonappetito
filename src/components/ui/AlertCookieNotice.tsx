@@ -31,6 +31,29 @@ const TEXTS: Record<string, { title: string; desc: string; link: string; accept:
   },
 };
 
+function getSavedConsent(): string | null {
+  try {
+    if (typeof window === "undefined") return null;
+    const local = localStorage.getItem(COOKIE_STORAGE_KEY);
+    if (local === "accepted" || local === "declined") return local;
+    
+    // Cookie fallback de 365 días
+    const match = document.cookie.match(new RegExp("(^|;\\s*)" + COOKIE_STORAGE_KEY + "=([^;]*)"));
+    if (match && (match[2] === "accepted" || match[2] === "declined")) {
+      return match[2];
+    }
+  } catch (e) {}
+  return null;
+}
+
+function saveConsent(value: "accepted" | "declined") {
+  try {
+    localStorage.setItem(COOKIE_STORAGE_KEY, value);
+    // Cookie persistente para todo el dominio durante 1 año
+    document.cookie = `${COOKIE_STORAGE_KEY}=${value}; path=/; max-age=31536000; SameSite=Lax`;
+  } catch (e) {}
+}
+
 function recordConsentInInsForge(decision: "accepted" | "declined", language: string) {
   try {
     const isMobile = typeof window !== "undefined" && window.innerWidth <= 768;
@@ -58,7 +81,7 @@ function recordConsentInInsForge(decision: "accepted" | "declined", language: st
 export function AlertCookieNotice() {
   const [isVisible, setIsVisible] = React.useState(false);
   const [lang, setLang] = React.useState<"es" | "en" | "de">("es");
-  const [hasScrolledPastHero, setHasScrolledPastHero] = React.useState(false);
+  const consentGivenRef = React.useRef<boolean>(false);
 
   // Inicializar idioma y escuchar cambios
   React.useEffect(() => {
@@ -81,27 +104,34 @@ export function AlertCookieNotice() {
     };
   }, []);
 
-  // REGLA DE ORO: Aparecer únicamente a partir de la segunda sección (#sobre-nosotros)
-  // Jamás en el Hero para no tapar el vídeo ni la experiencia de entrada
+  // REGLA DE ORO: Si el usuario ya dio su consentimiento, NUNCA mostrar automáticamente
+  // Si no lo ha dado, aparecer únicamente tras sobrepasar la primera sección (#sobre-nosotros)
   React.useEffect(() => {
-    // Si ya existe consentimiento previo, no mostrar automáticamente
-    let currentConsent: string | null = null;
-    try {
-      currentConsent = localStorage.getItem(COOKIE_STORAGE_KEY);
-    } catch (e) {}
+    // Si ya existe consentimiento previo, abortar inmediatamente
+    if (getSavedConsent()) {
+      consentGivenRef.current = true;
+      return;
+    }
+
+    let observer: IntersectionObserver | null = null;
+    let cleanupScroll: (() => void) | null = null;
+
+    const showBannerOnce = () => {
+      if (consentGivenRef.current || getSavedConsent()) return;
+      setIsVisible(true);
+      // Una vez visible, desenganchar listeners de scroll para no re-ejecutar
+      if (observer) observer.disconnect();
+      if (cleanupScroll) cleanupScroll();
+    };
 
     const aboutSection = document.getElementById("sobre-nosotros");
 
     if (aboutSection) {
-      const observer = new IntersectionObserver(
+      observer = new IntersectionObserver(
         (entries) => {
           entries.forEach((entry) => {
-            // Cuando la segunda sección entra en pantalla o el usuario bajó más
             if (entry.isIntersecting || entry.boundingClientRect.top < window.innerHeight) {
-              setHasScrolledPastHero(true);
-              if (!currentConsent) {
-                setIsVisible(true);
-              }
+              showBannerOnce();
             }
           });
         },
@@ -110,30 +140,24 @@ export function AlertCookieNotice() {
 
       observer.observe(aboutSection);
 
-      // Fallback por scroll si la sección tarda en renderizar
       const handleScroll = () => {
         if (window.scrollY > 350) {
-          setHasScrolledPastHero(true);
-          if (!currentConsent) {
-            setIsVisible(true);
-          }
+          showBannerOnce();
         }
       };
 
       window.addEventListener("scroll", handleScroll, { passive: true });
+      cleanupScroll = () => window.removeEventListener("scroll", handleScroll);
 
       return () => {
-        observer.disconnect();
-        window.removeEventListener("scroll", handleScroll);
+        if (observer) observer.disconnect();
+        if (cleanupScroll) cleanupScroll();
       };
     } else {
-      // Si estamos en una página sin #sobre-nosotros (como carta o vinos), aparecer tras breve scroll
+      // Páginas secundarias sin #sobre-nosotros
       const handleGeneralScroll = () => {
-        if (window.scrollY > 200) {
-          setHasScrolledPastHero(true);
-          if (!currentConsent) {
-            setIsVisible(true);
-          }
+        if (window.scrollY > 250) {
+          showBannerOnce();
         }
       };
       window.addEventListener("scroll", handleGeneralScroll, { passive: true });
@@ -141,9 +165,10 @@ export function AlertCookieNotice() {
     }
   }, []);
 
-  // Conexión con el Footer: Permitir reabrir el banner si el usuario lo solicita
+  // Conexión con el Footer: Permitir reabrir el banner voluntariamente
   React.useEffect(() => {
     const handleReopen = () => {
+      consentGivenRef.current = false;
       setIsVisible(true);
     };
 
@@ -157,11 +182,11 @@ export function AlertCookieNotice() {
   }, []);
 
   const handleAccept = () => {
-    try {
-      localStorage.setItem(COOKIE_STORAGE_KEY, "accepted");
-    } catch (e) {}
+    consentGivenRef.current = true;
+    saveConsent("accepted");
+    setIsVisible(false);
 
-    // Enviar consentimiento anónimo a InsForge (web_cookie_consents)
+    // Enviar consentimiento anónimo a InsForge
     recordConsentInInsForge("accepted", lang);
 
     // Activar Microsoft Clarity si está disponible
@@ -170,19 +195,15 @@ export function AlertCookieNotice() {
         (window as any).clarity("consent");
       } catch (e) {}
     }
-
-    setIsVisible(false);
   };
 
   const handleDecline = () => {
-    try {
-      localStorage.setItem(COOKIE_STORAGE_KEY, "declined");
-    } catch (e) {}
-
-    // Enviar consentimiento anónimo a InsForge (web_cookie_consents)
-    recordConsentInInsForge("declined", lang);
-
+    consentGivenRef.current = true;
+    saveConsent("declined");
     setIsVisible(false);
+
+    // Enviar consentimiento anónimo a InsForge
+    recordConsentInInsForge("declined", lang);
   };
 
   if (!isVisible) return null;
@@ -191,6 +212,7 @@ export function AlertCookieNotice() {
 
   return (
     <div
+      id="buon-cookie-banner"
       className="fixed bottom-4 left-4 right-4 sm:left-auto sm:right-6 sm:bottom-6 z-[100] max-w-[420px] mx-auto sm:mx-0 animate-in fade-in slide-in-from-bottom-5 duration-500 ease-out"
       style={{ paddingBottom: "env(safe-area-inset-bottom, 0px)" }}
     >
