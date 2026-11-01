@@ -216,10 +216,10 @@ const schemaJsonLd = {
           if (window.location.hash && window.location.hash !== '#inicio') {
             if (document.readyState === 'loading') {
               document.addEventListener('DOMContentLoaded', function() {
-                setTimeout(function() { scrollToSection(window.location.hash); }, 60);
+                setTimeout(function() { scrollToSection(window.location.hash); }, 80);
               });
             } else {
-              setTimeout(function() { scrollToSection(window.location.hash); }, 60);
+              setTimeout(function() { scrollToSection(window.location.hash); }, 80);
             }
           } else if (!isBackForward) {
             // Entrada limpia o recarga inicial: comenzar en el Hero
@@ -228,6 +228,12 @@ const schemaJsonLd = {
               history.replaceState(null, '', window.location.pathname);
             }
           }
+
+          window.addEventListener('buon:preloader-unlocked', function() {
+            if (window.location.hash && window.location.hash !== '#inicio') {
+              setTimeout(function() { scrollToSection(window.location.hash); }, 60);
+            }
+          });
 
           // Clic en el logo oficial (Header o Footer): siempre desplaza al inicio suavemente
           document.addEventListener('DOMContentLoaded', function() {

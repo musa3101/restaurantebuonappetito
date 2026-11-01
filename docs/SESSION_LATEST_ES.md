@@ -24,6 +24,10 @@
    - Ajuste de proporción vertical (`scaleY`) en móvil para llenar el 70-75% del recuadro.
    - Integración transversal en la portada (`/`), carta (`/carta`) y carta de vinos (`/vinos`).
    - Limpieza de footers secundarios: retirada del botón redundante "Volver al Menú" en carta y vinos (ya disponible en el header), dejando "Reservar mesa" centrado y elegante.
+6. **Redirección de Reservas a Plataforma Oficial Bavoli (`/#donde-estamos`)**:
+   - Eliminación total de enlaces hacia la página antigua de Nexo (`/reservar`).
+   - El botón *"Reservar mesa"* del footer en `/carta`, `/vinos` y el footer general ahora redirige con precisión a `/#donde-estamos` (donde se encuentra el botón directo de Bavoli y el mapa).
+   - Optimización de `Preloader.astro` y `Layout.astro` para omitir el preloader cuando se navega con ancla, desplazando suavemente al usuario al bloque de reservas.
 
 ---
 
@@ -33,11 +37,11 @@
 - `src/components/ui/halftone-wordmark-footer.tsx` (Nuevo)
 - `src/components/ui/alert.tsx`, `button.tsx`, `toggle.tsx` (Nuevos componentes shadcn)
 - `public/robots.txt` (Nuevo)
-- `src/layouts/Layout.astro` (SEO, GEO, banner de cookies, eliminación de fondo forzado)
-- `src/components/Footer.astro` (Configuración de cookies y Wordmark Halftone)
-- `src/pages/carta.astro` & `src/pages/vinos.astro` (Wordmark Halftone al pie, footer limpio)
+- `src/layouts/Layout.astro` (SEO, GEO, cookies, scroll inteligente sin preloader-lock)
+- `src/components/Footer.astro` (Cookies, Wordmark Halftone, enlace Bavoli en reservas)
+- `src/pages/carta.astro` & `src/pages/vinos.astro` (Wordmark Halftone, footer limpio, enlace a `/#donde-estamos`)
 - `src/pages/aviso-legal.astro`, `cookies.astro`, `privacidad.astro` (Fondo claro legible)
-- `src/components/Preloader.astro` (Eliminación de bloqueo de color de fondo del body)
+- `src/components/Preloader.astro` (Desbloqueo inmediato en navegación con anclas)
 - `astro.config.mjs` & `package.json` (Integración de sitemap)
 - `AGENTS.md` (Regla estricta contra falsear tests)
 - `docs/SESSION_LATEST_ES.md` & `docs/ROADMAP.md` (Documentación sincronizada)
@@ -45,11 +49,11 @@
 ---
 
 ## 3. Problemas solucionados
-- Banner de cookies invasivo que dañaba el vídeo principal resuelto con aparición condicionada al scroll.
+- Enlace obsoleto del footer a la página anterior de Nexo eliminado por completo.
+- Los clientes ahora van directamente a la sección `#donde-estamos` con Bavoli activo.
+- Banner de cookies invasivo o repetitivo resuelto con memoria persistente de 1 año.
 - Páginas legales ilegibles por contraste oscuro corregidas.
-- Tipografía del wordmark que quedaba diminuta en pantallas móviles alargada verticalmente.
-- Botón redundante "Volver al Menú" en el footer de carta y vinos eliminado.
-- Footer unificado visualmente con el cierre cinemático en todas las secciones principales.
+- Tipografía del wordmark adaptada al 70-75% de altura en pantallas estrechas.
 
 ---
 

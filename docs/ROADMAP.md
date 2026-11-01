@@ -50,6 +50,7 @@
   - [x] Adaptación móvil vertical (`scaleY`) al 70-75% de altura.
   - [x] Integración en portada (`/`), carta (`/carta`) y vinos (`/vinos`).
   - [x] Limpieza del footer en carta y vinos (eliminado botón duplicado de volver).
+  - [x] Redirección oficial de "Reservar mesa" a Bavoli (`/#donde-estamos`) en todos los footers, eliminando el enlace legacy a Nexo.
 
 ---
 

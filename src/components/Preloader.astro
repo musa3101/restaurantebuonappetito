@@ -8,8 +8,9 @@
     const isLegalPage = window.location.pathname.includes('/aviso-legal') || 
                         window.location.pathname.includes('/cookies') || 
                         window.location.pathname.includes('/privacidad');
+    const hasSectionHash = window.location.hash && window.location.hash !== '#inicio';
 
-    if (isLegalPage || (sessionStorage.getItem('ba_preloader_seen_v1') === 'true' && !sessionStorage.getItem('ba_nav_to_reservar'))) {
+    if (isLegalPage || hasSectionHash || (sessionStorage.getItem('ba_preloader_seen_v1') === 'true' && !sessionStorage.getItem('ba_nav_to_reservar'))) {
       document.documentElement.classList.add('preloader-already-seen');
     } else {
       // El preloader va a animarse: congelar la web desde el primer frame
@@ -54,7 +55,9 @@
     const isLegalPage = window.location.pathname.includes('/aviso-legal') || 
                         window.location.pathname.includes('/cookies') || 
                         window.location.pathname.includes('/privacidad');
-    if (isLegalPage) {
+    const hasSectionHash = window.location.hash && window.location.hash !== '#inicio';
+
+    if (isLegalPage || hasSectionHash) {
       hidePreloader(true);
       return;
     }
@@ -135,6 +138,9 @@
         document.body.classList.remove('preloader-lock');
         document.body.style.backgroundColor = '';
       }
+      try {
+        window.dispatchEvent(new CustomEvent('buon:preloader-unlocked'));
+      } catch (err) {}
     }
 
     // Ocultar preloader con suave desvanecimiento
