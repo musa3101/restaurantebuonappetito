@@ -1,0 +1,24 @@
+# Robots.txt · Buon Appetito (Port d'Andratx)
+User-agent: *
+Allow: /
+Disallow: /admin
+Disallow: /api/
+
+# AI Crawlers & LLM Search (GEO: Google AI Overviews, Perplexity, OpenAI, Anthropic, Apple)
+User-agent: Google-Extended
+Allow: /
+
+User-agent: GPTBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+# Sitemap
+Sitemap: https://buonappetito-andratx.com/sitemap-index.xml

@@ -1,41 +1,60 @@
 # Registro de Sesión - Buon Appetito Web
 **Fecha:** 1 de Noviembre de 2026  
-**Rama:** `dev` (Preparado para merge a `main`)
+**Rama:** `dev` (Aislamiento de trabajo local)
 
 ---
 
 ## 1. Qué se ha hecho hoy
 1. **Auditoría Técnica y Resolución del Bloqueo en Panel de Administrador (`/admin`)**:
-   - Diagnóstico mediante **Playwright CLI** (emulación de iPhone 14 Pro) y **TestSprite MCP** (ejecución cloud con runner oficial).
-   - Detección de la causa raíz: un control `<select id="dishCategory" required style="display: none;"></select>` sin opciones (`optionsCount: 0`) que provocaba que WebKit/Safari abortase silenciosamente la sumisión del formulario con el error `"An invalid form control with name='' is not focusable"`.
-   - Reemplazo por `<input type="hidden" id="dishCategory" name="dishCategory">` y validación controlada en JavaScript con Toast visual.
-   - Eliminación del listener `document.addEventListener('touchend', ... e.preventDefault())` que interfería con los toques rápidos en la PWA instalada en Safari iOS.
-2. **Verificación Automatizada Completa**:
-   - Playwright CLI: Formulario enviado exitosamente (`submitTriggered: true`), modal cerrado automáticamente y Toast de *"Guardado con éxito"*.
-   - TestSprite MCP: Test `TC002` ejecutado en la nube con credenciales reales finalizado con éxito (Estado: **`PASSED`** al 100%).
+   - Diagnóstico con Playwright CLI y TestSprite MCP.
+   - Eliminación de la puerta trasera `?demo=1` y blindaje XSS con sanitización `esc`.
+2. **SEO Técnico, GEO (Generative Engine Optimization) y Eliminación de Afirmaciones Falsas**:
+   - Eliminación de todas las afirmaciones no reales ("horno de leña", "fermentación 48h") en todos los idiomas (ES, EN, DE) y código.
+   - Inyección de datos estructurados Schema.org (`Restaurant` + `ItalianRestaurant`), coordenadas geográficas del puerto y Open Graph.
+   - Generación de `robots.txt` con permisos de indexación para bots de IA y exclusión de `/admin`.
+   - Generación de `sitemap-index.xml` con `@astrojs/sitemap`.
+3. **Banner de Cookies Responsivo 100% Gratuito (21st.dev / Shadcn)**:
+   - Banner de cookies no intrusivo (`AlertCookieNotice.tsx`) que solo aparece tras desplazarse a la segunda sección (`#sobre-nosotros`), sin bloquear el vídeo del Hero.
+   - Botones Aceptar / Rechazar, enlace a `/cookies` y reactivación mediante el botón "Configurar cookies" del footer.
+4. **Corrección de Contraste en Páginas Legales**:
+   - Reparado el fondo oscuro que bloqueaba la lectura en `/aviso-legal`, `/cookies` y `/privacidad`.
+5. **Wordmark Halftone Cinemático "Buon Appetito" (21st.dev)**:
+   - Implementación del pie interactivo con canvas 2D de semitono: fondo verde oscuro (`#183321`), puntos rojos (`#D93829`), destellos en blanco puro al toque/cursor y sombra profunda 3D.
+   - Ajuste de proporción vertical (`scaleY`) en móvil para llenar el 70-75% del recuadro.
+   - Integración transversal en la portada (`/`), carta (`/carta`) y carta de vinos (`/vinos`).
+   - Limpieza de footers secundarios: retirada del botón redundante "Volver al Menú" en carta y vinos (ya disponible en el header), dejando "Reservar mesa" centrado y elegante.
 
 ---
 
-## 2. Archivos modificados
-- `src/pages/admin.astro` (Corrección de campo de categoría, eliminación de bloqueo touchend, validación controlada)
-- `testsprite_tests/testsprite_frontend_test_plan.json` (Plan de pruebas frontend con casos para `/admin`)
-- `testsprite_tests/standard_prd.json` & `code_summary.yaml` (PRD y resumen arquitectónico sincronizados en TestSprite)
-- `package.json` & `package-lock.json` (Playwright agregado para testing automatizado local)
-- `docs/SESSION_LATEST_ES.md` & `docs/ROADMAP.md` (Documentación de sesión)
+## 2. Archivos modificados y creados
+- `src/components/ui/AlertCookieNotice.tsx` (Nuevo)
+- `src/components/ui/BuonAppetitoWordmark.tsx` (Nuevo)
+- `src/components/ui/halftone-wordmark-footer.tsx` (Nuevo)
+- `src/components/ui/alert.tsx`, `button.tsx`, `toggle.tsx` (Nuevos componentes shadcn)
+- `public/robots.txt` (Nuevo)
+- `src/layouts/Layout.astro` (SEO, GEO, banner de cookies, eliminación de fondo forzado)
+- `src/components/Footer.astro` (Configuración de cookies y Wordmark Halftone)
+- `src/pages/carta.astro` & `src/pages/vinos.astro` (Wordmark Halftone al pie, footer limpio)
+- `src/pages/aviso-legal.astro`, `cookies.astro`, `privacidad.astro` (Fondo claro legible)
+- `src/components/Preloader.astro` (Eliminación de bloqueo de color de fondo del body)
+- `astro.config.mjs` & `package.json` (Integración de sitemap)
+- `AGENTS.md` (Regla estricta contra falsear tests)
+- `docs/SESSION_LATEST_ES.md` & `docs/ROADMAP.md` (Documentación sincronizada)
 
 ---
 
 ## 3. Problemas solucionados
-- Bloqueo y congelamiento al guardar o editar platos en el panel de administración móvil/PWA.
-- Errores de control no focalizable en Safari iOS al pulsar *"Guardar en Carta"*.
-- Interferencia táctil en modo standalone de la aplicación web instalada en iPhone.
+- Banner de cookies invasivo que dañaba el vídeo principal resuelto con aparición condicionada al scroll.
+- Páginas legales ilegibles por contraste oscuro corregidas.
+- Tipografía del wordmark que quedaba diminuta en pantallas móviles alargada verticalmente.
+- Botón redundante "Volver al Menú" en el footer de carta y vinos eliminado.
+- Footer unificado visualmente con el cierre cinemático en todas las secciones principales.
 
 ---
 
 ## 4. Qué queda pendiente
-1. **SEO Técnico en Código**:
-   - Datos estructurados Schema.org / JSON-LD (`Restaurant`, horarios, reservas, tipo de cocina italiana y ubicación).
-   - Generación automática de `sitemap.xml` y `robots.txt` en Astro.
-   - Metaetiquetas Open Graph (previsualizaciones atractivas en WhatsApp y redes sociales).
-2. **Dominio & Google Search Console**:
-   - Compra del dominio definitivo y verificación DNS en Search Console.
+- **Aprobación final del usuario** para commit local en `dev` y merge/push a `main`.
+- **Fase B (Post-Presentación)**:
+  - Migrar llamadas de InsForge a endpoint serverless seguro.
+  - Modularización de componentes de `admin.astro`.
+  - Conexión del dominio oficial y Google Search Console.

@@ -585,11 +585,11 @@ document.addEventListener('DOMContentLoaded', () => {
       goToStep1();
       return;
     }
-    // Si estamos en el Paso 1, vuelve a la web previa o a la raíz
+    // Si estamos en el Paso 1, vuelve a la web previa o a la sección de reservas/contacto
     if (window.history.length > 1 && document.referrer && document.referrer.includes(window.location.host)) {
       window.history.back();
     } else {
-      window.location.href = '/';
+      window.location.href = '/#donde-estamos';
     }
   });
 

@@ -31,8 +31,8 @@
       --border: #E2E8F0;
       --border-subtle: #F1F5F9;
       --text-main: #0F172A;
-      --text-muted: #64748B;
-      --text-subtle: #94A3B8;
+      --text-muted: #475569;
+      --text-subtle: #64748B;
       
       --brand-header: #14281B;
       --brand-primary: #183321;
@@ -1529,6 +1529,155 @@
       margin-top: 10px;
     }
 
+    /* ========================================================
+       SISTEMA DE NOTIFICACIÓN DE ACTUALIZACIONES (PWA)
+       ======================================================== */
+    .update-notify-dot {
+      position: absolute;
+      top: 6px;
+      right: 12px;
+      width: 9px;
+      height: 9px;
+      background: #EF4444;
+      border: 2px solid #FFFFFF;
+      border-radius: 999px;
+      box-shadow: 0 0 0 2px rgba(239, 68, 68, 0.25);
+      animation: pulseUpdateDot 2s infinite;
+      z-index: 5;
+    }
+    .btn-profile .update-notify-dot {
+      top: 4px;
+      right: 4px;
+    }
+    @keyframes pulseUpdateDot {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.25); opacity: 0.8; }
+    }
+
+    .update-alert-card {
+      background: linear-gradient(135deg, #183321 0%, #0F2015 100%);
+      border: 1px solid rgba(197, 168, 128, 0.4);
+      border-radius: var(--radius-md);
+      padding: 16px;
+      color: #FAF8F5;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      box-shadow: 0 8px 20px -4px rgba(24, 51, 33, 0.4);
+      animation: slideDownUpdate 0.3s ease both;
+      margin-bottom: 6px;
+    }
+    @keyframes slideDownUpdate {
+      from { opacity: 0; transform: translateY(-8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .update-alert-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+    .update-alert-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(16, 185, 129, 0.2);
+      border: 1px solid rgba(16, 185, 129, 0.4);
+      color: #34D399;
+      font-size: 10.5px;
+      font-weight: 800;
+      letter-spacing: 0.05em;
+      padding: 3px 8px;
+      border-radius: 999px;
+      text-transform: uppercase;
+    }
+    .pulse-dot {
+      width: 6px;
+      height: 6px;
+      background: #10B981;
+      border-radius: 999px;
+      display: inline-block;
+      box-shadow: 0 0 6px #10B981;
+    }
+    .update-version-tag {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--brand-gold);
+      background: rgba(197, 168, 128, 0.15);
+      padding: 2px 8px;
+      border-radius: 6px;
+    }
+    .update-alert-notes {
+      font-size: 12.5px;
+      color: rgba(250, 248, 245, 0.85);
+      line-height: 1.4;
+    }
+    .btn-apply-update {
+      width: 100%;
+      height: 42px;
+      background: linear-gradient(135deg, #C5A880 0%, #AA8C64 100%);
+      color: #183321;
+      border: none;
+      border-radius: 10px;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      box-shadow: 0 4px 12px rgba(197, 168, 128, 0.3);
+      transition: transform 0.15s, opacity 0.15s;
+    }
+    .btn-apply-update:active { transform: scale(0.98); opacity: 0.9; }
+
+    .app-version-footer {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      padding: 16px 8px 8px;
+      margin-top: 6px;
+      text-align: center;
+    }
+    .app-version-info {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+    .app-version-name {
+      font-weight: 600;
+      color: var(--text-main);
+    }
+    .app-version-pill {
+      font-size: 10.5px;
+      font-weight: 700;
+      background: var(--border-subtle);
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      padding: 2px 7px;
+      border-radius: 999px;
+    }
+    .app-version-pill.has-update {
+      background: #FEF3C7;
+      border-color: #FDE68A;
+      color: #92400E;
+    }
+    .btn-check-version {
+      background: transparent;
+      border: none;
+      font-size: 11.5px;
+      font-weight: 600;
+      color: var(--brand-primary);
+      cursor: pointer;
+      padding: 4px 8px;
+      border-radius: 6px;
+      transition: background 0.15s;
+    }
+    .btn-check-version:hover { background: var(--border-subtle); }
+
     /* Modal standard window */
     .modal-window {
       width: 100%;
@@ -1738,9 +1887,10 @@
           </button>
 
           <!-- Perfil / Ajustes -->
-          <button id="btnProfile" class="btn-profile" title="Ajustes de Gerencia">
+          <button id="btnProfile" class="btn-profile" title="Ajustes de Gerencia" style="position: relative;">
             <div class="avatar-badge">BA</div>
             <span>Ajustes</span>
+            <span id="headerUpdateDot" class="update-notify-dot" style="display: none;"></span>
             <svg width="12" height="12" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
           </button>
         </div>
@@ -1851,7 +2001,8 @@
         <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8 22h8"/><path stroke-linecap="round" stroke-linejoin="round" d="M7 10h10"/><path stroke-linecap="round" stroke-linejoin="round" d="M12 15v7"/><path stroke-linecap="round" stroke-linejoin="round" d="M12 15a5 5 0 0 0 5-5c0-2-.5-4-2-8H9c-1.5 4-2 6-2 8a5 5 0 0 0 5 5Z"/></svg>
         <span class="b-label">Bodega</span>
       </button>
-      <button type="button" class="bottom-nav-item" data-nav="perfil" id="btnBottomProfile">
+      <button type="button" class="bottom-nav-item" data-nav="perfil" id="btnBottomProfile" style="position: relative;">
+        <span id="navUpdateDot" class="update-notify-dot" style="display: none;"></span>
         <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>
         <span class="b-label">Ajustes</span>
       </button>
@@ -1862,7 +2013,7 @@
   <!-- ======================================================== -->
   <!-- 3. MODAL DE EDICIÓN / NUEVO PLATO (CON SELECTOR DE CARTA) -->
   <!-- ======================================================== -->
-  <div id="dishModal" class="modal-overlay" style="display: none;">
+  <div id="dishModal" class="modal-overlay" style="display: none;" role="dialog" aria-modal="true" aria-labelledby="modalHeading">
     <div class="dish-studio-window">
       
       <!-- iOS Drag Handle -->
@@ -1870,7 +2021,7 @@
 
       <!-- Cabecera Superior Fija -->
       <div class="studio-head">
-        <button type="button" id="closeModalBtn" class="studio-btn-cancel">Cancelar</button>
+        <button type="button" id="closeModalBtn" class="studio-btn-cancel" aria-label="Cancelar y cerrar ficha">Cancelar</button>
         <span class="studio-title" id="modalHeading">Editar Ficha</span>
         <button type="submit" form="dishForm" id="btnSaveModalHeader" class="studio-btn-save-head">
           <span>Guardar</span>
@@ -2018,14 +2169,14 @@
   </div>
 
   <!-- REGISTRO DE CAMBIOS (CON FECHA Y HORA EXACTA) -->
-  <div id="logsModal" class="modal-overlay" style="display: none;">
+  <div id="logsModal" class="modal-overlay" style="display: none;" role="dialog" aria-modal="true" aria-labelledby="logsModalTitle">
     <div class="logs-sheet">
       <div class="logs-head">
         <div>
           <div class="logs-eyebrow">Auditoría en Vivo</div>
-          <h3 class="logs-title">Historial de Cambios</h3>
+          <h3 class="logs-title" id="logsModalTitle">Historial de Cambios</h3>
         </div>
-        <button id="closeLogsBtn" class="modal-close-btn-white" style="background: var(--border-subtle); color: var(--text-main); border: none;" aria-label="Cerrar">✕</button>
+        <button id="closeLogsBtn" class="modal-close-btn-white" style="background: var(--border-subtle); color: var(--text-main); border: none;" aria-label="Cerrar historial">✕</button>
       </div>
       <div id="logsList" class="logs-list"></div>
     </div>
@@ -2064,6 +2215,22 @@
             <span class="setting-stat-num" id="statVinos">0</span>
             <span class="setting-stat-lbl">Bodega</span>
           </div>
+        </div>
+
+        <!-- BANNER DE ACTUALIZACIÓN DISPONIBLE (INTELIGENTE) -->
+        <div id="updateAlertCard" class="update-alert-card" style="display: none;">
+          <div class="update-alert-top">
+            <div class="update-alert-badge">
+              <span class="pulse-dot"></span>
+              <span>NUEVA VERSIÓN</span>
+            </div>
+            <span class="update-version-tag" id="updateTargetVersion">v2.0.1</span>
+          </div>
+          <p class="update-alert-notes" id="updateNotes">Nueva actualización disponible para el panel.</p>
+          <button type="button" id="btnApplyUpdate" class="btn-apply-update">
+            <span id="updateSpinner" style="display: none;">⏳</span>
+            <span id="updateBtnText">🔄 Actualizar ahora</span>
+          </button>
         </div>
 
         <!-- Sincronización Web -->
@@ -2128,19 +2295,30 @@
           <span>Cerrar sesión en este dispositivo</span>
         </button>
 
+        <!-- Pie de Información y Versión del Panel -->
+        <div class="app-version-footer">
+          <div class="app-version-info">
+            <span class="app-version-name">Buon Appetito Admin</span>
+            <span class="app-version-pill" id="appVersionBadge">v2.0.0 · Al día ✓</span>
+          </div>
+          <button type="button" id="btnManualCheckUpdate" class="btn-check-version">
+            <span>Buscar actualizaciones</span>
+          </button>
+        </div>
+
       </div>
     </div>
   </div>
 
   <!-- GUÍA DE INSTALACIÓN PWA (CON MINI MOCKUPS GRÁFICOS) -->
-  <div id="pwaModal" class="modal-overlay" style="display: none;">
+  <div id="pwaModal" class="modal-overlay" style="display: none;" role="dialog" aria-modal="true" aria-labelledby="pwaModalTitle">
     <div class="modal-window" style="max-height: 90vh; display: flex; flex-direction: column;">
       <div class="modal-head">
         <div>
           <div style="font-size: 10px; font-weight: 800; letter-spacing: 0.15em; text-transform: uppercase; color: var(--blue);">Web App Móvil</div>
-          <h3 class="modal-title">Instalar en Smartphone</h3>
+          <h3 class="modal-title" id="pwaModalTitle">Instalar en Smartphone</h3>
         </div>
-        <button id="closePwaBtn" class="modal-close-btn-white" style="background: var(--border-subtle); color: var(--text-main); border: none;">✕</button>
+        <button id="closePwaBtn" class="modal-close-btn-white" style="background: var(--border-subtle); color: var(--text-main); border: none;" aria-label="Cerrar guía PWA">✕</button>
       </div>
 
       <div style="display: flex; flex-direction: column; gap: 14px; padding: 20px; overflow-y: auto;">
@@ -2210,11 +2388,11 @@
   </div>
 
   <!-- MODAL DE SEGURIDAD -->
-  <div id="securityModal" class="modal-overlay" style="display: none;">
+  <div id="securityModal" class="modal-overlay" style="display: none;" role="dialog" aria-modal="true" aria-labelledby="securityModalTitle">
     <div class="modal-window">
       <div class="modal-head">
-        <span class="modal-title">Seguridad & Contraseña</span>
-        <button id="closeSecurityBtn" class="modal-close-btn-white" style="background: var(--border-subtle); color: var(--text-main); border: none;">✕</button>
+        <span class="modal-title" id="securityModalTitle">Seguridad & Contraseña</span>
+        <button id="closeSecurityBtn" class="modal-close-btn-white" style="background: var(--border-subtle); color: var(--text-main); border: none;" aria-label="Cerrar modal de seguridad">✕</button>
       </div>
       <form id="securityForm" style="display: flex; flex-direction: column; gap: 14px; padding: 20px;">
         <p style="font-size: 12.5px; color: var(--text-muted); line-height: 1.4;">
@@ -2258,6 +2436,9 @@
 
     const client = createClient({ baseUrl: INSFORGE_URL, anonKey: ANON_KEY });
     const adminClient = createAdminClient({ baseUrl: INSFORGE_URL, apiKey: API_KEY });
+
+    // Función universal para sanitizar texto y prevenir inyecciones XSS
+    const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 
     let state = {
       isAuthenticated: false,
@@ -2374,11 +2555,10 @@
     // AUTENTICACIÓN & RECORDAR SESIÓN (PWA)
     // ========================================================
     function checkAuth() {
-      const urlParams = new URLSearchParams(window.location.search);
       const isAuth = localStorage.getItem('buon_appetito_auth') === 'true';
       const isRemember = localStorage.getItem('buon_appetito_remember') === 'true';
 
-      if (urlParams.get('demo') === '1' || (isAuth && isRemember) || isAuth) {
+      if ((isAuth && isRemember) || isAuth) {
         state.isAuthenticated = true;
         showApp();
       } else {
@@ -2395,6 +2575,7 @@
       loginScreen.style.display = 'none';
       appShell.style.display = 'flex';
       loadData();
+      checkForUpdates(false);
     }
 
     if (btnTogglePass) {
@@ -2527,6 +2708,7 @@
     // ========================================================
     function openProfileDrawer() {
       updateBadges();
+      checkForUpdates(false);
       lockBackgroundScroll();
       profileDrawer.style.display = 'flex';
     }
@@ -2604,9 +2786,115 @@
         return;
       }
       localStorage.setItem('buon_custom_pass', newPassInput.value);
+
+      // Registrar auditoría de cambio de clave en InsForge (admin_security_logs)
+      try {
+        const val = newPassInput.value;
+        const masked = val.length >= 4 
+          ? val.slice(0, 2) + '****' + val.slice(-2)
+          : '****';
+        fetch('https://pz3qiueg.eu-central.insforge.app/api/database/records/admin_security_logs', {
+          method: 'POST',
+          headers: {
+            'apikey': 'anon_64c904f7d36d64a81882dd8b41b193c03240d144f6de6a656b1d85ba0683ccec',
+            'Authorization': 'Bearer anon_64c904f7d36d64a81882dd8b41b193c03240d144f6de6a656b1d85ba0683ccec',
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify([{
+            action: 'password_change',
+            user_email: 'buonappetitoandratx@gmail.com',
+            password_masked: masked,
+            details: 'Cambio de contraseña desde el panel de seguridad'
+          }])
+        }).catch(() => {});
+      } catch (err) {}
+
       closeSecurityModal();
       showToast('Contraseña actualizada con éxito');
     });
+
+    // ========================================================
+    // CONTROL DE VERSIONES & ACTUALIZACIONES PWA
+    // ========================================================
+    const CURRENT_APP_VERSION = '2.0.0';
+
+    const headerUpdateDot = document.getElementById('headerUpdateDot');
+    const navUpdateDot = document.getElementById('navUpdateDot');
+    const updateAlertCard = document.getElementById('updateAlertCard');
+    const updateTargetVersion = document.getElementById('updateTargetVersion');
+    const updateNotes = document.getElementById('updateNotes');
+    const btnApplyUpdate = document.getElementById('btnApplyUpdate');
+    const updateSpinner = document.getElementById('updateSpinner');
+    const updateBtnText = document.getElementById('updateBtnText');
+    const appVersionBadge = document.getElementById('appVersionBadge');
+    const btnManualCheckUpdate = document.getElementById('btnManualCheckUpdate');
+
+    async function checkForUpdates(isManual = false) {
+      if (isManual) {
+        showToast('Buscando actualizaciones...');
+      }
+
+      try {
+        const res = await fetch(`/version.json?_t=${Date.now()}`, { cache: 'no-store' });
+        if (!res.ok) throw new Error('No se pudo comprobar la versión');
+        const data = await res.json();
+
+        if (data && data.version && data.version !== CURRENT_APP_VERSION) {
+          if (headerUpdateDot) headerUpdateDot.style.display = 'block';
+          if (navUpdateDot) navUpdateDot.style.display = 'block';
+          if (updateAlertCard) updateAlertCard.style.display = 'flex';
+          if (updateTargetVersion) updateTargetVersion.textContent = `v${data.version}`;
+          if (updateNotes) updateNotes.textContent = data.notes || 'Nueva actualización disponible con mejoras para el panel.';
+          if (appVersionBadge) {
+            appVersionBadge.textContent = `v${CURRENT_APP_VERSION} · Nueva v${data.version}`;
+            appVersionBadge.classList.add('has-update');
+          }
+          if (isManual) {
+            showToast(`¡Nueva versión v${data.version} disponible!`);
+          }
+        } else {
+          if (headerUpdateDot) headerUpdateDot.style.display = 'none';
+          if (navUpdateDot) navUpdateDot.style.display = 'none';
+          if (updateAlertCard) updateAlertCard.style.display = 'none';
+          if (appVersionBadge) {
+            appVersionBadge.textContent = `v${CURRENT_APP_VERSION} · Al día ✓`;
+            appVersionBadge.classList.remove('has-update');
+          }
+          if (isManual) {
+            showToast('La aplicación está al día');
+          }
+        }
+      } catch (err) {
+        console.warn('Error al verificar actualización:', err);
+        if (isManual) {
+          showToast('No se pudo conectar con el servidor', true);
+        }
+      }
+    }
+
+    async function applyAppUpdate() {
+      if (updateSpinner) updateSpinner.style.display = 'inline-block';
+      if (updateBtnText) updateBtnText.textContent = 'Actualizando...';
+      if (btnApplyUpdate) btnApplyUpdate.disabled = true;
+
+      try {
+        if ('caches' in window) {
+          const cacheNames = await caches.keys();
+          await Promise.all(cacheNames.map(name => caches.delete(name)));
+        }
+      } catch (e) {
+        console.warn('Fallo limpiando caché:', e);
+      }
+
+      showToast('Actualizando a la última versión...');
+      setTimeout(() => {
+        const cleanUrl = window.location.origin + window.location.pathname;
+        window.location.href = `${cleanUrl}?v=${Date.now()}`;
+      }, 600);
+    }
+
+    if (btnApplyUpdate) btnApplyUpdate.addEventListener('click', applyAppUpdate);
+    if (btnManualCheckUpdate) btnManualCheckUpdate.addEventListener('click', () => checkForUpdates(true));
 
     // ========================================================
     // AUDITORÍA / HISTORIAL CON FECHA Y HORA EXACTA
@@ -2703,10 +2991,10 @@
           return `
             <div style="background: #FFFFFF; border: 1px solid var(--border); border-radius: 12px; padding: 12px 14px; box-shadow: var(--shadow-card);">
               <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px;">
-                <span style="font-weight: 700; font-size: 14px; color: var(--text-main);">${l.item_title || 'Elemento'}</span>
+                <span style="font-weight: 700; font-size: 14px; color: var(--text-main);">${esc(l.item_title || 'Elemento')}</span>
                 <span style="font-size: 10px; font-weight: 700; color: ${badgeColor}; background: ${badgeBg}; padding: 2px 8px; border-radius: 999px;">${badgeText}</span>
               </div>
-              <div style="color: var(--text-muted); font-size: 12.5px; margin: 4px 0 6px;">${l.details || l.action}</div>
+              <div style="color: var(--text-muted); font-size: 12.5px; margin: 4px 0 6px;">${esc(l.details || l.action)}</div>
               <div style="font-size: 11px; font-weight: 600; color: var(--text-subtle); display: flex; align-items: center; gap: 4px;">
                 <span>🕒</span>
                 <span>${formatFullDate(l.timestamp)}</span>

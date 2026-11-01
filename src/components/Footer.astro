@@ -2,17 +2,18 @@
 // web/src/components/Footer.astro
 // Footer Oficial Buon Appetito (Port d'Andratx)
 // Diseño Verde Salvia Suave (Sage Mist) con logotipo original a todo color y créditos MYNEXT
+import BuonAppetitoWordmark from './ui/BuonAppetitoWordmark';
 ---
 
 <!-- ======================================================== -->
 <!-- FOOTER OFICIAL BUON APPETITO                             -->
 <!-- ======================================================== -->
-<footer class="bg-gradient-to-b from-[#E2EAE3] via-[#D8E3DA] to-[#CDDCD0] border-t border-[#B8CEBC] text-[#183321] relative">
+<footer id="footer" class="bg-gradient-to-b from-[#E2EAE3] via-[#D8E3DA] to-[#CDDCD0] border-t border-[#B8CEBC] text-[#183321] relative">
   <div class="max-w-7xl mx-auto px-5 sm:px-10 lg:px-12 py-10 sm:py-14">
     
     <!-- Top Identity / Logo Section con Logo Original a Todo Color -->
     <div class="text-center max-w-md mx-auto mb-8 sm:mb-10">
-      <a href="/" class="inline-block group" aria-label="Buon Appetito - Volver al inicio">
+      <a href="/" data-logo-home class="inline-block group" aria-label="Buon Appetito - Volver al inicio">
         <img 
           src="/assets/logos/logo-buon-appetito.png" 
           alt="Buon Appetito - Port d'Andratx" 
@@ -107,19 +108,29 @@
         </div>
         <ul class="space-y-2 text-xs sm:text-sm text-[#2D4534] font-satoshi">
           <li>
-            <a href="/aviso-legal" data-i18n="footer_legal_aviso" class="hover:text-[#183321] hover:translate-x-1 inline-block transition-all duration-200">
+            <a href="/aviso-legal" onclick="sessionStorage.setItem('buon_last_section', '#footer')" data-i18n="footer_legal_aviso" class="hover:text-[#183321] hover:translate-x-1 inline-block transition-all duration-200">
               Aviso legal
             </a>
           </li>
           <li>
-            <a href="/privacidad" data-i18n="footer_legal_privacidad" class="hover:text-[#183321] hover:translate-x-1 inline-block transition-all duration-200">
+            <a href="/privacidad" onclick="sessionStorage.setItem('buon_last_section', '#footer')" data-i18n="footer_legal_privacidad" class="hover:text-[#183321] hover:translate-x-1 inline-block transition-all duration-200">
               Política de privacidad
             </a>
           </li>
           <li>
-            <a href="/cookies" data-i18n="footer_legal_cookies" class="hover:text-[#183321] hover:translate-x-1 inline-block transition-all duration-200">
+            <a href="/cookies" onclick="sessionStorage.setItem('buon_last_section', '#footer')" data-i18n="footer_legal_cookies" class="hover:text-[#183321] hover:translate-x-1 inline-block transition-all duration-200">
               Política de cookies
             </a>
+          </li>
+          <li>
+            <button 
+              type="button" 
+              onclick="if (typeof window.openBuonCookieBanner === 'function') { window.openBuonCookieBanner(); } else { window.dispatchEvent(new CustomEvent('buon:openCookieBanner')); }"
+              data-i18n="footer_legal_cookie_config"
+              class="text-left text-xs sm:text-sm text-[#2D4534] hover:text-[#183321] hover:translate-x-1 inline-block transition-all duration-200 cursor-pointer bg-transparent border-none p-0 font-satoshi"
+            >
+              Configurar cookies
+            </button>
           </li>
         </ul>
       </div>
@@ -145,5 +156,10 @@
       </p>
     </div>
 
+  </div>
+
+  <!-- Halftone Wordmark Interactivo "Buon Appetito" (Cierre Cinemático) -->
+  <div class="border-t border-[#183321]/20 bg-[#183321] relative overflow-hidden">
+    <BuonAppetitoWordmark client:idle />
   </div>
 </footer>

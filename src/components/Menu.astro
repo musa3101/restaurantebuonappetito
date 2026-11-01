@@ -16,7 +16,7 @@ import { ShimmerButton } from './ui/shimmer-button';
         Nuestra Carta &amp; Especialidades
       </h2>
       <p data-i18n="menu_desc" class="font-sans text-[#424842] text-sm sm:text-base leading-relaxed max-w-2xl mx-auto">
-        Tradición ítalo-mediterránea en cada creación. Desde ensaladas frescas y pastas con trufa negra, hasta pizzas al horno de leña, cortes nobles a la brasa y postres de la casa.
+        Tradición ítalo-mediterránea en cada creación. Desde ensaladas frescas y pastas con trufa negra, hasta pizzas artesanales crujientes, cortes nobles y postres caseros.
       </p>
     </div>
 
@@ -30,6 +30,7 @@ import { ShimmerButton } from './ui/shimmer-button';
       <!-- Button 1: Carta de Comida (Activo -> /carta) -->
       <ShimmerButton 
         client:visible
+        id="btn-goto-carta"
         href="/carta"
         background="#183321"
         shimmerColor="#FFFFFF"
@@ -49,6 +50,7 @@ import { ShimmerButton } from './ui/shimmer-button';
       <!-- Button 2: Carta de Vinos y Bodega (Abre la carta digital de vinos y bebidas) -->
       <ShimmerButton 
         client:visible
+        id="btn-goto-vinos"
         href="/vinos"
         background="#9E4221"
         shimmerColor="#FED7AA"
@@ -66,6 +68,19 @@ import { ShimmerButton } from './ui/shimmer-button';
         <span data-i18n="menu_btn_wine">Vinos y Bodega</span>
       </ShimmerButton>
     </div>
+
+    <script is:inline>
+      document.addEventListener('DOMContentLoaded', () => {
+        ['btn-goto-carta', 'btn-goto-vinos'].forEach(btnId => {
+          const el = document.getElementById(btnId);
+          if (el) {
+            el.addEventListener('click', () => {
+              try { sessionStorage.setItem('buon_last_section', '#menu'); } catch (e) {}
+            });
+          }
+        });
+      });
+    </script>
 
   </div>
 </section>

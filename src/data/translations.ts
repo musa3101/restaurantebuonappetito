@@ -45,7 +45,7 @@ export const TRANSLATIONS: Record<Language, Record<string, string>> = {
     // Menú
     menu_eyebrow: "Gastronomía Artesanal",
     menu_title: "Nuestra Carta & Especialidades",
-    menu_desc: "Tradición ítalo-mediterránea en cada creación. Desde ensaladas frescas y pastas con trufa negra, hasta pizzas al horno de leña, cortes nobles a la brasa y postres de la casa.",
+    menu_desc: "Tradición ítalo-mediterránea en cada creación. Desde ensaladas frescas y pastas con trufa negra, hasta pizzas artesanales crujientes, carnes selectas y postres caseros.",
     menu_btn_food: "Carta de Comida",
     menu_btn_wine: "Vinos y Bodega",
     menu_wine_badge: "En sala",
@@ -89,6 +89,7 @@ export const TRANSLATIONS: Record<Language, Record<string, string>> = {
     footer_legal_aviso: "Aviso legal",
     footer_legal_privacidad: "Política de privacidad",
     footer_legal_cookies: "Política de cookies",
+    footer_legal_cookie_config: "Configurar cookies",
     footer_rights: "Todos los derechos reservados.",
     footer_made_with: "Hecho con",
 
@@ -143,7 +144,7 @@ export const TRANSLATIONS: Record<Language, Record<string, string>> = {
     // Menú
     menu_eyebrow: "Artisanal Gastronomy",
     menu_title: "Our Menu & Specialties",
-    menu_desc: "Italo-Mediterranean tradition in every creation. From crisp salads and black truffle pasta to wood-fired pizzas, prime grilled cuts, and homemade desserts.",
+    menu_desc: "Italo-Mediterranean tradition in every creation. From crisp salads and black truffle pasta to handcrafted crispy pizzas, prime grilled cuts, and homemade desserts.",
     menu_btn_food: "Food Menu",
     menu_btn_wine: "Wines & Cellar",
     menu_wine_badge: "In room",
@@ -187,6 +188,7 @@ export const TRANSLATIONS: Record<Language, Record<string, string>> = {
     footer_legal_aviso: "Legal notice",
     footer_legal_privacidad: "Privacy policy",
     footer_legal_cookies: "Cookie policy",
+    footer_legal_cookie_config: "Cookie settings",
     footer_rights: "All rights reserved.",
     footer_made_with: "Made with",
 
@@ -241,7 +243,7 @@ export const TRANSLATIONS: Record<Language, Record<string, string>> = {
     // Menú
     menu_eyebrow: "Handwerkliche Gastronomie",
     menu_title: "Unsere Speisekarte & Spezialitäten",
-    menu_desc: "Italo-mediterrane Tradition in jeder Kreation. Von frischen Salaten und Pasta mit schwarzem Trüffel bis hin zu Holzofenpizzen, feinem Fleisch vom Grill und hausgemachten Desserts.",
+    menu_desc: "Italo-mediterrane Tradition in jeder Kreation. Von frischen Salaten und Pasta mit schwarzem Trüffel bis hin zu hausgemachten knusprigen Pizzen, feinem Fleisch vom Grill und hausgemachten Desserts.",
     menu_btn_food: "Speisekarte",
     menu_btn_wine: "Weine & Keller",
     menu_wine_badge: "Am Tisch",
@@ -285,6 +287,7 @@ export const TRANSLATIONS: Record<Language, Record<string, string>> = {
     footer_legal_aviso: "Impressum",
     footer_legal_privacidad: "Datenschutzerklärung",
     footer_legal_cookies: "Cookie-Richtlinie",
+    footer_legal_cookie_config: "Cookie-Einstellungen",
     footer_rights: "Alle Rechte vorbehalten.",
     footer_made_with: "Erstellt mit",
 

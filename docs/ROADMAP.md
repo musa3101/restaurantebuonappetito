@@ -26,19 +26,40 @@
 - [x] Solución integral de vídeo Hero para Desktop y Tablet con render panorámico 16:9 ambiental sin botón de play de Safari.
 - [x] Barra de navegación editorial refinada en Desktop (sin píldoras, con scroll-spy dorado y selector de idioma limpio).
 - [x] Perfeccionamiento de la infografía "Il Nostro Calzone" con arcos simétricos en pantallas grandes.
+- [x] **Auditoría Integral y Fase A de Blindaje Inmediato (Riesgo Cero para Presentación)**:
+  - [x] Eliminación de puerta trasera de autenticación por URL (`?demo=1`) en `admin.astro`.
+  - [x] Sanitización completa contra inyecciones XSS (`escapeHtml`) en carta, vinos e historial del panel admin.
+  - [x] Corrección de discrepancia de hidratación en React en botón de reserva (`FlowButton`).
+  - [x] Accesibilidad en modales (`role="dialog"`, `aria-modal="true"`, `aria-labelledby`, `aria-label` en botones de cierre).
+  - [x] Mejora de ratios de contraste tipográfico WCAG AA en textos sutiles y badges de agotado.
+  - [x] Blindaje estricto de secretos en `.gitignore` (`.env*`, certificados, claves).
+  - [x] **Navegación y Retorno Contextual Inteligente ("Volver Atrás")**:
+    - [x] Retorno exacto al Menú (`#menu`) desde `/carta` y `/vinos` arriba.
+    - [x] Retorno exacto al Footer (`#footer`) desde las páginas de Aviso Legal, Privacidad y Cookies.
+    - [x] Retorno exacto a Dónde Estamos (`#donde-estamos`) desde `/reservar`.
+    - [x] Desplazamiento suave al Hero / Inicio (`scrollY = 0`) exclusivo al hacer clic en el Logo oficial o entrar de cero a la web.
+- [x] **SEO Técnico, GEO e Integridad del Mensaje de Marca**:
+  - [x] Supresión total de textos falsos ("horno de leña", "fermentación 48 horas").
+  - [x] Datos estructurados Schema.org `Restaurant` + `ItalianRestaurant` con geolocalización de Port d'Andratx.
+  - [x] Sitemap dinámico `@astrojs/sitemap` y `robots.txt` para rastreadores de IA.
+- [x] **Privacidad y Aviso de Cookies Responsivo**:
+  - [x] Banner interactivo shadcn/21st.dev (`AlertCookieNotice.tsx`) condicionado al scroll más allá del Hero.
+  - [x] Páginas legales con contraste óptimo y legible.
+- [x] **Cierre Cinemático Halftone Wordmark "Buon Appetito"**:
+  - [x] Canvas 2D semitono verde `#183321` y rojo `#D93829` con interacción física de resortes y destellos al tacto.
+  - [x] Adaptación móvil vertical (`scaleY`) al 70-75% de altura.
+  - [x] Integración en portada (`/`), carta (`/carta`) y vinos (`/vinos`).
+  - [x] Limpieza del footer en carta y vinos (eliminado botón duplicado de volver).
 
 ---
 
-## Tareas en progreso / Próxima sesión
-- [ ] **SEO Técnico y Metadatos en Código**:
-  - [ ] Implementar Schema.org / JSON-LD para restaurante (`Restaurant`, menú, ubicación en el puerto, teléfono y link de reservas).
-  - [ ] Configurar generación automática de `sitemap.xml` y `robots.txt` en Astro.
-  - [ ] Optimizar etiquetas Open Graph (OG tags) para previsualizaciones atractivas en WhatsApp, Telegram y redes sociales.
-
----
-
-## Próximas mejoras prioritarias (Post-Dominio)
-1. **Compra y conexión del dominio definitivo** (ej. `buonappetitopuerto.es`).
-2. **Alta y verificación DNS en Google Search Console**.
-3. **Vinculación con Google Business Profile (Google Maps)** con link a la web y reservas de Bavoli.
-4. **Comprobación en sala con código QR real impreso en las mesas.**
+## 🚨 RECORDATORIO PRIORITARIO DE SESIÓN (A partir de mañana / Post-Presentación)
+> [!IMPORTANT]
+> **Prioridad Máxima acordada para próximas sesiones (a partir de la presentación):**
+> 1. **FASE B - Seguridad y Arquitectura Profunda**:
+>    - **Backend Seguro para Admin**: Mudar la llamada con API key de InsForge a un endpoint protegido de servidor en Astro / Edge Function para que la Master Key nunca viaje al navegador.
+>    - **Modularización de `admin.astro`**: Dividir el archivo de 3.500 líneas en componentes reutilizables (`AdminHeader`, `DishList`, `DishModal`, `AdminDrawer`, `useAdminState`).
+>    - **Unificación DRY de Carta y Vinos**: Compartir la lógica de categorías, filtros e internacionalización entre `carta.astro` y `vinos.astro` en un servicio común.
+> 2. **GOOGLE SEARCH CONSOLE & DOMINIO**:
+>    - Alta y verificación DNS en Google Search Console.
+>    - Vinculación con Google Business Profile (Google Maps) con enlace oficial a la web y reservas.

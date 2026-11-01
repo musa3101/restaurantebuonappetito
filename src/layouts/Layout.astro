@@ -2,20 +2,134 @@
 import '../styles/global.css';
 import Preloader from '../components/Preloader.astro';
 import { TRANSLATIONS } from '../data/translations';
+import { AlertCookieNotice } from '../components/ui/AlertCookieNotice';
 
 interface Props {
   title?: string;
   description?: string;
+  image?: string;
+  type?: string;
 }
 
 const {
   title = "Buon Appetito | Cocina Mediterránea y Pizzería Artesanal",
-  description = "Restaurante mediterráneo y pizzería artesanal en Port d'Andratx, Mallorca. Masas de fermentación lenta de 48h en horno de leña y producto selecto italiano y local."
+  description = "Restaurante mediterráneo y pizzería artesanal en Port d'Andratx, Mallorca. Pizzas de masa fina y crujiente, pastas caseras, producto selecto italiano y pescados frescos frente al puerto.",
+  image = "/assets/our-pizza.webp",
+  type = "restaurant.restaurant"
 } = Astro.props;
+
+const siteUrl = Astro.site ? Astro.site.toString().replace(/\/$/, '') : 'https://buonappetito-andratx.com';
+const canonicalUrl = new URL(Astro.url.pathname, siteUrl).toString();
+const ogImageUrl = new URL(image, siteUrl).toString();
+
+// Estructuración Semántica Avanzada (Schema.org / JSON-LD) para Google Maps, Local Pack y Motores de IA (GEO)
+const schemaJsonLd = {
+  "@context": "https://schema.org",
+  "@type": ["Restaurant", "ItalianRestaurant"],
+  "@id": `${siteUrl}/#restaurant`,
+  "name": "Buon Appetito",
+  "alternateName": [
+    "Restaurante Buon Appetito",
+    "Buon Appetito Port d'Andratx",
+    "Pizzería Buon Appetito Andratx"
+  ],
+  "description": description,
+  "url": siteUrl,
+  "logo": `${siteUrl}/favicon.svg`,
+  "image": [
+    ogImageUrl,
+    `${siteUrl}/assets/our-pizza.webp`,
+    `${siteUrl}/assets/gallery/frame_18s.jpg`
+  ],
+  "telephone": "+34632446064",
+  "email": "buonappetitoandratx@gmail.com",
+  "priceRange": "€€",
+  "currenciesAccepted": "EUR",
+  "paymentAccepted": "Cash, Credit Card, Debit Card, Apple Pay, Google Pay, Contactless",
+  "servesCuisine": [
+    "Italian",
+    "Mediterranean",
+    "Pizza artesanal",
+    "Pasta fresca",
+    "Pescados y Mariscos"
+  ],
+  "hasMenu": `${siteUrl}/carta`,
+  "acceptsReservations": "True",
+  "potentialAction": {
+    "@type": "ReserveAction",
+    "target": {
+      "@type": "EntryPoint",
+      "urlTemplate": "https://www.bavoli.com/book/buon-appetito",
+      "inLanguage": ["es", "en", "de", "it"],
+      "actionPlatform": [
+        "http://schema.org/DesktopWebPlatform",
+        "http://schema.org/MobileWebPlatform"
+      ]
+    },
+    "result": {
+      "@type": "FoodEstablishmentReservation",
+      "name": "Reserva de mesa en Buon Appetito"
+    }
+  },
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Avenida Mateo Bosch, 24",
+    "addressLocality": "Port d'Andratx",
+    "addressRegion": "Illes Balears",
+    "postalCode": "07157",
+    "addressCountry": "ES"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": 39.5443444,
+    "longitude": 2.3882905
+  },
+  "hasMap": "https://maps.app.goo.gl/nC1F69YNFf4TghwD6",
+  "sameAs": [
+    "https://maps.app.goo.gl/nC1F69YNFf4TghwD6",
+    "https://www.tripadvisor.es/Restaurant_Review-g616239-d24183908-Reviews-Grand_Pasta-Port_d_Andratx_Majorca_Balearic_Islands.html"
+  ],
+  "openingHoursSpecification": [
+    {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday",
+        "Sunday"
+      ],
+      "opens": "11:30",
+      "closes": "23:30"
+    }
+  ],
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "4.8",
+    "reviewCount": "148",
+    "bestRating": "5",
+    "worstRating": "1"
+  },
+  "areaServed": [
+    { "@type": "City", "name": "Port d'Andratx" },
+    { "@type": "City", "name": "Andratx" },
+    { "@type": "AdministrativeArea", "name": "Mallorca" }
+  ],
+  "amenityFeature": [
+    { "@type": "LocationFeatureSpecification", "name": "Terraza frente al mar y puerto deportivo", "value": true },
+    { "@type": "LocationFeatureSpecification", "name": "Pizzas artesanales de masa fina y crujiente", "value": true },
+    { "@type": "LocationFeatureSpecification", "name": "Pastas caseras y especialidades mediterráneas", "value": true },
+    { "@type": "LocationFeatureSpecification", "name": "Salón interior climatizado", "value": true },
+    { "@type": "LocationFeatureSpecification", "name": "Opciones vegetarianas", "value": true },
+    { "@type": "LocationFeatureSpecification", "name": "Bodega selecta de vinos italianos y de Mallorca", "value": true }
+  ]
+};
 ---
 
 <!DOCTYPE html>
-<html lang="es" class="scroll-smooth overflow-x-hidden" style="background-color: #183321;">
+<html lang="es" class="scroll-smooth overflow-x-hidden bg-[#183321]">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover" />
@@ -26,6 +140,39 @@ const {
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     <title>{title}</title>
     <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalUrl} />
+
+    <!-- Open Graph (WhatsApp, Telegram, Facebook, iMessage) -->
+    <meta property="og:site_name" content="Buon Appetito · Port d'Andratx" />
+    <meta property="og:type" content={type} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:image" content={ogImageUrl} />
+    <meta property="og:image:secure_url" content={ogImageUrl} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="786" />
+    <meta property="og:image:alt" content="Buon Appetito - Pizzería artesanal y cocina mediterránea en Port d'Andratx" />
+    <meta property="og:locale" content="es_ES" />
+    <meta property="og:locale:alternate" content="en_GB" />
+    <meta property="og:locale:alternate" content="de_DE" />
+    <meta property="og:locale:alternate" content="it_IT" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageUrl} />
+
+    <!-- SEO Local y Geoposicionamiento (Google Maps, Bing, Apple Maps, Motores GEO) -->
+    <meta name="geo.region" content="ES-IB" />
+    <meta name="geo.placename" content="Port d'Andratx, Illes Balears" />
+    <meta name="geo.position" content="39.544344;2.388291" />
+    <meta name="ICBM" content="39.544344, 2.388291" />
+
+    <!-- Datos Estructurados JSON-LD Schema.org para Motores de Búsqueda e IA (Perplexity, ChatGPT, Gemini) -->
+    <script type="application/ld+json" set:html={JSON.stringify(schemaJsonLd)} />
+
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
@@ -41,24 +188,78 @@ const {
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,600&family=Outfit:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Questrial&display=swap" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
 
-    <!-- Control de Scroll Limpio: Evitar saltos automáticos a mitad de página y forzar inicio arriba -->
+    <!-- Control de Scroll Inteligente: Permite volver a la sección exacta y forzar inicio al entrar de cero o tocar logo -->
     <script is:inline>
-      try {
-        if ('scrollRestoration' in history) {
-          history.scrollRestoration = 'manual';
-        }
-        if (!window.location.hash || window.location.hash === '#inicio') {
-          window.scrollTo(0, 0);
-          if (window.location.hash === '#inicio') {
-            history.replaceState(null, '', window.location.pathname);
+      (function() {
+        try {
+          if ('scrollRestoration' in history) {
+            history.scrollRestoration = 'auto';
           }
-        }
-      } catch (e) {}
+
+          const navEntries = performance.getEntriesByType('navigation');
+          const isBackForward = navEntries.length > 0 && navEntries[0].type === 'back_forward';
+
+          function scrollToSection(hash) {
+            if (!hash) return;
+            const target = document.querySelector(hash);
+            if (target) {
+              const headerOffset = 80;
+              const elementPosition = target.getBoundingClientRect().top;
+              const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+              window.scrollTo({
+                top: Math.max(0, offsetPosition),
+                behavior: 'smooth'
+              });
+            }
+          }
+
+          if (window.location.hash && window.location.hash !== '#inicio') {
+            if (document.readyState === 'loading') {
+              document.addEventListener('DOMContentLoaded', function() {
+                setTimeout(function() { scrollToSection(window.location.hash); }, 60);
+              });
+            } else {
+              setTimeout(function() { scrollToSection(window.location.hash); }, 60);
+            }
+          } else if (!isBackForward) {
+            // Entrada limpia o recarga inicial: comenzar en el Hero
+            window.scrollTo(0, 0);
+            if (window.location.hash === '#inicio') {
+              history.replaceState(null, '', window.location.pathname);
+            }
+          }
+
+          // Clic en el logo oficial (Header o Footer): siempre desplaza al inicio suavemente
+          document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('[data-logo-home]').forEach(function(el) {
+              el.addEventListener('click', function(e) {
+                if (window.location.pathname === '/' || window.location.pathname === '') {
+                  e.preventDefault();
+                  window.scrollTo({ top: 0, behavior: 'smooth' });
+                  if (window.location.hash) {
+                    history.replaceState(null, '', window.location.pathname);
+                  }
+                }
+              });
+            });
+          });
+        } catch (e) {}
+      })();
+    </script>
+
+    <!-- Microsoft Clarity -->
+    <script is:inline type="text/javascript">
+      (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+      })(window, document, "clarity", "script", "z6ux9thsuf");
     </script>
   </head>
-  <body class="bg-[#FBF9F5] text-[#1B1C1A] font-sans antialiased selection:bg-[#9E4221] selection:text-white relative overflow-x-hidden" style="background-color: #183321;">
+  <body class="bg-[#FBF9F5] text-[#1B1C1A] font-sans antialiased selection:bg-[#9E4221] selection:text-white relative overflow-x-hidden min-h-screen">
     <Preloader />
     <slot />
+    <AlertCookieNotice client:idle />
 
     <!-- Runtime Oficial de Traducción (i18nstack) -->
     <script is:inline define:vars={{ TRANSLATIONS }}>

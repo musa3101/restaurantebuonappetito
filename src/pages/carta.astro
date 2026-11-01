@@ -1,8 +1,9 @@
 ---
 // Carta & Menú Digital Oficial · Buon Appetito (Port d'Andratx)
 import PizzaMenuLoader from '../components/PizzaMenuLoader.astro';
+import BuonAppetitoWordmark from '../components/ui/BuonAppetitoWordmark';
 const title = "Carta & Menú Digital | Buon Appetito • Port d'Andratx";
-const description = "Carta digital interactiva de Buon Appetito en Port d'Andratx. Cocina mediterránea tradicional italiana, pastas artesanales, pizzas en horno de leña y pescados frescos de Mallorca.";
+const description = "Carta digital interactiva de Buon Appetito en Port d'Andratx. Cocina mediterránea tradicional italiana, pastas caseras, pizzas artesanales crujientes y pescados frescos de Mallorca.";
 ---
 
 <!DOCTYPE html>
@@ -25,14 +26,22 @@ const description = "Carta digital interactiva de Buon Appetito en Port d'Andrat
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <meta name="theme-color" content="#0E2015" />
 
-  <!-- Control de Scroll Limpio -->
+  <!-- Control de Scroll Limpio y Restauración Nativa -->
   <script is:inline>
     try {
       if ('scrollRestoration' in history) {
-        history.scrollRestoration = 'manual';
+        history.scrollRestoration = 'auto';
       }
-      window.scrollTo(0, 0);
     } catch (e) {}
+  </script>
+
+  <!-- Microsoft Clarity -->
+  <script is:inline type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+      c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+      t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+      y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "z6ux9thsuf");
   </script>
 </head>
 <body class="menu-body">
@@ -152,8 +161,8 @@ const description = "Carta digital interactiva de Buon Appetito en Port d'Andrat
           Disponemos de opciones sin gluten (pastas y pizzas artesanales). Si tiene alguna alergia o intolerancia alimentaria, por favor comuníqueselo a nuestro equipo antes de realizar su comanda.
         </p>
 
-        <!-- Enlace Elegante Reservar Mesa (sin botón ni píldora, texto con flecha sutil) -->
-        <div class="footer-reserve-wrapper">
+        <!-- Enlaces de Acción Inferiores: Reservar Mesa -->
+        <div class="footer-action-links-wrapper">
           <a href="/reservar" class="footer-reserve-link" id="footer-reservar-link" title="Reservar mesa en Buon Appetito">
             Reservar mesa
           </a>
@@ -205,16 +214,25 @@ const description = "Carta digital interactiva de Buon Appetito en Port d'Andrat
 
       </div>
     </div>
+
+    <!-- Halftone Wordmark Interactivo "Buon Appetito" (Cierre Cinemático) -->
+    <div class="footer-wordmark-wrap">
+      <BuonAppetitoWordmark client:idle />
+    </div>
   </footer>
 
   <!-- Scripts oficiales sincronizados -->
   <script is:inline src="/data/menu-data.js"></script>
 
   <script is:inline>
+    // Utilidad de escape para prevenir XSS
+    const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+
     const UI_TEXT = {
       es: {
         heroTitle: "Nuestra Carta",
         btnBack: "Volver",
+        btnBackBottom: "Volver al Menú",
         reserveTable: "Reservar mesa",
         taxIncluded: "Precios con IVA incluido (10%).",
         allergensNote: "Disponemos de opciones sin gluten (pastas y pizzas artesanales). Si tiene alguna alergia o intolerancia alimentaria, por favor comuníqueselo a nuestro equipo antes de realizar su comanda.",
@@ -225,6 +243,7 @@ const description = "Carta digital interactiva de Buon Appetito en Port d'Andrat
       en: {
         heroTitle: "Our Menu",
         btnBack: "Back",
+        btnBackBottom: "Back to Menu",
         reserveTable: "Book a table",
         taxIncluded: "All prices include 10% VAT.",
         allergensNote: "Gluten-free options available (artisanal pasta and pizzas). If you have any food allergy or intolerance, please inform our team before ordering.",
@@ -235,6 +254,7 @@ const description = "Carta digital interactiva de Buon Appetito en Port d'Andrat
       de: {
         heroTitle: "Unsere Speisekarte",
         btnBack: "Zurück",
+        btnBackBottom: "Zurück zum Menü",
         reserveTable: "Tisch reservieren",
         taxIncluded: "Alle Preise inklusive 10% MwSt.",
         allergensNote: "Glutenfreie Optionen verfügbar (hausgemachte Pasta und Pizzen). Bitte informieren Sie unser Team vor Ihrer Bestellung über eventuelle Allergien oder Unverträglichkeiten.",
@@ -318,16 +338,22 @@ const description = "Carta digital interactiva de Buon Appetito en Port d'Andrat
       renderMenu();
     }
 
+    function goBackToMenu() {
+      if (window.history.length > 1 && document.referrer && document.referrer.includes(window.location.host)) {
+        window.history.back();
+      } else {
+        window.location.href = '/#menu';
+      }
+    }
+
     function setupEventListeners() {
       const btnBack = document.getElementById('btn-back');
       if (btnBack) {
-        btnBack.addEventListener('click', () => {
-          if (window.history.length > 1) {
-            window.history.back();
-          } else {
-            window.location.href = '/';
-          }
-        });
+        btnBack.addEventListener('click', goBackToMenu);
+      }
+      const btnBackBottom = document.getElementById('btn-back-bottom');
+      if (btnBackBottom) {
+        btnBackBottom.addEventListener('click', goBackToMenu);
       }
 
       const langContainer = document.getElementById('lang-nav-container');
@@ -401,6 +427,7 @@ const description = "Carta digital interactiva de Buon Appetito en Port d'Andrat
 
       const titleEl = document.getElementById('hero-title');
       const txtBackEl = document.getElementById('txt-back');
+      const txtBackBottomEl = document.getElementById('txt-back-bottom');
       const taxNoteEl = document.getElementById('tax-note');
       const allergenNoteEl = document.getElementById('allergen-note');
       const legalAvisoEl = document.getElementById('legal-aviso');
@@ -409,6 +436,7 @@ const description = "Carta digital interactiva de Buon Appetito en Port d'Andrat
 
       if (titleEl) titleEl.textContent = t.heroTitle;
       if (txtBackEl) txtBackEl.textContent = t.btnBack;
+      if (txtBackBottomEl) txtBackBottomEl.textContent = t.btnBackBottom || t.btnBack;
       if (taxNoteEl) taxNoteEl.textContent = t.taxIncluded;
       if (allergenNoteEl) allergenNoteEl.textContent = t.allergensNote;
       if (legalAvisoEl) legalAvisoEl.textContent = t.legalAviso;
@@ -469,9 +497,9 @@ const description = "Carta digital interactiva de Buon Appetito en Port d'Andrat
         const catTitle = cat[currentLang] || cat.es;
 
         html += `
-          <section class="menu-category-section" id="cat-${cat.id}">
+          <section class="menu-category-section" id="cat-${esc(cat.id)}">
             <div class="menu-category-header">
-              <h2 class="category-heading">${catTitle}</h2>
+              <h2 class="category-heading">${esc(catTitle)}</h2>
             </div>
 
             <div class="menu-editorial-list">
@@ -482,16 +510,16 @@ const description = "Carta digital interactiva de Buon Appetito en Port d'Andrat
                 const soldOutLabel = currentLang === 'en' ? 'Sold out today' : (currentLang === 'de' ? 'Heute ausverkauft' : 'Agotado hoy');
 
                 return `
-                  <article class="menu-item-row ${!isAvail ? 'opacity-50 grayscale' : ''}" id="item-${item.id}">
+                  <article class="menu-item-row ${!isAvail ? 'opacity-50 grayscale' : ''}" id="item-${esc(item.id)}">
                     <div class="menu-item-top">
                       <div class="menu-item-title-group">
-                        <h3 class="menu-item-title">${trans.title}</h3>
-                        ${!isAvail ? `<span class="inline-block text-[10px] font-bold text-rose-700 bg-rose-50 border border-rose-200 px-2 py-0.5 rounded-full uppercase tracking-wider ml-2">${soldOutLabel}</span>` : ''}
+                        <h3 class="menu-item-title">${esc(trans.title)}</h3>
+                        ${!isAvail ? `<span class="inline-block text-[10px] font-bold text-rose-800 bg-rose-50 border border-rose-200 px-2 py-0.5 rounded-full uppercase tracking-wider ml-2">${soldOutLabel}</span>` : ''}
                       </div>
                       <span class="menu-item-dots" aria-hidden="true"></span>
-                      <span class="menu-item-price">${item.price.toFixed(2)} €</span>
+                      <span class="menu-item-price">${Number(item.price).toFixed(2)} €</span>
                     </div>
-                    ${hasDesc ? `<p class="menu-item-desc">${trans.description}</p>` : ''}
+                    ${hasDesc ? `<p class="menu-item-desc">${esc(trans.description)}</p>` : ''}
                   </article>
                 `;
               }).join('')}
@@ -1157,8 +1185,17 @@ html {
   background: var(--footer-bg);
   border-top: 1px solid var(--footer-border);
   color: var(--footer-text);
-  padding: 38px 0 30px;
+  padding: 38px 0 0;
   margin-top: auto;
+}
+
+.footer-wordmark-wrap {
+  margin-top: 28px;
+  background-color: #183321;
+  border-top: 1px solid rgba(24, 51, 33, 0.2);
+  position: relative;
+  overflow: hidden;
+  width: 100%;
 }
 
 .footer-card {
@@ -1183,9 +1220,39 @@ html {
   padding: 0 10px;
 }
 
-/* Enlace Elegante Reservar Mesa */
-.footer-reserve-wrapper {
+/* Enlaces de Acción Inferiores (Volver al Menú + Reservar Mesa) */
+.footer-action-links-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  flex-wrap: wrap;
   margin-bottom: 24px;
+}
+
+.footer-back-bottom-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  font-family: var(--font-sans);
+  font-size: 0.82rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-green-deep);
+  background: rgba(24, 51, 33, 0.08);
+  border: 1px solid rgba(24, 51, 33, 0.18);
+  border-radius: 999px;
+  padding: 8px 18px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.footer-back-bottom-btn:hover {
+  background: var(--color-green-deep);
+  color: #FFFFFF;
+  transform: translateY(-1px);
 }
 
 .footer-reserve-link {

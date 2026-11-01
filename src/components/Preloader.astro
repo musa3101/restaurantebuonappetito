@@ -2,10 +2,14 @@
 // Preloader Oficial Buon Appetito con Animación Lottie de Restaurante
 ---
 
-<!-- Chequeo ultrarrápido síncrono para suprimir flash en visitas repetidas -->
+<!-- Chequeo ultrarrápido síncrono para suprimir flash en visitas repetidas o páginas de lectura legal -->
 <script is:inline>
   try {
-    if (sessionStorage.getItem('ba_preloader_seen_v1') === 'true' && !sessionStorage.getItem('ba_nav_to_reservar')) {
+    const isLegalPage = window.location.pathname.includes('/aviso-legal') || 
+                        window.location.pathname.includes('/cookies') || 
+                        window.location.pathname.includes('/privacidad');
+
+    if (isLegalPage || (sessionStorage.getItem('ba_preloader_seen_v1') === 'true' && !sessionStorage.getItem('ba_nav_to_reservar'))) {
       document.documentElement.classList.add('preloader-already-seen');
     } else {
       // El preloader va a animarse: congelar la web desde el primer frame
@@ -13,7 +17,6 @@
       document.documentElement.style.backgroundColor = '#183321';
       if (document.body) {
         document.body.classList.add('preloader-lock');
-        document.body.style.backgroundColor = '#183321';
       }
     }
   } catch (e) {}
@@ -47,6 +50,14 @@
 
     const SESSION_SEEN_KEY = 'ba_preloader_seen_v1';
     const FROM_RESERVAR_KEY = 'ba_nav_to_reservar';
+
+    const isLegalPage = window.location.pathname.includes('/aviso-legal') || 
+                        window.location.pathname.includes('/cookies') || 
+                        window.location.pathname.includes('/privacidad');
+    if (isLegalPage) {
+      hidePreloader(true);
+      return;
+    }
 
     let hasSeenFirstVisit = false;
     let isNavigatingToReservar = false;
@@ -110,10 +121,8 @@
       window.addEventListener('touchmove', preventScrollAndTouch, { passive: false, capture: true });
       window.addEventListener('wheel', preventScrollAndTouch, { passive: false, capture: true });
       rootEl.classList.add('preloader-lock');
-      rootEl.style.backgroundColor = '#183321';
       if (document.body) {
         document.body.classList.add('preloader-lock');
-        document.body.style.backgroundColor = '#183321';
       }
     }
 
@@ -122,11 +131,9 @@
       window.removeEventListener('touchmove', preventScrollAndTouch, { capture: true });
       window.removeEventListener('wheel', preventScrollAndTouch, { capture: true });
       rootEl.classList.remove('preloader-lock');
-      // Preservar siempre el verde oliva #183321 de base para evitar que Safari iOS exponga fondos claros al rebotar
-      rootEl.style.backgroundColor = '#183321';
       if (document.body) {
         document.body.classList.remove('preloader-lock');
-        document.body.style.backgroundColor = '#183321';
+        document.body.style.backgroundColor = '';
       }
     }
 
