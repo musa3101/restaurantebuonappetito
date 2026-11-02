@@ -297,24 +297,51 @@
 
   // Control de scroll spy para marcar la sección activa en el menú de escritorio
   const navItems = document.querySelectorAll('.nav-desktop-item');
-  const sections = ['inicio', 'sobre-nosotros', 'menu', 'donde-estamos'];
+
+  // Mapeo ordenado de secciones hacia el elemento activo correspondiente del menú
+  const sectionNavMap = [
+    { id: 'inicio', navTarget: 'inicio' },
+    { id: 'sobre-nosotros', navTarget: 'sobre-nosotros' },
+    { id: 'pizza', navTarget: 'sobre-nosotros' }, // La Nostra Pizza forma parte de la historia/elaboración artesanal
+    { id: 'menu', navTarget: 'menu' },
+    { id: 'resenas', navTarget: 'menu' }, // Experiencias y platos de clientes tras la carta
+    { id: 'donde-estamos', navTarget: 'donde-estamos' },
+  ];
 
   function updateActiveNavSection() {
     if (window.innerWidth < 1024) return;
-    const scrollPosition = window.scrollY + 180;
 
-    let currentSection = 'inicio';
-    for (const sectionId of sections) {
-      const el = document.getElementById(sectionId);
+    // Si estamos en la parte superior del todo (Hero), Inicio siempre activo
+    if (window.scrollY < 200) {
+      applyActiveNav('inicio');
+      return;
+    }
+
+    // Si hemos llegado cerca del final de la página, Dónde Estamos siempre activo
+    const scrollBottom = window.innerHeight + window.scrollY;
+    if (scrollBottom >= document.documentElement.scrollHeight - 150) {
+      applyActiveNav('donde-estamos');
+      return;
+    }
+
+    // Línea de lectura visual de referencia: tercio superior de la pantalla (160px desde el header)
+    const triggerY = window.scrollY + 200;
+
+    let matchedTarget = 'inicio';
+    for (const mapping of sectionNavMap) {
+      const el = document.getElementById(mapping.id);
       if (el) {
         const top = el.offsetTop;
-        const height = el.offsetHeight;
-        if (scrollPosition >= top && scrollPosition < top + height) {
-          currentSection = sectionId;
+        if (triggerY >= top) {
+          matchedTarget = mapping.navTarget;
         }
       }
     }
 
+    applyActiveNav(matchedTarget);
+  }
+
+  function applyActiveNav(currentSection: string) {
     navItems.forEach(item => {
       const target = item.getAttribute('data-nav-target');
       const line = item.querySelector('.nav-active-line') as HTMLElement | null;
