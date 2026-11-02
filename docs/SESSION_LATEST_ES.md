@@ -1,67 +1,50 @@
 # Registro de Sesión - Buon Appetito Web
-**Fecha:** 1 de Noviembre de 2026  
-**Rama:** `dev` (Aislamiento de trabajo local)
+**Fecha:** 2 de Noviembre de 2026  
+**Rama:** `dev` sincronizada con `main` y desplegada en producción.
 
 ---
 
 ## 1. Qué se ha hecho hoy
-1. **Auditoría Técnica y Resolución del Bloqueo en Panel de Administrador (`/admin`)**:
-   - Diagnóstico con Playwright CLI y TestSprite MCP.
-   - Eliminación de la puerta trasera `?demo=1` y blindaje XSS con sanitización `esc`.
-2. **SEO Técnico, GEO (Generative Engine Optimization) y Eliminación de Afirmaciones Falsas**:
-   - Eliminación de todas las afirmaciones no reales ("horno de leña", "fermentación 48h") en todos los idiomas (ES, EN, DE) y código.
-   - Inyección de datos estructurados Schema.org (`Restaurant` + `ItalianRestaurant`), coordenadas geográficas del puerto y Open Graph.
-   - Generación de `robots.txt` con permisos de indexación para bots de IA y exclusión de `/admin`.
-   - Generación de `sitemap-index.xml` con `@astrojs/sitemap`.
-3. **Banner de Cookies Responsivo 100% Gratuito (21st.dev / Shadcn)**:
-   - Banner de cookies no intrusivo (`AlertCookieNotice.tsx`) que solo aparece tras desplazarse a la segunda sección (`#sobre-nosotros`), sin bloquear el vídeo del Hero.
-   - **Persistencia Permanente (1 Año)**: Corrección de captura de closure en scroll. Ahora guarda consentimiento tanto en `localStorage` como en `document.cookie` (365 días) y desengancha inmediatamente los observadores de scroll. Una vez aceptado o rechazado, **nunca vuelve a aparecer** en ninguna página ni al recargar.
-   - Botones Aceptar / Rechazar, enlace a `/cookies` y reactivación mediante el botón "Configurar cookies" del footer.
-4. **Corrección de Contraste en Páginas Legales**:
-   - Reparado el fondo oscuro que bloqueaba la lectura en `/aviso-legal`, `/cookies` y `/privacidad`.
-5. **Wordmark Halftone Cinemático "Buon Appetito" (21st.dev)**:
-   - Implementación del pie interactivo con canvas 2D de semitono: fondo verde oscuro (`#183321`), puntos rojos (`#D93829`), destellos en blanco puro al toque/cursor y sombra profunda 3D.
-   - Ajuste de proporción vertical (`scaleY`) en móvil para llenar el 70-75% del recuadro.
-   - Integración transversal en la portada (`/`), carta (`/carta`) y carta de vinos (`/vinos`).
-   - Limpieza de footers secundarios: retirada del botón redundante "Volver al Menú" en carta y vinos (ya disponible en el header), dejando "Reservar mesa" centrado y elegante.
-6. **Redirección de Reservas a Plataforma Oficial Bavoli (`/#donde-estamos`)**:
-   - Eliminación total de enlaces hacia la página antigua de Nexo (`/reservar`).
-   - El botón *"Reservar mesa"* del footer en `/carta`, `/vinos` y el footer general ahora redirige con precisión a `/#donde-estamos` (donde se encuentra el botón directo de Bavoli y el mapa).
-   - Optimización de `Preloader.astro` y `Layout.astro` para omitir el preloader cuando se navega con ancla, desplazando suavemente al usuario al bloque de reservas.
+1. **Auditoría Global Multi-Dispositivo (Desktop, Tablet y Mobile)**:
+   - Verificación exhaustiva con Playwright CLI y Chrome DevTools en 3 resoluciones reales (1440x900, 768x1024 y 390x844).
+   - Generación de informe completo con capturas de pantalla de la experiencia de cliente y panel de administrador.
+2. **Auditoría Profunda E2E del Panel de Administración (`/admin`)**:
+   - Pruebas simuladas de dueño de restaurante creando y verificando platos en las 3 cartas independientes: Comida (plato nuevo), Bebida y Vino.
+   - Verificación de la auto-traducción en vivo con IA (Google Translate gtx) a Español, Inglés y Alemán.
+   - Prueba de edición rápida de disponibilidad ("Agotado" / redondeo de precio).
+   - Prueba del módulo de Seguridad y Cambio de Contraseña.
+   - Limpieza total de los platos de prueba en InsForge, garantizando la carta original impecable.
+3. **Optimización y Síntesis de los Marcos Legales (Aviso Legal, Privacidad y Cookies)**:
+   - Diagnóstico profundo de las tres páginas legales (`/aviso-legal`, `/privacidad`, `/cookies`).
+   - Eliminación del 100% de la paja jurídica innecesaria (cláusulas obsoletas de virus informáticos, ataques a servidores y tutoriales paso a paso de configuración de cada navegador).
+   - Sustitución de bloques de texto denso por un diseño editorial premium de tarjetas limpias y tabla clara de cookies (esenciales y Google Maps).
+   - Botón directo de "Configurar mis preferencias de cookies" que dispara el banner interactivo.
+   - Redacción adaptativa trilingüe (ES, EN, DE) con la habilidad `/i18nstack` protegiendo los contenedores visuales frente a la expansión de caracteres del alemán y el inglés.
+4. **Fusión (Merge) a `main` y Despliegue en Cloudflare Pages**:
+   - Compilación estática exitosa con `astro build`.
+   - Merge de la rama `dev` a `main` y push a GitHub (`c3ae27c`).
+   - Verificación en vivo en `https://restaurantebuonappetito.pages.dev`: HTTP 200 y contenido legal actualizado visible.
 
 ---
 
 ## 2. Archivos modificados y creados
-- `src/components/ui/AlertCookieNotice.tsx` (Nuevo)
-- `src/components/ui/BuonAppetitoWordmark.tsx` (Nuevo)
-- `src/components/ui/halftone-wordmark-footer.tsx` (Nuevo)
-- `src/components/ui/alert.tsx`, `button.tsx`, `toggle.tsx` (Nuevos componentes shadcn)
-- `public/robots.txt` (Nuevo)
-- `src/layouts/Layout.astro` (SEO, GEO, cookies, scroll inteligente sin preloader-lock)
-- `src/components/Footer.astro` (Cookies, Wordmark Halftone, enlace Bavoli en reservas)
-- `src/pages/carta.astro` & `src/pages/vinos.astro` (Wordmark Halftone, footer limpio, enlace a `/#donde-estamos`)
-- `src/pages/aviso-legal.astro`, `cookies.astro`, `privacidad.astro` (Fondo claro legible)
-- `src/components/Preloader.astro` (Desbloqueo inmediato en navegación con anclas)
-- `astro.config.mjs` & `package.json` (Integración de sitemap)
-- `AGENTS.md` (Regla estricta contra falsear tests)
-- `docs/SESSION_LATEST_ES.md` & `docs/ROADMAP.md` (Documentación sincronizada)
+- `src/pages/aviso-legal.astro` (Rediseño sintetizado y trilingüe)
+- `src/pages/privacidad.astro` (Rediseño sintetizado y trilingüe)
+- `src/pages/cookies.astro` (Tabla de cookies, botón interactivo y rediseño)
+- `src/components/About.astro`, `Header.astro`, `Footer.astro`, `Reviews.astro` (Ajustes de copy y enlaces)
+- `testsprite_tests/` (Suites de pruebas E2E e informes técnicos de auditoría)
+- `docs/SESSION_LATEST_ES.md` (Actualizado para el cierre de sesión)
+- `docs/ROADMAP.md` (Actualizado con las tareas completadas)
 
 ---
 
-## 3. Problemas solucionados
-- Enlace obsoleto del footer a la página anterior de Nexo eliminado por completo.
-- Los clientes ahora van directamente a la sección `#donde-estamos` con Bavoli activo.
-- Banner de cookies invasivo o repetitivo resuelto con memoria persistente de 1 año.
-- Páginas legales ilegibles por contraste oscuro corregidas.
-- Tipografía del wordmark adaptada al 70-75% de altura en pantallas estrechas.
+## 3. Qué problemas se han solucionado
+- Se eliminó el texto excesivo y burocrático que rompía con la estética de restaurante de alta gama.
+- Se garantizó la validez legal española (LSSI-CE y RGPD) en un formato moderno y legible.
+- Se verificó que todas las funciones de administración (traducción automática, CRUD de cartas, cambio de credenciales) funcionan al 100% sin romper datos en producción.
 
 ---
 
-## 4. Qué queda pendiente (Para próximas sesiones / Post-Presentación)
-- **Fase B (Seguridad y Arquitectura de Servidor)**:
-  - Migrar llamadas directas con clave de InsForge a endpoints serverless en Astro / Edge Functions.
-  - Modularización de componentes de `admin.astro` (dividir las 3.500 líneas en submódulos).
-  - Unificación de lógica común entre `carta.astro` y `vinos.astro`.
-- **Dominio Oficial & Google Search Console**:
-  - Conexión de dominio definitivo y verificación DNS en Google Search Console.
-  - Enlace oficial en Google Business Profile (Google Maps).
+## 4. Qué queda pendiente
+- Comprobación visual final en el teléfono móvil del usuario en `https://restaurantebuonappetito.pages.dev`.
+- Ajustes menores que puedan surgir tras la prueba de usuario en vivo.
