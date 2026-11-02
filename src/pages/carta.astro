@@ -459,8 +459,8 @@ const description = "Carta digital interactiva de Buon Appetito en Port d'Andrat
       if (menuData && menuData.categories) {
         const nav = document.getElementById('category-nav');
         if (nav) {
-          // Filtrar Bebidas para la carta de vinos y bodega (/vinos)
-          const activeCategories = menuData.categories.filter(cat => cat.id !== 'bebidas');
+          // Filtrar Bebidas y Vinos para que en /carta solo aparezca comida
+          const activeCategories = menuData.categories.filter(cat => cat.id !== 'bebidas' && cat.id !== 'vinos' && cat.id !== 'bodega');
 
           nav.innerHTML = activeCategories.map((cat, idx) => `
             <button type="button" class="cat-nav-link ${idx === 0 ? 'active' : ''}" data-cat="${cat.id}">
@@ -492,13 +492,14 @@ const description = "Carta digital interactiva de Buon Appetito en Port d'Andrat
 
     function renderMenu() {
       if (!menuData || !menuData.items) return;
+      const t = UI_TEXT[currentLang];
 
       const contentArea = document.getElementById('menu-content');
       if (!contentArea) return;
 
       const items = menuData.items;
-      // Filtrar categorías: la carta digital de comida termina en Pizzas (bebidas en /vinos)
-      const categories = menuData.categories.filter(c => c.id !== 'bebidas');
+      // Filtrar categorías: la carta digital de comida termina en Pizzas (bebidas y vinos en /vinos)
+      const categories = menuData.categories.filter(c => c.id !== 'bebidas' && c.id !== 'vinos' && c.id !== 'bodega');
 
       let html = '';
       categories.forEach(cat => {

@@ -446,7 +446,10 @@ const description = "Selección de vinos, coctelería italiana y bebidas de Buon
       const nav = document.getElementById('category-nav');
       if (nav) {
         const labelBebidas = currentLang === 'en' ? 'Beverages & Cocktails' : (currentLang === 'de' ? 'Getränke & Cocktails' : 'Bebidas & Cócteles');
-        nav.innerHTML = `
+        const labelVinos = currentLang === 'en' ? 'Wine Cellar' : (currentLang === 'de' ? 'Bodega & Weine' : 'Bodega & Vinos');
+        const hasVinosItems = menuData && menuData.items && menuData.items.some(i => i.category === 'vinos' || i.category === 'bodega');
+
+        let navHtml = `
           <button type="button" class="cat-nav-link active" data-cat="bebidas">
             <span class="cat-svg-box">
               <svg class="cat-svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 22h8"/><path d="M12 15v7"/><path d="M5 3h14l-5 7.5v4.5h-4V10.5L5 3Z"/><path d="M6.5 6h11"/></svg>
@@ -454,17 +457,47 @@ const description = "Selección de vinos, coctelería italiana y bebidas de Buon
             <span class="cat-text">${labelBebidas}</span>
           </button>
         `;
+
+        if (hasVinosItems) {
+          navHtml += `
+            <button type="button" class="cat-nav-link" data-cat="vinos">
+              <span class="cat-svg-box">
+                <svg class="cat-svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 22h8"/><path d="M7 10h10"/><path d="M12 15v7"/><path d="M12 15a5 5 0 0 0 5-5c0-2-.5-4-2-8H9c-1.5 4-2 6-2 8a5 5 0 0 0 5 5Z"/></svg>
+              </span>
+              <span class="cat-text">${labelVinos}</span>
+            </button>
+          `;
+        }
+
+        nav.innerHTML = navHtml;
+        nav.querySelectorAll('.cat-nav-link').forEach(btn => {
+          btn.addEventListener('click', () => {
+            nav.querySelectorAll('.cat-nav-link').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            const catId = btn.getAttribute('data-cat');
+            const target = document.getElementById(`cat-${catId}`);
+            if (target) {
+              const headerOffset = 120;
+              const elementPosition = target.getBoundingClientRect().top;
+              const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+              window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
+            }
+          });
+        });
       }
     }
 
     function renderVinos() {
       if (!menuData || !menuData.items) return;
+      const t = UI_TEXT[currentLang];
 
       const contentArea = document.getElementById('menu-content');
       if (!contentArea) return;
 
       const bebidasItems = menuData.items.filter(i => i.category === 'bebidas');
+      const vinosItems = menuData.items.filter(i => i.category === 'vinos' || i.category === 'bodega');
       const sectionTitle = currentLang === 'en' ? 'Beverages & Italian Cocktails' : (currentLang === 'de' ? 'Getränke & Italienische Cocktails' : 'Bebidas & Coctelería Italiana');
+      const vinosSectionTitle = currentLang === 'en' ? 'Wine Cellar & Selection' : (currentLang === 'de' ? 'Weinkeller & Bodega' : 'Bodega & Selección de Vinos');
 
       let html = `
         <section class="menu-category-section" id="cat-bebidas">
@@ -496,6 +529,39 @@ const description = "Selección de vinos, coctelería italiana y bebidas de Buon
           </div>
         </section>
       `;
+
+      if (vinosItems.length > 0) {
+        html += `
+          <section class="menu-category-section" id="cat-vinos">
+            <div class="menu-category-header">
+              <h2 class="category-heading">${esc(vinosSectionTitle)}</h2>
+            </div>
+
+            <div class="menu-editorial-list">
+              ${vinosItems.map(item => {
+                const trans = item[currentLang] || item.es;
+                const hasDesc = Boolean(trans.description && trans.description.trim().length > 0);
+                const isAvail = item.is_available !== false;
+                const soldOutLabel = currentLang === 'en' ? 'Sold out today' : (currentLang === 'de' ? 'Heute ausverkauft' : 'Agotado hoy');
+
+                return `
+                  <article class="menu-item-row ${!isAvail ? 'opacity-50 grayscale' : ''}" id="item-${esc(item.id)}">
+                    <div class="menu-item-top">
+                      <div class="menu-item-title-group">
+                        <h3 class="menu-item-title">${esc(trans.title)}</h3>
+                        ${!isAvail ? `<span class="inline-block text-[10px] font-bold text-rose-800 bg-rose-50 border border-rose-200 px-2 py-0.5 rounded-full uppercase tracking-wider ml-2">${soldOutLabel}</span>` : ''}
+                      </div>
+                      <span class="menu-item-dots" aria-hidden="true"></span>
+                      <span class="menu-item-price">${Number(item.price).toFixed(2)} €</span>
+                    </div>
+                    ${hasDesc ? `<p class="menu-item-desc">${esc(trans.description)}</p>` : ''}
+                  </article>
+                `;
+              }).join('')}
+            </div>
+          </section>
+        `;
+      }
 
       // Grabado editorial de bodega y vino al final
       html += `

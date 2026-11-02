@@ -7,24 +7,48 @@ import HeroActions from './ui/HeroActions';
 <!-- ======================================================== -->
 <section id="inicio" class="hero-fullscreen relative w-full flex flex-col justify-end items-center overflow-hidden">
   
-  <!-- Background Video Unificado con Fuentes Responsivas (1 solo reproductor para evitar bloqueo nativo de Safari) -->
+  <!-- Background Video Unificado con src directo para garantizar autoplay instantáneo en iOS Safari sin botón de play -->
   <video
     id="hero-bg-video"
+    src="/assets/hero/Hero_Andratx_Final.mp4"
     autoplay
     loop
     muted
     playsinline
     webkit-playsinline
+    x5-playsinline
     disablePictureInPicture
     disableremoteplayback
     preload="auto"
-    class="absolute inset-0 w-full h-full object-cover object-center brightness-[0.9] pointer-events-none"
-  >
-    <!-- Desktop y Tablets (>=768px): Vídeo panorámico 16:9 con fondo atmosférico suave -->
-    <source src="/assets/hero/Hero_Andratx_Desktop.mp4" type="video/mp4" media="(min-width: 768px)" />
-    <!-- Móviles (<768px): Vídeo vertical original nativo sin pérdida -->
-    <source src="/assets/hero/Hero_Andratx_Final.mp4" type="video/mp4" />
-  </video>
+    class="absolute inset-0 w-full h-full object-cover object-center brightness-[0.9] pointer-events-none select-none"
+  ></video>
+
+  <!-- Script síncrono ultra-rápido: asigna fuente Desktop si >=768px y fuerza reproducción inmediata en iOS -->
+  <script is:inline>
+    (function() {
+      var v = document.getElementById('hero-bg-video');
+      if (!v) return;
+      v.muted = true;
+      v.defaultMuted = true;
+      v.playsInline = true;
+      v.setAttribute('muted', '');
+      v.setAttribute('playsinline', '');
+      v.setAttribute('webkit-playsinline', '');
+
+      var targetSrc = window.innerWidth >= 768
+        ? '/assets/hero/Hero_Andratx_Desktop.mp4'
+        : '/assets/hero/Hero_Andratx_Final.mp4';
+
+      if (v.getAttribute('src') !== targetSrc) {
+        v.setAttribute('src', targetSrc);
+        v.load();
+      }
+      var p = v.play();
+      if (p && typeof p.catch === 'function') {
+        p.catch(function() {});
+      }
+    })();
+  </script>
 
   <!-- Cinematic Gradients estilo Arko: velo sutil general para contraste sin comerse el vídeo -->
   <div aria-hidden="true" class="absolute inset-0 bg-black/20 pointer-events-none"></div>
@@ -57,7 +81,7 @@ import HeroActions from './ui/HeroActions';
   </div>
 </section>
 
-<style>
+<style is:global>
   /* Altura: asegura que el Hero cubra toda la pantalla móvil sin que asome 'Nuestra Esencia' por debajo */
   .hero-fullscreen {
     height: 100vh;
@@ -86,56 +110,89 @@ import HeroActions from './ui/HeroActions';
     .hero-fullscreen { padding-bottom: 5.5rem; }
   }
 
-  /* Ocultación radical de cualquier control o botón de reproducción nativo de WebKit/Safari */
+  /* Ocultación radical y global de cualquier control o botón de reproducción nativo de WebKit/iOS Safari */
+  video::-webkit-media-controls,
+  video::-webkit-media-controls-panel,
+  video::-webkit-media-controls-play-button,
+  video::-webkit-media-controls-start-playback-button,
+  video::-webkit-media-controls-overlay-play-button,
+  video::-webkit-media-controls-overlay-enclosure,
+  video::-webkit-media-controls-enclosure,
   #hero-bg-video::-webkit-media-controls,
   #hero-bg-video::-webkit-media-controls-panel,
   #hero-bg-video::-webkit-media-controls-play-button,
   #hero-bg-video::-webkit-media-controls-start-playback-button,
   #hero-bg-video::-webkit-media-controls-overlay-play-button,
+  #hero-bg-video::-webkit-media-controls-overlay-enclosure,
   #hero-bg-video::-webkit-media-controls-enclosure {
     display: none !important;
     -webkit-appearance: none !important;
+    appearance: none !important;
     opacity: 0 !important;
     visibility: hidden !important;
     pointer-events: none !important;
+    width: 0 !important;
+    height: 0 !important;
   }
 </style>
 
 <script>
-  // Garantizar reproducción continua e incondicional en Safari y Chromium
+  // Garantizar reproducción continua e incondicional en iOS Safari (incluyendo recargas y post-preloader)
   const heroVideo = document.getElementById('hero-bg-video') as HTMLVideoElement | null;
   if (heroVideo) {
     heroVideo.muted = true;
     heroVideo.defaultMuted = true;
     (heroVideo as any).playsInline = true;
 
-    const playVideo = () => {
+    const forcePlay = () => {
+      if (!heroVideo) return;
+      heroVideo.muted = true;
       if (heroVideo.paused) {
-        const promise = heroVideo.play();
-        if (promise !== undefined) {
-          promise.catch(() => {
-            const unlockTouch = () => {
-              heroVideo.play().catch(() => {});
-              window.removeEventListener('touchstart', unlockTouch);
-              window.removeEventListener('scroll', unlockTouch);
-              window.removeEventListener('pointerdown', unlockTouch);
-            };
-            window.addEventListener('touchstart', unlockTouch, { passive: true, once: true });
-            window.addEventListener('scroll', unlockTouch, { passive: true, once: true });
-            window.addEventListener('pointerdown', unlockTouch, { passive: true, once: true });
-          });
+        const playPromise = heroVideo.play();
+        if (playPromise !== undefined) {
+          playPromise.catch(() => {});
         }
       }
     };
 
-    playVideo();
-    heroVideo.addEventListener('loadedmetadata', playVideo, { once: true });
-    heroVideo.addEventListener('canplay', playVideo, { once: true });
-    heroVideo.addEventListener('ended', playVideo);
-
-    document.addEventListener('visibilitychange', () => {
-      if (!document.hidden) playVideo();
+    // Ejecutar inmediatamente y en todos los eventos del ciclo de vida del vídeo y preloader
+    forcePlay();
+    heroVideo.addEventListener('loadedmetadata', forcePlay);
+    heroVideo.addEventListener('loadeddata', forcePlay);
+    heroVideo.addEventListener('canplay', forcePlay);
+    heroVideo.addEventListener('canplaythrough', forcePlay);
+    heroVideo.addEventListener('pause', () => {
+      if (!document.hidden) forcePlay();
     });
-    window.addEventListener('pageshow', playVideo);
+    heroVideo.addEventListener('ended', () => {
+      heroVideo.currentTime = 0;
+      forcePlay();
+    });
+
+    // Sincronizar con el desbloqueo del preloader y visibilidad de pestaña
+    window.addEventListener('buon:preloader-unlocked', forcePlay);
+    window.addEventListener('pageshow', forcePlay);
+    window.addEventListener('focus', forcePlay);
+    document.addEventListener('visibilitychange', () => {
+      if (!document.hidden) forcePlay();
+    });
+
+    // Respaldo para Modo Bajo Consumo extremo de iOS al menor contacto
+    ['touchstart', 'touchend', 'scroll', 'pointerdown', 'click'].forEach(evt => {
+      window.addEventListener(evt, forcePlay, { passive: true, once: true });
+    });
+
+    // Watchdog durante los primeros 4 segundos tras cargar o recargar para asegurar bucle activo
+    let attempts = 0;
+    const watchdog = setInterval(() => {
+      attempts++;
+      forcePlay();
+      if (!heroVideo.paused && heroVideo.currentTime > 0 && attempts > 8) {
+        clearInterval(watchdog);
+      }
+      if (attempts >= 20) {
+        clearInterval(watchdog);
+      }
+    }, 200);
   }
 </script>

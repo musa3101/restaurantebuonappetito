@@ -268,7 +268,7 @@
     background-color: #183321 !important;
   }
 
-  /* Ocultación 100% absoluta de todo el contenido de fondo para que NADA se filtre ni asome por debajo */
+  /* Ocultación visual de todo el contenido de fondo sin visibility:hidden para no bloquear el autoplay de WebKit/iOS en el video Hero */
   html.preloader-lock main,
   html.preloader-lock header,
   html.preloader-lock footer,
@@ -276,7 +276,6 @@
   html.preloader-lock #mobile-menu,
   html.preloader-lock .booking-wrapper {
     opacity: 0 !important;
-    visibility: hidden !important;
     pointer-events: none !important;
     user-select: none !important;
     -webkit-user-select: none !important;
@@ -284,7 +283,7 @@
 
   /* Transición suave al desvanecer el preloader */
   main, header, footer, #main-header, #mobile-menu, .booking-wrapper {
-    transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
   .site-preloader {
