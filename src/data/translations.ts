@@ -28,6 +28,7 @@ export const TRANSLATIONS: Record<Language, Record<string, string>> = {
     about_p2: "A ello se suma nuestra amplia terraza junto al puerto, donde el ambiente marinero y los atardeceres de Mallorca crean el escenario perfecto para compartir una comida, una cena o simplemente un buen rato en compañía.",
     about_p3: "Nos gustan los momentos sencillos: una mesa compartida, una buena conversación y el placer de disfrutar sin mirar el reloj. Esa es la esencia que queremos transmitir en Buon Appetito.",
     about_stat1_desc: "Pescado fresco de lonja",
+    about_stat2_num: "1ª",
     about_stat2_desc: "Línea frente al puerto",
     about_stat3_desc: "Sabor mediterráneo",
 
@@ -127,6 +128,7 @@ export const TRANSLATIONS: Record<Language, Record<string, string>> = {
     about_p2: "Complementing this is our spacious harbor terrace, where sea breezes and Mallorcan sunsets provide the ideal backdrop for a memorable lunch, a relaxed dinner, or simply an aperitif in great company.",
     about_p3: "We believe in life's simple pleasures: a shared table, great conversation, and the joy of dining without watching the clock. That is the soul we share with you at Buon Appetito.",
     about_stat1_desc: "Fresh harbor fish",
+    about_stat2_num: "1st",
     about_stat2_desc: "Front harbor line",
     about_stat3_desc: "Mediterranean taste",
 
@@ -226,7 +228,8 @@ export const TRANSLATIONS: Record<Language, Record<string, string>> = {
     about_p2: "Dazu kommt unsere herrliche Terrasse direkt am Hafen, wo das maritime Flair und Mallorcas Sonnenuntergänge die perfekte Kulisse für ein Mittagessen, ein Abendessen oder ein Glas Wein bieten.",
     about_p3: "Wir schätzen die einfachen Momente: eine geteilte Tafel, anregende Gespräche und Genuss ohne Blick auf die Uhr. Das ist das Lebensgefühl von Buon Appetito.",
     about_stat1_desc: "Frischer Fisch vom Hafen",
-    about_stat2_desc: "Erste Meereslinie am Hafen",
+    about_stat2_num: "1.",
+    about_stat2_desc: "Direkte Hafenlage",
     about_stat3_desc: "Mediterraner Geschmack",
 
     // La Nostra Pizza (Il Nostro Calzone)

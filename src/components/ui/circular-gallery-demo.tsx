@@ -7,46 +7,63 @@ import {
   type GalleryItem,
 } from "@/components/ui/circular-gallery-2";
 
-// 9 authentic gallery items featuring owner with Aymeric Laporte, terrace, façade and atmosphere
-export const authenticGalleryItems: GalleryItem[] = [
-  {
-    image: "/assets/sobre-nosotros/galeria_laporte.webp",
-    text: "Visita de Aymeric Laporte",
-    subtitle: "El dueño del restaurante junto al futbolista internacional, campeón de la Eurocopa con la Selección Española",
-  },
-  {
-    image: "/assets/sobre-nosotros/galeria_01.webp",
-    text: "Nuestra Carta & Bienvenida",
-  },
-  {
-    image: "/assets/sobre-nosotros/galeria_02.webp",
-    text: "Pizzería & Restaurante",
-  },
-  {
-    image: "/assets/sobre-nosotros/galeria_03.webp",
-    text: "Vistas al Puerto Deportivo",
-  },
-  {
-    image: "/assets/sobre-nosotros/galeria_04.webp",
-    text: "Mesa Preparada",
-  },
-  {
-    image: "/assets/sobre-nosotros/galeria_05.webp",
-    text: "Nuestra Terraza Climatizada",
-  },
-  {
-    image: "/assets/sobre-nosotros/galeria_06.webp",
-    text: "Noches en Buon Appetito",
-  },
-  {
-    image: "/assets/sobre-nosotros/galeria_07.webp",
-    text: "Punto de Encuentro",
-  },
-  {
-    image: "/assets/sobre-nosotros/galeria_08.webp",
-    text: "Atardecer Mediterráneo",
-  },
-];
+type Language = "es" | "en" | "de";
+
+export const galleryItemsByLang: Record<Language, GalleryItem[]> = {
+  es: [
+    {
+      image: "/assets/sobre-nosotros/galeria_laporte.webp",
+      text: "Visita de Aymeric Laporte",
+      subtitle: "El dueño del restaurante junto al futbolista internacional, campeón de la Eurocopa con la Selección Española",
+    },
+    { image: "/assets/sobre-nosotros/galeria_01.webp", text: "Nuestra Carta & Bienvenida" },
+    { image: "/assets/sobre-nosotros/galeria_02.webp", text: "Pizzería & Restaurante" },
+    { image: "/assets/sobre-nosotros/galeria_03.webp", text: "Vistas al Puerto Deportivo" },
+    { image: "/assets/sobre-nosotros/galeria_04.webp", text: "Mesa Preparada" },
+    { image: "/assets/sobre-nosotros/galeria_05.webp", text: "Nuestra Terraza Climatizada" },
+    { image: "/assets/sobre-nosotros/galeria_06.webp", text: "Noches en Buon Appetito" },
+    { image: "/assets/sobre-nosotros/galeria_07.webp", text: "Punto de Encuentro" },
+    { image: "/assets/sobre-nosotros/galeria_08.webp", text: "Atardecer Mediterráneo" },
+  ],
+  en: [
+    {
+      image: "/assets/sobre-nosotros/galeria_laporte.webp",
+      text: "Visit of Aymeric Laporte",
+      subtitle: "Restaurant owner with international football star, European champion with the Spanish national team",
+    },
+    { image: "/assets/sobre-nosotros/galeria_01.webp", text: "Our Menu & Welcome" },
+    { image: "/assets/sobre-nosotros/galeria_02.webp", text: "Pizzeria & Restaurant" },
+    { image: "/assets/sobre-nosotros/galeria_03.webp", text: "Marina Harbor Views" },
+    { image: "/assets/sobre-nosotros/galeria_04.webp", text: "Table Prepared" },
+    { image: "/assets/sobre-nosotros/galeria_05.webp", text: "Our Heated Terrace" },
+    { image: "/assets/sobre-nosotros/galeria_06.webp", text: "Evenings at Buon Appetito" },
+    { image: "/assets/sobre-nosotros/galeria_07.webp", text: "Meeting Point by the Port" },
+    { image: "/assets/sobre-nosotros/galeria_08.webp", text: "Mediterranean Sunset" },
+  ],
+  de: [
+    {
+      image: "/assets/sobre-nosotros/galeria_laporte.webp",
+      text: "Besuch von Aymeric Laporte",
+      subtitle: "Der Restaurantbesitzer mit dem internationalen Fußballstar, Europameister mit der spanischen Nationalmannschaft",
+    },
+    { image: "/assets/sobre-nosotros/galeria_01.webp", text: "Unsere Karte & Willkommen" },
+    { image: "/assets/sobre-nosotros/galeria_02.webp", text: "Pizzeria & Restaurant" },
+    { image: "/assets/sobre-nosotros/galeria_03.webp", text: "Blick auf den Yachthafen" },
+    { image: "/assets/sobre-nosotros/galeria_04.webp", text: "Gedeckter Tisch" },
+    { image: "/assets/sobre-nosotros/galeria_05.webp", text: "Unsere beheizte Terrasse" },
+    { image: "/assets/sobre-nosotros/galeria_06.webp", text: "Abende im Buon Appetito" },
+    { image: "/assets/sobre-nosotros/galeria_07.webp", text: "Treffpunkt an der Hafenpromenade" },
+    { image: "/assets/sobre-nosotros/galeria_08.webp", text: "Mediterraner Sonnenuntergang" },
+  ],
+};
+
+export const authenticGalleryItems = galleryItemsByLang.es;
+
+const swipeHints: Record<Language, string> = {
+  es: "desliza · toca para ampliar",
+  en: "swipe · tap to enlarge",
+  de: "wischen · tippen zum vergrößern",
+};
 
 /**
  * Responsive circular 3D gallery with:
@@ -58,10 +75,30 @@ export const authenticGalleryItems: GalleryItem[] = [
  */
 export default function CircularGalleryDemo() {
   const galleryRef = useRef<CircularGalleryRef>(null);
+  const [lang, setLang] = useState<Language>("es");
   const [activeModalIndex, setActiveModalIndex] = useState<number | null>(null);
 
+  useEffect(() => {
+    let initialLang: Language = "es";
+    try {
+      const stored = localStorage.getItem("buon_appetito_lang") || localStorage.getItem("preferred_language");
+      if (stored === "es" || stored === "en" || stored === "de") initialLang = stored;
+    } catch (e) {}
+    setLang(initialLang);
+
+    const handleLang = (e: any) => {
+      if (e.detail?.lang && ["es", "en", "de"].includes(e.detail.lang)) {
+        setLang(e.detail.lang);
+      }
+    };
+
+    window.addEventListener("buon:languageChange", handleLang);
+    return () => window.removeEventListener("buon:languageChange", handleLang);
+  }, []);
+
+  const activeItems = galleryItemsByLang[lang] || galleryItemsByLang.es;
   const activeItem =
-    activeModalIndex !== null ? authenticGalleryItems[activeModalIndex] : null;
+    activeModalIndex !== null ? activeItems[activeModalIndex] : null;
 
   const handleOpenPhoto = useCallback((_item: GalleryItem, index: number) => {
     setActiveModalIndex(index);
@@ -73,17 +110,17 @@ export default function CircularGalleryDemo() {
 
   const handleNextPhoto = useCallback(() => {
     setActiveModalIndex((prev) =>
-      prev !== null ? (prev + 1) % authenticGalleryItems.length : null,
+      prev !== null ? (prev + 1) % activeItems.length : null,
     );
-  }, []);
+  }, [activeItems]);
 
   const handlePrevPhoto = useCallback(() => {
     setActiveModalIndex((prev) =>
       prev !== null
-        ? (prev - 1 + authenticGalleryItems.length) % authenticGalleryItems.length
+        ? (prev - 1 + activeItems.length) % activeItems.length
         : null,
     );
-  }, []);
+  }, [activeItems]);
 
   // Keyboard navigation & escape to close
   useEffect(() => {
@@ -105,7 +142,7 @@ export default function CircularGalleryDemo() {
       <div className="relative h-[390px] sm:h-[450px] md:h-[490px] w-full overflow-hidden select-none">
         <CircularGallery
           ref={galleryRef}
-          items={authenticGalleryItems}
+          items={activeItems}
           bend={1.8}
           borderRadius={0.065}
           scrollEase={0.045}
@@ -121,8 +158,8 @@ export default function CircularGalleryDemo() {
         <button
           type="button"
           onClick={() => galleryRef.current?.prev()}
-          aria-label="Foto anterior"
-          className="group flex items-center justify-center w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-white/80 dark:bg-[#183321]/50 backdrop-blur-md border border-[#183321]/15 hover:border-[#183321]/30 hover:bg-white text-[#183321] dark:text-[#E8E4DC] active:scale-90 transition-all duration-200 shadow-sm cursor-pointer"
+          aria-label={lang === "de" ? "Vorheriges Foto" : lang === "en" ? "Previous photo" : "Foto anterior"}
+          className="group flex items-center justify-center w-11 h-11 rounded-full bg-white/80 dark:bg-[#183321]/50 backdrop-blur-md border border-[#183321]/15 hover:border-[#183321]/30 hover:bg-white text-[#183321] dark:text-[#E8E4DC] active:scale-90 transition-all duration-200 shadow-sm cursor-pointer"
         >
           <svg
             className="w-4 h-4 transition-transform duration-200 group-hover:-translate-x-0.5"
@@ -135,15 +172,15 @@ export default function CircularGalleryDemo() {
           </svg>
         </button>
 
-        <span className="text-[10px] sm:text-[11px] font-sans tracking-[0.18em] text-[#525A54]/70 uppercase select-none px-1">
-          desliza &middot; toca para ampliar
+        <span className="text-[11px] sm:text-[12px] font-sans tracking-[0.18em] text-[#142318] uppercase select-none px-2 py-0.5 rounded bg-[#ECE6DC]">
+          {swipeHints[lang] || swipeHints.es}
         </span>
 
         <button
           type="button"
           onClick={() => galleryRef.current?.next()}
-          aria-label="Foto siguiente"
-          className="group flex items-center justify-center w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-white/80 dark:bg-[#183321]/50 backdrop-blur-md border border-[#183321]/15 hover:border-[#183321]/30 hover:bg-white text-[#183321] dark:text-[#E8E4DC] active:scale-90 transition-all duration-200 shadow-sm cursor-pointer"
+          aria-label={lang === "de" ? "Nächstes Foto" : lang === "en" ? "Next photo" : "Foto siguiente"}
+          className="group flex items-center justify-center w-11 h-11 rounded-full bg-white/80 dark:bg-[#183321]/50 backdrop-blur-md border border-[#183321]/15 hover:border-[#183321]/30 hover:bg-white text-[#183321] dark:text-[#E8E4DC] active:scale-90 transition-all duration-200 shadow-sm cursor-pointer"
         >
           <svg
             className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-0.5"
@@ -220,7 +257,7 @@ export default function CircularGalleryDemo() {
                 type="button"
                 onClick={handlePrevPhoto}
                 aria-label="Foto anterior"
-                className="flex items-center justify-center w-10 h-10 rounded-full bg-white/15 hover:bg-white/25 text-white active:scale-90 transition-all cursor-pointer"
+                className="flex items-center justify-center w-11 h-11 rounded-full bg-white/15 hover:bg-white/25 text-white active:scale-90 transition-all cursor-pointer"
               >
                 <svg
                   className="w-5 h-5"
@@ -236,7 +273,7 @@ export default function CircularGalleryDemo() {
                 type="button"
                 onClick={handleNextPhoto}
                 aria-label="Foto siguiente"
-                className="flex items-center justify-center w-10 h-10 rounded-full bg-white/15 hover:bg-white/25 text-white active:scale-90 transition-all cursor-pointer"
+                className="flex items-center justify-center w-11 h-11 rounded-full bg-white/15 hover:bg-white/25 text-white active:scale-90 transition-all cursor-pointer"
               >
                 <svg
                   className="w-5 h-5"

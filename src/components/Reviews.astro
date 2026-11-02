@@ -155,7 +155,6 @@ const googleWriteReviewUrl = "https://search.google.com/local/writereview?placei
         href={googleMapsUrl}
         target="_blank"
         rel="noopener noreferrer"
-        aria-label="Ver 240 opiniones de Buon Appetito en Google Maps con valoración 4.4 sobre 5"
         class="mt-6 inline-flex items-center justify-between bg-[#183321] px-6 sm:px-8 py-4.5 sm:py-5.5 rounded-2xl sm:rounded-3xl border border-[#2E5239] shadow-[0_16px_36px_rgba(24,51,33,0.22),0_4px_12px_rgba(0,0,0,0.08)] transition-all duration-300 hover:shadow-[0_22px_44px_rgba(24,51,33,0.32)] hover:scale-[1.02] hover:border-[#A3C0A7]/40 max-w-md w-full sm:w-auto group cursor-pointer"
       >
         <div class="flex items-center gap-5 sm:gap-6 w-full justify-between sm:justify-start">
@@ -226,6 +225,7 @@ const googleWriteReviewUrl = "https://search.google.com/local/writereview?placei
       {reviews.map((rev) => (
         <article 
           class="review-card review-card-capsule w-[86vw] sm:w-[360px] md:w-[380px] shrink-0 snap-start p-6 sm:p-8 flex flex-col justify-between"
+          data-review-id={rev.id}
           data-tags={rev.tags.join(" ")}
           data-timeframe={rev.timeframe}
         >
@@ -244,14 +244,14 @@ const googleWriteReviewUrl = "https://search.google.com/local/writereview?placei
                   </h3>
                   <div class="flex items-center gap-1.5 mt-0.5 font-satoshi">
                     {rev.isLocalGuide && (
-                      <span class="inline-flex items-center gap-1 text-[11px] font-medium text-[#EA4335]">
+                      <span class="inline-flex items-center gap-1 text-[11px] font-medium text-[#C5221F]">
                         <svg class="w-3 h-3 fill-current" viewBox="0 0 24 24">
                           <path d="M12 2l2.4 7.2h7.6l-6 4.8 2.4 7.2-6.4-4.8-6.4 4.8 2.4-7.2-6-4.8h7.6z"/>
                         </svg>
                         Local Guide
                       </span>
                     )}
-                    <span class="text-[11px] text-[#424842]">
+                    <span class="review-role-text text-[11px] text-[#424842]">
                       {rev.isLocalGuide ? `· ${rev.role.split("·")[1] || ""}` : rev.role}
                     </span>
                   </div>
@@ -266,7 +266,7 @@ const googleWriteReviewUrl = "https://search.google.com/local/writereview?placei
                   <path fill="#FBBC05" d="M5.28 14.28c-.25-.72-.38-1.49-.38-2.28s.13-1.56.38-2.28V6.59H1.24C.45 8.16 0 9.94 0 12s.45 3.84 1.24 5.41l4.04-3.13z"/>
                   <path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.34 0 3.26 2.59 1.24 6.59l4.04 3.13c.95-2.83 3.6-4.97 6.72-4.97z"/>
                 </svg>
-                <span class="text-[11px] text-[#424842] mt-1 font-satoshi">{rev.date}</span>
+                <span class="review-date-text text-[11px] text-[#424842] mt-1 font-satoshi">{rev.date}</span>
               </div>
             </div>
 
@@ -279,7 +279,7 @@ const googleWriteReviewUrl = "https://search.google.com/local/writereview?placei
                   </svg>
                 ))}
               </div>
-              <span class="text-[11px] font-semibold text-[#9E4221] bg-[#9E4221]/10 px-2.5 py-0.5 rounded-full border border-[#9E4221]/20 font-satoshi">
+              <span class="review-cat-text text-[11px] font-semibold text-[#9E4221] bg-[#9E4221]/10 px-2.5 py-0.5 rounded-full border border-[#9E4221]/20 font-satoshi">
                 {rev.category}
               </span>
             </div>
@@ -312,6 +312,8 @@ const googleWriteReviewUrl = "https://search.google.com/local/writereview?placei
                       <img 
                         src={photo.url} 
                         alt={photo.label} 
+                        width="72"
+                        height="72"
                         class="w-16 h-16 sm:w-18 sm:h-18 object-cover group-hover:scale-105 transition-transform duration-300 pointer-events-none select-none" 
                         loading="lazy" 
                       />
@@ -331,7 +333,7 @@ const googleWriteReviewUrl = "https://search.google.com/local/writereview?placei
               </svg>
               <span data-i18n="reviews_verified_tag">Opinión verificada en Google Maps</span>
             </span>
-            <span class="font-boska italic text-[#183321]/40 text-sm">Buon Appetito</span>
+            <span class="font-boska italic text-[#25462F] text-sm">Buon Appetito</span>
           </div>
         </article>
       ))}
@@ -817,10 +819,70 @@ const googleWriteReviewUrl = "https://search.google.com/local/writereview?placei
     observer.observe(badge);
   }
 
+  // Diccionario trilingüe reactivo de opiniones
+  const reviewsI18n = {
+    es: {
+      "review-1": { role: "· 52 opiniones", date: "Hace 1 mes", category: "Pizza & Tiramisú", quote: "Parada obligatoria cada vez que venimos a Port d'Andratx. Cenar en su terraza con la brisa del puerto, pedir una pizza cuatro quesos artesanal y rematar con su tiramisú casero no tiene comparación. El equipo siempre te recibe con una sonrisa sincera y un trato de diez." },
+      "review-2": { role: "· 28 opiniones", date: "Hace 3 meses", category: "Calidad & Servicio", quote: "La verdad es que no hemos ido el día ideal (fiestas populares, ruido, mucha gente...), pero la comida ha compensado con creces el malestar inicial. Excelente calidad y cantidad del producto a precios muy razonables para el Port d'Andratx. Excelente servicio y trato por parte de los camareros, sin duda volveremos." },
+      "review-3": { role: "2 opiniones · 2 fotos", date: "Hace 5 meses", category: "Terraza & Raviolis", quote: "Hemos llegado sin ningún plan al puerto de Andratx y la verdad es que la terraza nos ha enamorado con ese toque italiano acogedor. Supimos que era un acierto total al probar la comida que sin duda es increíble: los raviolis y la pasta con trufa espectaculares, sumado al trato y servicio impecable de los camareros. ¡Volveremos sin duda!" },
+      "review-4": { role: "· 45 opiniones", date: "Hace 5 meses", category: "Horno de Leña & Puerto", quote: "Encontramos este fantástico lugar paseando por Port d'Andratx. La pasta con marisco rebosaba frescura y sabor mediterráneo, y la pizza artesanal tenía una masa crujiente sencillamente insuperable. El personal nos hizo sentir como en familia. Vistas mágicas al atardecer desde la terraza frente al puerto." },
+      "review-5": { role: "Cliente verificada", date: "Hace 8 meses", category: "Auténtico Sabor Italiano", quote: "Como italiana viviendo en Mallorca, encontrar una pizza que me recuerde a casa no es fácil, y Buon Appetito lo ha clavado. Masa ligera, crujiente y productos de primerísima calidad traídos de Italia. El ambiente en la terraza por la noche es mágico y el personal es encantador." },
+      "review-6": { role: "· 6 opiniones", date: "Hace 1 año", category: "Trato Familiar & Servicio", quote: "Decidimos visitar este restaurante de forma espontánea y salimos absolutamente encantados. La comida estaba excepcionalmente deliciosa, auténtica y abundante. El personal fue sumamente atento y amable en todo momento. Muchísimas gracias por el detalle y la sorpresa de cumpleaños para mi hijo. ¡Estaremos felices de volver y lo recomendamos al 100%!" },
+      "review-7": { role: "· 394 opiniones", date: "Hace 3 años", category: "Ubicación en el Puerto", quote: "Todo espectacular. Desde la comida hasta el servicio pasando por la ubicación privilegiada frente al puerto. El camarero muy agradable y atento, se le nota la profesionalidad y el cariño. Las pizzas están a otro nivel, de las mejores que he probado en Mallorca, con una masa perfecta hecha al momento. El carpaccio y los entrantes de primera." }
+    },
+    en: {
+      "review-1": { role: "· 52 reviews", date: "1 month ago", category: "Pizza & Tiramisù", quote: "A must-visit every time we come to Port d'Andratx. Dining on their terrace with the harbor breeze, ordering a handmade four-cheese pizza and finishing with homemade tiramisù is simply unbeatable. The team always welcomes you with a warm smile and top-notch service." },
+      "review-2": { role: "· 28 reviews", date: "3 months ago", category: "Quality & Service", quote: "We didn't pick the quietest day due to local festivities, but the food more than made up for it. Outstanding quality and generous portions at very reasonable prices for Port d'Andratx. Excellent service and attentiveness from the waitstaff — we will definitely be back." },
+      "review-3": { role: "2 reviews · 2 photos", date: "5 months ago", category: "Terrace & Ravioli", quote: "We arrived at the port of Andratx without a plan and immediately fell in love with the cozy Italian terrace. The food was incredible: the truffle ravioli and pasta were spectacular, matched by impeccable service. We'll be back without a doubt!" },
+      "review-4": { role: "· 45 reviews", date: "5 months ago", category: "Wood Oven & Harbor", quote: "Found this fantastic spot while strolling along Port d'Andratx. The seafood pasta was bursting with Mediterranean freshness, and the handmade pizza had a crust that was simply second to none. The staff made us feel like family. Magical sunset views from the terrace facing the harbor." },
+      "review-5": { role: "Verified Guest", date: "8 months ago", category: "Authentic Italian Taste", quote: "As an Italian living in Mallorca, finding a pizza that reminds me of home isn't easy, and Buon Appetito nailed it. Light, crispy dough and top-quality ingredients imported from Italy. The evening terrace atmosphere is magical and the staff is lovely." },
+      "review-6": { role: "· 6 reviews", date: "1 year ago", category: "Warm Hospitality & Service", quote: "We decided to visit spontaneously and were completely delighted. The food was exceptionally delicious, authentic, and generous. The staff was attentive and kind throughout. Thank you so much for the birthday surprise for my son! We'll happily return and recommend 100%!" },
+      "review-7": { role: "· 394 reviews", date: "3 years ago", category: "Prime Harbor Location", quote: "Everything was spectacular — from the food and service to the prime waterfront setting. The waiter was warm, attentive, and passionate about his craft. The pizzas are on another level, made fresh to order with a perfect crust. Top-tier carpaccio and starters." }
+    },
+    de: {
+      "review-1": { role: "· 52 Rezensionen", date: "Vor 1 Monat", category: "Pizza & Tiramisù", quote: "Ein absolutes Muss bei jedem Besuch in Port d'Andratx. Auf der Terrasse mit der Meeresbrise des Hafens zu speisen, eine handgemachte Vier-Käse-Pizza zu genießen und mit hausgemachtem Tiramisù abzuschließen ist unvergleichlich. Das Team empfängt einen stets mit einem herzlichen Lächeln und erstklassigem Service." },
+      "review-2": { role: "· 28 Rezensionen", date: "Vor 3 Monaten", category: "Qualität & Service", quote: "Zwar war durch ein Dorffest viel Trubel, aber das Essen hat uns vollends entschädigt. Hervorragende Produktqualität und großzügige Portionen zu sehr fairen Preisen für Port d'Andratx. Exzellenter und aufmerksamer Service — wir kommen gerne wieder." },
+      "review-3": { role: "2 Rezensionen · 2 Fotos", date: "Vor 5 Monaten", category: "Terrasse & Ravioli", quote: "Wir kamen ohne festen Plan in den Hafen von Andratx und haben uns sofort in die gemütliche italienische Terrasse verliebt. Das Essen war phänomenal: Die Trüffel-Ravioli und Pasta waren spektakulär, der Service makellos. Wir kommen garantiert wieder!" },
+      "review-4": { role: "· 45 Rezensionen", date: "Vor 5 Monaten", category: "Holzofen & Hafen", quote: "Diesen fantastischen Ort haben wir beim Spaziergang durch Port d'Andratx entdeckt. Die Meeresfrüchte-Pasta war herrlich frisch und mediterran, und der Pizzateig einfach unschlagbar knusprig. Man fühlt sich wie bei der Familie. Magischer Sonnenuntergang mit Hafenblick von der Terrasse." },
+      "review-5": { role: "Verifizierter Gast", date: "Vor 8 Monaten", category: "Authentischer Geschmack", quote: "Als Italienerin auf Mallorca ist es nicht leicht, eine Pizza zu finden, die wie zu Hause schmeckt — Buon Appetito hat es perfekt getroffen! Leichter, knuspriger Teig und erstklassige Zutaten direkt aus Italien. Traumhafte Abendstimmung auf der Terrasse und ein bezauberndes Team." },
+      "review-6": { role: "· 6 Rezensionen", date: "Vor 1 Jahr", category: "Herzlicher Service", quote: "Wir haben uns spontan entschieden, hier essen zu gehen, und waren restlos begeistert. Das Essen war außergewöhnlich lecker, authentisch und reichlich. Das Personal war zu jeder Zeit aufmerksam und herzlich. Herzlichen Dank für die Geburtstagsüberraschung für meinen Sohn! Wir kommen sehr gerne wieder und empfehlen das Lokal zu 100% weiter!" },
+      "review-7": { role: "· 394 Rezensionen", date: "Vor 3 Jahren", category: "Beste Hafenlage", quote: "Alles spektakulär: vom Essen über den Service bis hin zur erstklassigen Lage direkt am Hafen. Der Kellner war überaus freundlich und aufmerksam, mit spürbarer Hingabe. Die Pizzen spielen in einer eigenen Liga, frisch zubereitet mit perfektem Teig. Erstklassiges Carpaccio und Vorspeisen." }
+    }
+  };
+
+  function updateReviewsLanguage(lang) {
+    const data = (reviewsI18n as any)[lang] || reviewsI18n.es;
+    document.querySelectorAll('.review-card').forEach((card) => {
+      const id = card.getAttribute('data-review-id');
+      const r = id ? data[id] : null;
+      if (!r) return;
+      const dateEl = card.querySelector('.review-date-text');
+      const catEl = card.querySelector('.review-cat-text');
+      const quoteEl = card.querySelector('.review-text');
+      const roleEl = card.querySelector('.review-role-text');
+      if (dateEl) dateEl.textContent = r.date;
+      if (catEl) catEl.textContent = r.category;
+      if (quoteEl) quoteEl.textContent = `"${r.quote}"`;
+      if (roleEl) roleEl.textContent = r.role;
+    });
+  }
+
   // Ejecución inmediata y segura en cualquier estado del DOM
   function initReviews() {
     setupReviewsCarousel();
     initBadgeAnimation();
+
+    let initialLang = 'es';
+    try {
+      initialLang = localStorage.getItem('buon_appetito_lang') || localStorage.getItem('preferred_language') || 'es';
+    } catch (e) {}
+    updateReviewsLanguage(initialLang);
+
+    window.addEventListener('buon:languageChange', (e: any) => {
+      if (e.detail?.lang) {
+        updateReviewsLanguage(e.detail.lang);
+      }
+    });
   }
 
   if (document.readyState === 'loading') {

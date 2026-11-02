@@ -168,7 +168,7 @@ const PL_CSS = `
 .pl-peg{position:absolute;left:50%;top:0;width:11px;height:26px;margin-left:-5.5px;border-radius:2px;background:linear-gradient(90deg,#c9a67a,#e3c9a1 45%,#b8915f);box-shadow:0 2px 4px rgba(0,0,0,.25)}
 .pl-peg::after{content:'';position:absolute;left:4.5px;top:8px;width:2px;height:7px;background:rgba(80,60,30,.45);border-radius:1px}
 .pl-controls{position:absolute;left:0;right:0;bottom:14px;display:flex;align-items:center;justify-content:center;gap:20px;cursor:default}
-.pl-btn{appearance:none;width:38px;height:38px;border-radius:50%;border:1px solid rgba(24,51,33,0.18);background:rgba(255,255,255,0.9);backdrop-filter:blur(8px);color:#183321;display:grid;place-items:center;cursor:pointer;transition:all .2s ease;flex-shrink:0;box-shadow:0 2px 6px rgba(0,0,0,0.06)}
+.pl-btn{appearance:none;width:44px;height:44px;border-radius:50%;border:1px solid rgba(24,51,33,0.18);background:rgba(255,255,255,0.9);backdrop-filter:blur(8px);color:#183321;display:grid;place-items:center;cursor:pointer;transition:all .2s ease;flex-shrink:0;box-shadow:0 2px 6px rgba(0,0,0,0.06)}
 .pl-btn:hover{background:#183321;color:#ffffff;border-color:#183321;transform:scale(1.05)}
 .pl-btn:active{transform:scale(0.92)}
 `;

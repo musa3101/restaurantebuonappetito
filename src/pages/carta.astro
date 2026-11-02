@@ -122,7 +122,7 @@ const description = "Carta digital interactiva de Buon Appetito en Port d'Andrat
   <section class="menu-hero" id="inicio">
     <div class="container hero-container">
       <h1 class="hero-title" id="hero-title">Nuestra Carta</h1>
-      <span class="hero-subtitle">GASTRONOMÍA ITALIANA · PORT D'ANDRATX</span>
+      <span class="hero-subtitle" id="hero-subtitle">GASTRONOMÍA ITALIANA · PORT D'ANDRATX</span>
     </div>
   </section>
 
@@ -231,33 +231,42 @@ const description = "Carta digital interactiva de Buon Appetito en Port d'Andrat
     const UI_TEXT = {
       es: {
         heroTitle: "Nuestra Carta",
+        heroSubtitle: "GASTRONOMÍA ITALIANA · PORT D'ANDRATX",
         btnBack: "Volver",
         btnBackBottom: "Volver al Menú",
         reserveTable: "Reservar mesa",
         taxIncluded: "Precios con IVA incluido (10%).",
         allergensNote: "Disponemos de opciones sin gluten (pastas y pizzas artesanales). Si tiene alguna alergia o intolerancia alimentaria, por favor comuníqueselo a nuestro equipo antes de realizar su comanda.",
+        finaleTitle: "Port d'Andratx",
+        finaleSub: "TRADICIÓN & COCINA MEDITERRÁNEA",
         legalAviso: "Aviso Legal",
         legalPrivacidad: "Privacidad",
         legalCookies: "Cookies"
       },
       en: {
         heroTitle: "Our Menu",
+        heroSubtitle: "ITALIAN GASTRONOMY · PORT D'ANDRATX",
         btnBack: "Back",
         btnBackBottom: "Back to Menu",
         reserveTable: "Book a table",
         taxIncluded: "All prices include 10% VAT.",
         allergensNote: "Gluten-free options available (artisanal pasta and pizzas). If you have any food allergy or intolerance, please inform our team before ordering.",
+        finaleTitle: "Port d'Andratx",
+        finaleSub: "TRADITION & MEDITERRANEAN CUISINE",
         legalAviso: "Legal Notice",
         legalPrivacidad: "Privacy Policy",
         legalCookies: "Cookies"
       },
       de: {
         heroTitle: "Unsere Speisekarte",
+        heroSubtitle: "ITALIENISCHE GASTRONOMIE · PORT D'ANDRATX",
         btnBack: "Zurück",
         btnBackBottom: "Zurück zum Menü",
         reserveTable: "Tisch reservieren",
         taxIncluded: "Alle Preise inklusive 10% MwSt.",
         allergensNote: "Glutenfreie Optionen verfügbar (hausgemachte Pasta und Pizzen). Bitte informieren Sie unser Team vor Ihrer Bestellung über eventuelle Allergien oder Unverträglichkeiten.",
+        finaleTitle: "Port d'Andratx",
+        finaleSub: "TRADITION & MEDITERRANE KÜCHE",
         legalAviso: "Impressum",
         legalPrivacidad: "Datenschutz",
         legalCookies: "Cookies"
@@ -426,6 +435,7 @@ const description = "Carta digital interactiva de Buon Appetito en Port d'Andrat
       if (!t) return;
 
       const titleEl = document.getElementById('hero-title');
+      const subEl = document.getElementById('hero-subtitle');
       const txtBackEl = document.getElementById('txt-back');
       const txtBackBottomEl = document.getElementById('txt-back-bottom');
       const taxNoteEl = document.getElementById('tax-note');
@@ -435,6 +445,7 @@ const description = "Carta digital interactiva de Buon Appetito en Port d'Andrat
       const legalCookiesEl = document.getElementById('legal-cookies');
 
       if (titleEl) titleEl.textContent = t.heroTitle;
+      if (subEl) subEl.textContent = t.heroSubtitle;
       if (txtBackEl) txtBackEl.textContent = t.btnBack;
       if (txtBackBottomEl) txtBackBottomEl.textContent = t.btnBackBottom || t.btnBack;
       if (taxNoteEl) taxNoteEl.textContent = t.taxIncluded;
@@ -538,8 +549,8 @@ const description = "Carta digital interactiva de Buon Appetito en Port d'Andrat
             loading="lazy"
           />
           <div class="finale-caption">
-            <span class="finale-title">Port d'Andratx</span>
-            <span class="finale-sub">TRADICIÓN & COCINA MEDITERRÁNEA</span>
+            <span class="finale-title">${t ? t.finaleTitle : "Port d'Andratx"}</span>
+            <span class="finale-sub">${t ? t.finaleSub : "TRADICIÓN & COCINA MEDITERRÁNEA"}</span>
           </div>
           <div class="finale-divider finale-divider-footer">
             <span class="divider-line"></span>
