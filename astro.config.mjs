@@ -7,7 +7,7 @@ import sitemap from '@astrojs/sitemap';
 // https://astro.build/config
 // NOTA SEO: Sustituir 'https://buonappetito-andratx.com' por el dominio definitivo adquirido
 export default defineConfig({
-  site: process.env.SITE_URL || 'https://buonappetito-andratx.com',
+  site: process.env.SITE_URL || 'https://restaurantebuonappetito.com',
   integrations: [
     react(),
     sitemap({

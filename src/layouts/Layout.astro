@@ -18,7 +18,7 @@ const {
   type = "restaurant.restaurant"
 } = Astro.props;
 
-const siteUrl = Astro.site ? Astro.site.toString().replace(/\/$/, '') : 'https://buonappetito-andratx.com';
+const siteUrl = Astro.site ? Astro.site.toString().replace(/\/$/, '') : 'https://restaurantebuonappetito.com';
 const canonicalUrl = new URL(Astro.url.pathname, siteUrl).toString();
 const ogImageUrl = new URL(image, siteUrl).toString();
 
