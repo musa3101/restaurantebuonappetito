@@ -1,38 +1,45 @@
-# Registro de Sesión - Buon Appetito Web
+# 📋 Resumen de Sesión - Buon Appetito
+
 **Fecha:** 3 de Noviembre de 2026  
-**Rama:** `dev` (Modo aislamiento en entorno local)
+**Rama de trabajo:** `dev` (fusionada y sincronizada con `main`)  
+**Estado:** Proyecto Web & App Móvil entregados en producción al cliente. Máxima precaución en futuros cambios.
 
 ---
 
-## 1. Qué se ha hecho hoy
-1. **Nueva Carta de Vinos Oficial (`/vinos`)**:
-   - Extraídas fielmente las 31 referencias oficiales desde el documento oficial del restaurante (Vinos de la Casa, Mallorca, Otros Vinos y Espumosos).
-   - Implementado selector bilingüe exclusivo **ES / EN** (sin opción de alemán, según indicación expresa del cliente).
-   - Rediseño editorial elegante con tipografía vinícola en **Cormorant Garamond** y **Plus Jakarta Sans**, sin "cuadritos" ni cajas, con línea de puntos fina y precio a la derecha.
-   - Eliminados todos los emojis e iconos de los botones de filtro superior, dejando botones de texto limpios.
-   - Eliminadas las etiquetas redundantes de denominación de origen que duplicaban el detalle.
-2. **Reubicación de Bebidas en la Carta de Comida (`/carta`)**:
-   - Reintegradas todas las bebidas al final de la carta de comida, tras la sección de Pizzas.
-3. **Limpieza del Texto Legal de IVA en Footers**:
-   - Eliminado el texto de porcentaje `(10%)` en el footer tanto de `/carta` como de `/vinos`. Ahora indica limpiamente: *"Precios con IVA incluido."* / *"All prices include VAT."*
+## 1. ¿Qué se ha hecho hoy?
+1. **Precios con Decimales Libres:** Se resolvió el bloqueo en la aplicación móvil (`/admin`) que obligaba a ingresar múltiplos de 5. Ahora permite ingresar cualquier importe exacto céntimo a céntimo (ej. `6.11 €`, `16.73 €`).
+2. **Sistema de Actualización Inteligente PWA:** Se corrigió el bucle de actualización tras recargar, se añadió un botón rápido de cierre (`✕`) y se programó un auto-cierre con transición suave a los 8.5 segundos sin interrumpir al usuario.
+3. **Rediseño Bento UI en Ajustes:** Pantalla de ajustes de la aplicación renovada con mayor espaciado, estilo limpio e intuitivo en móvil.
+4. **Perfil de Gerencia Personalizable:** Sección dedicada para que el dueño pueda cambiar su nombre libremente y subir su propia foto/avatar sin tocar la web pública ni saturar la base de datos.
+5. **Saludo Dinámico Contextual:** Saludo en cabecera según la hora del día (*"Buenos días"*, *"Buenas tardes"*, *"Buenas noches"*).
+6. **Integración Completa de Vinos / Bodega:** 
+   - Nueva carta de vinos oficial en la web (`/vinos`) alimentada por `public/data/vinos.json`.
+   - Reubicación de las bebidas al final de la carta de comida (`/carta`).
+   - Sincronización de las 31 referencias de vinos en la base de datos de InsForge (`menu_items`) para que la pestaña **Bodega** en la aplicación móvil sea 100% operativa (editar precios, controlar stock o añadir nuevos).
+7. **Auditoría Integral E2E:** Verificado con Playwright en emulación iPhone y comprobada la integridad del backend de InsForge (137 productos base 100% intactos).
+8. **Fusión y Despliegue:** Todo el trabajo quedó fusionado limpiamente en `main` y subido a GitHub en producción (`faa3dd9`).
 
 ---
 
-## 2. Archivos modificados
-- `public/data/vinos.json` (Estructura oficial de las 31 referencias de vinos)
-- `src/pages/vinos.astro` (Rediseño editorial limpio, selector ES/EN y ajuste del texto de IVA)
-- `src/pages/carta.astro` (Reincorporación de Bebidas al final y ajuste del texto de IVA)
-- `docs/SESSION_LATEST_ES.md` & `docs/ROADMAP.md` (Documentación actualizada)
+## 2. Archivos modificados y creados
+- `src/app-carta/AdminApp.astro`: Precios decimales libres, actualización sin bucle, rediseño de ajustes, saludo contextual y perfil de gerencia.
+- `src/pages/carta.astro`: Bebidas integradas al final de la carta de comida.
+- `src/pages/vinos.astro`: Nueva página y presentación de la bodega seleccionada.
+- `public/data/vinos.json`: Estructura oficial de las 31 referencias de vinos.
+- `scripts/e2e_audit.mjs`: Script de verificación reproducible con Playwright.
+- `docs/SESSION_LATEST_ES.md` y `docs/ROADMAP.md`: Actualización de la documentación de sesión.
 
 ---
 
-## 3. Qué problemas se han solucionado
-- Eliminados los "cuadritos" y cajas que sobrecargaban la carta de vinos.
-- Eliminados los emojis en la botonera de categorías.
-- Eliminada la duplicidad de badges de origen.
-- Eliminado el `(10%)` del IVA en ambas cartas.
+## 3. Problemas solucionados
+- Corregido el mensaje *"Introduce un valor válido"* al guardar decimales libres en platos y bebidas.
+- Eliminado el modal persistente de actualización que requería pulsar *"Actualizar Ahora"* varias veces.
+- Corregido el contador de bodega que marcaba 0 en la app móvil.
+- Eliminados botones redundantes en la cabecera de ajustes.
 
 ---
 
-## 4. Qué queda pendiente
-- **Fase 2**: Integración y sincronización de las 31 referencias de vinos en la mini app de gestión PWA (`src/app-carta/AdminApp.astro`) tras visto bueno final del cliente.
+## 4. ¿Qué queda pendiente?
+- Ninguna tarea pendiente urgente.
+- El proyecto y la app están funcionando de forma estable en producción para el cliente.
+- En próximas sesiones: mantener la regla de aislamiento absoluto en `dev` y no realizar modificaciones que puedan alterar el servicio en producción sin validación previa.

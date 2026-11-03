@@ -1,26 +1,26 @@
-# Hoja de Ruta (Roadmap) - Buon Appetito
+# 🗺️ Roadmap - Restaurante Buon Appetito
 
-## Tareas completadas
-- [x] Backend cloud en InsForge permanente (106 registros en 3 idiomas).
-- [x] Sincronización en vivo de `/carta` y `/vinos` con la base de datos y la App `/admin`.
-- [x] Despliegue en producción con dominio limpio: `https://restaurantebuonappetito.pages.dev`.
-- [x] Configuración Web App instalable (PWA) para iPhone y Android (`manifest.webmanifest`).
-- [x] Separación de la carta en 3 cartas independientes: Comida, Bebidas y Bodega de Vinos.
-- [x] Rediseño V2 Mobile-First del panel de administración (`/admin`) con auto-traducción por IA, control de agotados y cambio de clave.
-- [x] Integración oficial de reservas con Bavoli y mapa interactivo en Port d'Andratx.
-- [x] Optimización y Síntesis de Marcos Legales (Aviso Legal, Privacidad, Cookies) trilingüe con `/i18nstack`.
-- [x] Autoplay en Bucle del Vídeo Hero en iOS Safari sin botón de Play.
-- [x] **Nueva Carta Oficial de Vinos (`/vinos`)**: 31 referencias en ES/EN, diseño editorial en Cormorant Garamond sin cuadritos ni emojis.
-- [x] **Reubicación de Bebidas**: Reincorporadas al final de la Carta de Comida (`/carta`).
-- [x] **Eliminación del "(10%)" del IVA**: Texto legal limpio en los footers de `/carta` y `/vinos`.
-
----
-
-## Tareas en progreso
-- [ ] **Fase 2 de Bodega**: Sincronización de las 31 referencias de vinos con la mini app PWA de gerencia (`src/app-carta/AdminApp.astro`) una vez aprobado el diseño web por el cliente.
+## ✅ Tareas Completadas
+- [x] Web principal de comensales y reservas en producción.
+- [x] Carta digital interactiva multiidioma (`/carta`).
+- [x] Nueva Carta de Vinos y Bodega oficial seleccionada (`/vinos`).
+- [x] App móvil de gestión de carta en tiempo real para el restaurante (`/admin`).
+- [x] Soporte de precios con decimales libres (céntimo a céntimo).
+- [x] PWA con detección y notificación de actualizaciones sin bucles.
+- [x] Pantalla de Ajustes rediseñada (Bento UI) con perfil de gerencia y foto personalizable.
+- [x] Saludo dinámico según la hora del día.
+- [x] Sincronización completa de Comida (72), Bebidas (34) y Bodega (31) en InsForge.
+- [x] Auditoría integral E2E con Playwright e integridad de base de datos verificada.
+- [x] Fusión a `main` y despliegue final en producción.
 
 ---
 
-## Próximas mejoras prioritarias
-- [ ] Fase 2: Gestión de precios y disponibilidad de los 31 vinos desde la app `/admin`.
-- [ ] Incorporación de nuevas fotografías de platos si el cliente las solicita en el futuro.
+## 🟡 Tareas en Progreso / Mantenimiento
+- [ ] Monitorización pasiva de estabilidad en producción y feedback del cliente.
+
+---
+
+## 🔮 Próximas Mejoras Prioritarias (Bajo demanda del cliente)
+- [ ] Exportación o informes periódicos de ventas o cambios de carta si el restaurante lo requiere.
+- [ ] Posibles ajustes de fotos o descripciones adicionales en la bodega de vinos.
+- [ ] Mantener el protocolo de seguridad estricto en cada futura actualización.
