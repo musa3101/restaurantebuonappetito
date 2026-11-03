@@ -21,4 +21,4 @@ User-agent: Applebot-Extended
 Allow: /
 
 # Sitemap
-Sitemap: https://restaurantebuonappetito.com/sitemap-index.xml
+Sitemap: https://restaurantebuonappetito.com/sitemap.xml
