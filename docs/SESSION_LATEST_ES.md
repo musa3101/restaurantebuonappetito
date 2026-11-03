@@ -1,8 +1,9 @@
 # 📋 Resumen de Sesión - Buon Appetito
 
 **Fecha:** 3 de Noviembre de 2026  
-**Rama de trabajo:** `dev` (fusionada y sincronizada con `main`)  
-**Estado:** Proyecto Web & App Móvil entregados en producción al cliente. Máxima precaución en futuros cambios.
+**Rama de trabajo:** `dev` (fusionada y sincronizada con `main` y desplegada)  
+**Dominio Oficial en Producción:** `https://restaurantebuonappetito.com`  
+**Estado:** Proyecto Web & App Móvil entregados en producción al cliente bajo dominio propio. Máxima precaución en futuros cambios.
 
 ---
 
@@ -15,9 +16,13 @@
 6. **Integración Completa de Vinos / Bodega:** 
    - Nueva carta de vinos oficial en la web (`/vinos`) alimentada por `public/data/vinos.json`.
    - Reubicación de las bebidas al final de la carta de comida (`/carta`).
-   - Sincronización de las 31 referencias de vinos en la base de datos de InsForge (`menu_items`) para que la pestaña **Bodega** en la aplicación móvil sea 100% operativa (editar precios, controlar stock o añadir nuevos).
+   - Sincronización de las 31 referencias de vinos en la base de datos de InsForge (`menu_items`) para que la pestaña **Bodega** en la aplicación móvil sea 100% operativa.
 7. **Auditoría Integral E2E:** Verificado con Playwright en emulación iPhone y comprobada la integridad del backend de InsForge (137 productos base 100% intactos).
 8. **Fusión y Despliegue:** Todo el trabajo quedó fusionado limpiamente en `main` y subido a GitHub en producción (`faa3dd9`).
+9. **Dominio Oficial Comprado y Conectado en Cloudflare:**
+   - Adquisición del dominio oficial `restaurantebuonappetito.com`.
+   - Vinculación automatizada mediante Cloudflare Pages y registros DNS CNAME (`@` y `www`).
+   - Verificación activa con certificado SSL HTTPS y respuesta HTTP 200 directa.
 
 ---
 
@@ -36,10 +41,10 @@
 - Eliminado el modal persistente de actualización que requería pulsar *"Actualizar Ahora"* varias veces.
 - Corregido el contador de bodega que marcaba 0 en la app móvil.
 - Eliminados botones redundantes en la cabecera de ajustes.
+- Dominio personalizado enlazado con éxito a la infraestructura de Cloudflare.
 
 ---
 
 ## 4. ¿Qué queda pendiente?
-- Ninguna tarea pendiente urgente.
-- El proyecto y la app están funcionando de forma estable en producción para el cliente.
-- En próximas sesiones: mantener la regla de aislamiento absoluto en `dev` y no realizar modificaciones que puedan alterar el servicio en producción sin validación previa.
+- La propagación del certificado SSL en algunos navegadores puede demorar de 2 a 5 minutos en estabilizarse en todo el mundo.
+- Mantener la regla de aislamiento absoluto en `dev` para futuros trabajos.
