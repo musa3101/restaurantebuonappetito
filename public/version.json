@@ -1,6 +1,6 @@
 {
-  "version": "2.0.0",
-  "build": 20261101,
-  "releaseDate": "2026-11-01",
-  "notes": "Panel V2 Mobile-First: Gestión de Comida, Bebidas y Bodega con optimización táctil PWA"
+  "version": "2.1.0",
+  "build": 20261103,
+  "releaseDate": "2026-11-03",
+  "notes": "Precios decimales libres (céntimo a céntimo como 6.11€), panel emergente de actualización automática y registro de auditoría en historial."
 }

@@ -1,50 +1,42 @@
 # Registro de Sesión - Buon Appetito Web
-**Fecha:** 2 de Noviembre de 2026  
+**Fecha:** 3 de Noviembre de 2026  
 **Rama:** `dev` sincronizada con `main` y desplegada en producción.
 
 ---
 
 ## 1. Qué se ha hecho hoy
-1. **Auditoría Global Multi-Dispositivo (Desktop, Tablet y Mobile)**:
-   - Verificación exhaustiva con Playwright CLI y Chrome DevTools en 3 resoluciones reales (1440x900, 768x1024 y 390x844).
-   - Generación de informe completo con capturas de pantalla de la experiencia de cliente y panel de administrador.
-2. **Auditoría Profunda E2E del Panel de Administración (`/admin`)**:
-   - Pruebas simuladas de dueño de restaurante creando y verificando platos en las 3 cartas independientes: Comida (plato nuevo), Bebida y Vino.
-   - Verificación de la auto-traducción en vivo con IA (Google Translate gtx) a Español, Inglés y Alemán.
-   - Prueba de edición rápida de disponibilidad ("Agotado" / redondeo de precio).
-   - Prueba del módulo de Seguridad y Cambio de Contraseña.
-   - Limpieza total de los platos de prueba en InsForge, garantizando la carta original impecable.
-3. **Optimización y Síntesis de los Marcos Legales (Aviso Legal, Privacidad y Cookies)**:
-   - Diagnóstico profundo de las tres páginas legales (`/aviso-legal`, `/privacidad`, `/cookies`).
-   - Eliminación del 100% de la paja jurídica innecesaria (cláusulas obsoletas de virus informáticos, ataques a servidores y tutoriales paso a paso de configuración de cada navegador).
-   - Sustitución de bloques de texto denso por un diseño editorial premium de tarjetas limpias y tabla clara de cookies (esenciales y Google Maps).
-   - Botón directo de "Configurar mis preferencias de cookies" que dispara el banner interactivo.
-   - Redacción adaptativa trilingüe (ES, EN, DE) con la habilidad `/i18nstack` protegiendo los contenedores visuales frente a la expansión de caracteres del alemán y el inglés.
-4. **Fusión (Merge) a `main` y Despliegue en Cloudflare Pages**:
-   - Compilación estática exitosa con `astro build`.
-   - Merge de la rama `dev` a `main` y push a GitHub (`c3ae27c`).
-   - Verificación en vivo en `https://restaurantebuonappetito.pages.dev`: HTTP 200 y contenido legal actualizado visible.
+1. **Reparación de Renderizado en `/carta` y `/vinos`**:
+   - Solucionado el error de consola `ReferenceError: t is not defined` en `renderMenu()` y `renderVinos()` que impedía que se pintaran los platos y bebidas en pantalla.
+   - Verificados los 72 platos de comida en `/carta` y las 34 bebidas/cócteles en `/vinos`.
+   - Preparada la detección automática en `/vinos` para cuando el dueño añada vinos desde la pestaña "Bodega" en la App `/admin`.
+2. **Autoplay Continuo en Bucle del Vídeo Hero en iPhone (iOS Safari)**:
+   - Eliminada la propiedad `visibility: hidden` del bloqueo del preloader para que el motor WebKit de iOS Safari permita el arranque inmediato del vídeo en segundo plano.
+   - Asignación directa de fuente de vídeo y script síncrono de reproducción continua sin botón de Play superpuesto al cargar o recargar.
+3. **Scroll Spy del Header y Marcos Legales Trilingües**:
+   - Mapeo completo de secciones intermedias (`#pizza`, `#resenas`) en el navegador de escritorio.
+   - Síntesis editorial trilingüe (ES, EN, DE) de Aviso Legal, Privacidad y Cookies con `/i18nstack`.
+4. **Entrega Exitosa al Cliente Final**:
+   - Fusión (`merge`) en `main`, despliegue en Cloudflare Pages (`https://restaurantebuonappetito.pages.dev`) y validación exitosa en iPhone real.
 
 ---
 
-## 2. Archivos modificados y creados
-- `src/pages/aviso-legal.astro` (Rediseño sintetizado y trilingüe)
-- `src/pages/privacidad.astro` (Rediseño sintetizado y trilingüe)
-- `src/pages/cookies.astro` (Tabla de cookies, botón interactivo y rediseño)
-- `src/components/About.astro`, `Header.astro`, `Footer.astro`, `Reviews.astro` (Ajustes de copy y enlaces)
-- `testsprite_tests/` (Suites de pruebas E2E e informes técnicos de auditoría)
-- `docs/SESSION_LATEST_ES.md` (Actualizado para el cierre de sesión)
-- `docs/ROADMAP.md` (Actualizado con las tareas completadas)
+## 2. Archivos modificados
+- `src/components/Hero.astro` (Autoplay continuo e incondicional en iOS Safari)
+- `src/components/Preloader.astro` (Desbloqueo de visibilidad para WebKit)
+- `src/pages/carta.astro` (Corrección de variable de traducción `t` y filtro de categorías)
+- `src/pages/vinos.astro` (Corrección de variable `t` y soporte dinámico para Bodega + Bebidas)
+- `src/components/Header.astro` (Scroll spy continuo en desktop)
+- `src/pages/aviso-legal.astro`, `privacidad.astro`, `cookies.astro` (Marcos legales sintetizados)
+- `docs/SESSION_LATEST_ES.md` & `docs/ROADMAP.md` (Documentación de cierre)
 
 ---
 
 ## 3. Qué problemas se han solucionado
-- Se eliminó el texto excesivo y burocrático que rompía con la estética de restaurante de alta gama.
-- Se garantizó la validez legal española (LSSI-CE y RGPD) en un formato moderno y legible.
-- Se verificó que todas las funciones de administración (traducción automática, CRUD de cartas, cambio de credenciales) funcionan al 100% sin romper datos en producción.
+- Eliminado el botón de Play que bloqueaba el vídeo del Hero al recargar en iPhone.
+- Restaurada la visualización inmediata de todos los platos y bebidas en `/carta` y `/vinos`.
+- Confirmada la sincronización 100% en tiempo real entre la App instalada (`/admin`), InsForge y la web pública.
 
 ---
 
 ## 4. Qué queda pendiente
-- Comprobación visual final en el teléfono móvil del usuario en `https://restaurantebuonappetito.pages.dev`.
-- Ajustes menores que puedan surgir tras la prueba de usuario en vivo.
+- Proyecto entregado satisfactoriamente. Listo para futuras ampliaciones (como subir la carta de vinos desde la App `/admin` o añadir nuevas fotografías).
