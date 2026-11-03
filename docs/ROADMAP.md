@@ -11,16 +11,16 @@
 - [x] Saludo dinámico según la hora del día.
 - [x] Sincronización completa de Comida (72), Bebidas (34) y Bodega (31) en InsForge.
 - [x] Auditoría integral E2E con Playwright e integridad de base de datos verificada.
-- [x] Fusión a `main` y despliegue final en producción.
+- [x] Dominio oficial `restaurantebuonappetito.com` comprado y enlazado con SSL activo.
+- [x] Solicitud de indexación enviada a Google Search Console.
 
 ---
 
 ## 🟡 Tareas en Progreso / Mantenimiento
-- [ ] Monitorización pasiva de estabilidad en producción y feedback del cliente.
+- [ ] Monitorización pasiva de estabilidad en producción y propagación de DNS en Google.
 
 ---
 
 ## 🔮 Próximas Mejoras Prioritarias (Bajo demanda del cliente)
-- [ ] Exportación o informes periódicos de ventas o cambios de carta si el restaurante lo requiere.
-- [ ] Posibles ajustes de fotos o descripciones adicionales en la bodega de vinos.
+- [ ] Validar el sitemap en Google Search Console una vez completada la propagación de DNS.
 - [ ] Mantener el protocolo de seguridad estricto en cada futura actualización.

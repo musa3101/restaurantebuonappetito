@@ -1,14 +1,14 @@
 # 📋 Resumen de Sesión - Buon Appetito
 
 **Fecha:** 3 de Noviembre de 2026  
-**Rama de trabajo:** `dev` (fusionada y sincronizada con `main` y desplegada)  
+**Rama activa:** `dev` (sincronizada y desplegada en `main`)  
 **Dominio Oficial en Producción:** `https://restaurantebuonappetito.com`  
-**Estado:** Proyecto Web & App Móvil entregados en producción al cliente bajo dominio propio. Máxima precaución en futuros cambios.
+**Estado:** Proyecto Web & App Móvil entregados en producción al cliente bajo dominio propio. Indexación solicitada en Google Search Console.
 
 ---
 
 ## 1. ¿Qué se ha hecho hoy?
-1. **Precios con Decimales Libres:** Se resolvió el bloqueo en la aplicación móvil (`/admin`) que obligaba a ingresar múltiplos de 5. Ahora permite ingresar cualquier importe exacto céntimo a céntimo (ej. `6.11 €`, `16.73 €`).
+1. **Precios con Decimales Libres:** Se resolvió el bloqueo en la app móvil (`/admin`) que obligaba a ingresar múltiplos de 5. Ahora permite ingresar cualquier importe exacto céntimo a céntimo (ej. `6.11 €`, `16.73 €`).
 2. **Sistema de Actualización Inteligente PWA:** Se corrigió el bucle de actualización tras recargar, se añadió un botón rápido de cierre (`✕`) y se programó un auto-cierre con transición suave a los 8.5 segundos sin interrumpir al usuario.
 3. **Rediseño Bento UI en Ajustes:** Pantalla de ajustes de la aplicación renovada con mayor espaciado, estilo limpio e intuitivo en móvil.
 4. **Perfil de Gerencia Personalizable:** Sección dedicada para que el dueño pueda cambiar su nombre libremente y subir su propia foto/avatar sin tocar la web pública ni saturar la base de datos.
@@ -18,11 +18,13 @@
    - Reubicación de las bebidas al final de la carta de comida (`/carta`).
    - Sincronización de las 31 referencias de vinos en la base de datos de InsForge (`menu_items`) para que la pestaña **Bodega** en la aplicación móvil sea 100% operativa.
 7. **Auditoría Integral E2E:** Verificado con Playwright en emulación iPhone y comprobada la integridad del backend de InsForge (137 productos base 100% intactos).
-8. **Fusión y Despliegue:** Todo el trabajo quedó fusionado limpiamente en `main` y subido a GitHub en producción (`faa3dd9`).
-9. **Dominio Oficial Comprado y Conectado en Cloudflare:**
+8. **Fusión y Despliegue en Producción:** Todo el trabajo quedó fusionado limpiamente en `main` y subido a GitHub en producción (`faa3dd9`).
+9. **Dominio Oficial Adquirido y Conectado en Cloudflare:**
    - Adquisición del dominio oficial `restaurantebuonappetito.com`.
-   - Vinculación automatizada mediante Cloudflare Pages y registros DNS CNAME (`@` y `www`).
-   - Verificación activa con certificado SSL HTTPS y respuesta HTTP 200 directa.
+   - Registros DNS CNAME (`@` y `www`) vinculados a Cloudflare Pages y certificados SSL activos con código HTTP 200 directo.
+10. **SEO y Google Search Console:**
+    - Generación y despliegue del archivo `sitemap.xml` con todas las rutas oficiales.
+    - Solicitud de indexación enviada manualmente desde la herramienta de inspección de URLs de Google Search Console.
 
 ---
 
@@ -31,6 +33,8 @@
 - `src/pages/carta.astro`: Bebidas integradas al final de la carta de comida.
 - `src/pages/vinos.astro`: Nueva página y presentación de la bodega seleccionada.
 - `public/data/vinos.json`: Estructura oficial de las 31 referencias de vinos.
+- `astro.config.mjs`: Configuración del dominio oficial `https://restaurantebuonappetito.com`.
+- `public/robots.txt` y `public/sitemap.xml`: Archivos de indexación para motores de búsqueda.
 - `scripts/e2e_audit.mjs`: Script de verificación reproducible con Playwright.
 - `docs/SESSION_LATEST_ES.md` y `docs/ROADMAP.md`: Actualización de la documentación de sesión.
 
@@ -41,10 +45,10 @@
 - Eliminado el modal persistente de actualización que requería pulsar *"Actualizar Ahora"* varias veces.
 - Corregido el contador de bodega que marcaba 0 en la app móvil.
 - Eliminados botones redundantes en la cabecera de ajustes.
-- Dominio personalizado enlazado con éxito a la infraestructura de Cloudflare.
+- Dominio personalizado enlazado con éxito y certificado SSL operativo.
 
 ---
 
 ## 4. ¿Qué queda pendiente?
-- La propagación del certificado SSL en algunos navegadores puede demorar de 2 a 5 minutos en estabilizarse en todo el mundo.
-- Mantener la regla de aislamiento absoluto en `dev` para futuros trabajos.
+- Esperar la propagación completa de DNS en los centros de datos de Google para reintentar la subida del sitemap en Google Search Console.
+- La web y la app están funcionando de forma estable en producción bajo el nuevo dominio oficial.
