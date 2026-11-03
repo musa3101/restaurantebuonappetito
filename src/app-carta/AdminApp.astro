@@ -1337,7 +1337,7 @@
     }
 
     .drawer-header {
-      padding: calc(14px + var(--safe-top)) 18px 14px;
+      padding: calc(16px + var(--safe-top)) 20px 18px;
       background: linear-gradient(135deg, #183321 0%, #112518 100%);
       color: #FAF8F5;
       display: flex;
@@ -1349,19 +1349,51 @@
     .drawer-user-info {
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 14px;
     }
     .drawer-avatar {
-      width: 40px;
-      height: 40px;
+      width: 48px;
+      height: 48px;
       border-radius: 50%;
       background: #C5A880;
       color: #183321;
-      font-size: 15px;
+      font-size: 17px;
       font-weight: 800;
       display: flex;
       align-items: center;
       justify-content: center;
+      border: 2px solid rgba(232, 197, 71, 0.6);
+      background-size: cover;
+      background-position: center;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+      flex-shrink: 0;
+    }
+    .drawer-greeting-eyebrow {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #E8C547;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      margin-bottom: 2px;
+    }
+    .drawer-owner-name {
+      font-size: 17px;
+      font-weight: 800;
+      color: #FAF8F5;
+      margin: 0;
+      line-height: 1.25;
+      letter-spacing: -0.01em;
+    }
+    .drawer-owner-sub {
+      font-size: 12px;
+      color: rgba(250, 248, 245, 0.72);
+      margin: 2px 0 0;
+      display: flex;
+      align-items: center;
+      gap: 4px;
     }
     .modal-close-btn-white {
       width: 32px;
@@ -1888,8 +1920,8 @@
 
           <!-- Perfil / Ajustes -->
           <button id="btnProfile" class="btn-profile" title="Ajustes de Gerencia" style="position: relative;">
-            <div class="avatar-badge">BA</div>
-            <span>Ajustes</span>
+            <div class="avatar-badge" id="headerAvatarBadge">BA</div>
+            <span id="headerGreetingBtnText">Ajustes</span>
             <span id="headerUpdateDot" class="update-notify-dot" style="display: none;"></span>
             <svg width="12" height="12" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
           </button>
@@ -2190,10 +2222,16 @@
       
       <div class="drawer-header">
         <div class="drawer-user-info">
-          <div class="drawer-avatar">BA</div>
+          <div class="drawer-avatar" id="drawerAvatar">
+            <span id="drawerAvatarInitials">BA</span>
+          </div>
           <div>
-            <h3 style="font-size: 16px; font-weight: 800; color: #FAF8F5;">Buon Appetito</h3>
-            <p style="font-size: 12px; color: rgba(250, 248, 245, 0.7);" id="drawerUserEmail">buonappetitoandratx@gmail.com</p>
+            <div class="drawer-greeting-eyebrow">
+              <span id="drawerGreetingEmoji">☀️</span>
+              <span id="drawerGreetingText">Buenos días</span>
+            </div>
+            <h3 class="drawer-owner-name" id="drawerOwnerName">Buon Appetito</h3>
+            <p class="drawer-owner-sub" id="drawerOwnerSub">Gerencia · Andratx</p>
           </div>
         </div>
         <button id="closeProfileBtn" class="modal-close-btn-white" title="Volver a la carta">✕</button>
@@ -2252,6 +2290,18 @@
 
         <!-- Menú de Opciones -->
         <div class="ios-menu-group">
+          <!-- Perfil del Dueño / Gerencia -->
+          <button type="button" id="btnOpenOwnerProfileFromMenu" class="ios-menu-item">
+            <div class="ios-item-left">
+              <div class="ios-icon-circle" style="background: rgba(197, 168, 128, 0.2); color: #183321;">👤</div>
+              <div class="ios-item-text">
+                <span class="ios-item-title">Perfil de Gerencia</span>
+                <span class="ios-item-sub">Tu nombre, cargo y foto personal en la app</span>
+              </div>
+            </div>
+            <span class="ios-chevron">›</span>
+          </button>
+
           <!-- PWA con mini fotos -->
           <button type="button" id="btnOpenPwaFromDrawer" class="ios-menu-item">
             <div class="ios-item-left">
@@ -2421,7 +2471,11 @@
 
   <!-- MODAL EMERGENTE DE ACTUALIZACIÓN DEL SISTEMA -->
   <div id="updatePopupModal" class="modal-overlay" style="display: none; z-index: 99999;" role="dialog" aria-modal="true" aria-labelledby="popupUpdateTitle">
-    <div class="modal-window" style="max-width: 380px; text-align: center; border-radius: 20px; overflow: hidden; border: 1px solid var(--border);">
+    <div class="modal-window" style="max-width: 380px; text-align: center; border-radius: 20px; overflow: hidden; border: 1px solid var(--border); position: relative;">
+      
+      <!-- Botón de Cierre Rápido arriba a la derecha (✕) -->
+      <button type="button" id="btnCloseUpdatePopupX" style="position: absolute; top: 12px; right: 12px; z-index: 10; width: 32px; height: 32px; border-radius: 999px; background: rgba(0,0,0,0.25); color: #FFFFFF; border: none; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 700; cursor: pointer; backdrop-filter: blur(8px);" title="Cerrar aviso">✕</button>
+
       <div style="background: linear-gradient(135deg, #183321 0%, #2A4F36 100%); padding: 26px 20px 22px; color: #FFFFFF;">
         <div style="width: 54px; height: 54px; margin: 0 auto 12px; background: rgba(255,255,255,0.15); border-radius: 16px; display: flex; align-items: center; justify-content: center; font-size: 26px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);">
           🚀
@@ -2457,6 +2511,55 @@
           </button>
         </div>
       </div>
+    </div>
+  </div>
+
+  <!-- MODAL DE EDICIÓN DE PERFIL DEL DUEÑO / GERENCIA -->
+  <div id="ownerProfileModal" class="modal-overlay" style="display: none; z-index: 99999;" role="dialog" aria-modal="true" aria-labelledby="ownerProfileTitle">
+    <div class="modal-window" style="max-width: 400px; border-radius: 20px; overflow: hidden; border: 1px solid var(--border);">
+      <div class="modal-head">
+        <span class="modal-title" id="ownerProfileTitle">Perfil de Gerencia</span>
+        <button id="closeOwnerProfileBtn" class="modal-close-btn-white" style="background: var(--border-subtle); color: var(--text-main); border: none;" aria-label="Cerrar perfil">✕</button>
+      </div>
+      <form id="ownerProfileForm" style="display: flex; flex-direction: column; gap: 16px; padding: 20px;">
+        <p style="font-size: 12.5px; color: var(--text-muted); line-height: 1.45; margin: 0;">
+          Personaliza tu nombre y foto de perfil. Estos datos se muestran únicamente en tu aplicación móvil personal.
+        </p>
+
+        <!-- Selector de Foto / Avatar -->
+        <div style="display: flex; align-items: center; gap: 16px; background: #F9FAFB; padding: 14px; border-radius: 14px; border: 1px solid var(--border);">
+          <div id="ownerModalAvatarPreview" style="width: 60px; height: 60px; border-radius: 50%; background: #183321; color: #FAF8F5; font-size: 22px; font-weight: 800; display: flex; align-items: center; justify-content: center; overflow: hidden; border: 2px solid #E8C547; flex-shrink: 0; background-size: cover; background-position: center;">
+            <span id="ownerModalAvatarInitials">BA</span>
+          </div>
+          <div style="flex: 1;">
+            <label style="font-size: 12px; font-weight: 700; color: var(--text-main); display: block; margin-bottom: 4px;">Foto del Dueño / Avatar</label>
+            <input type="file" id="ownerPhotoInput" accept="image/*" style="display: none;">
+            <div style="display: flex; gap: 8px;">
+              <button type="button" id="btnUploadOwnerPhoto" style="font-size: 12px; font-weight: 700; background: #FFFFFF; border: 1px solid var(--border); padding: 6px 12px; border-radius: 8px; cursor: pointer;">
+                📷 Subir foto
+              </button>
+              <button type="button" id="btnRemoveOwnerPhoto" style="font-size: 12px; color: #DC2626; background: transparent; border: none; cursor: pointer; display: none;">
+                Eliminar
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="studio-field-group">
+          <label class="studio-label">Tu nombre (ej. para el saludo diario)</label>
+          <input type="text" id="ownerNameInput" class="studio-input" placeholder="Introduce tu nombre...">
+        </div>
+
+        <div class="studio-field-group">
+          <label class="studio-label">Nombre del local o cargo</label>
+          <input type="text" id="ownerRoleInput" class="studio-input" placeholder="Buon Appetito · Gerencia">
+        </div>
+
+        <div style="display: flex; gap: 8px; margin-top: 6px;">
+          <button type="button" id="btnCancelOwnerProfile" class="studio-btn-cancel" style="flex: 1;">Cancelar</button>
+          <button type="submit" class="btn-studio-save-main" style="flex: 2; height: 42px;">Guardar Perfil</button>
+        </div>
+      </form>
     </div>
   </div>
 
@@ -2615,6 +2718,7 @@
     function showApp() {
       loginScreen.style.display = 'none';
       appShell.style.display = 'flex';
+      renderOwnerProfile();
       loadData();
       checkForUpdates(false);
     }
@@ -2748,6 +2852,7 @@
     // CAJÓN DE AJUSTES & GERENCIA (PANTALLA COMPLETA 100DVH)
     // ========================================================
     function openProfileDrawer() {
+      renderOwnerProfile();
       updateBadges();
       checkForUpdates(false);
       lockBackgroundScroll();
@@ -2855,9 +2960,218 @@
     });
 
     // ========================================================
+    // PERFIL PERSONALIZABLE DEL DUEÑO / GERENCIA & SALUDO DINÁMICO
+    // ========================================================
+    const OWNER_NAME_KEY = 'buon_owner_name';
+    const OWNER_ROLE_KEY = 'buon_owner_role';
+    const OWNER_PHOTO_KEY = 'buon_owner_photo';
+
+    const headerAvatarBadge = document.getElementById('headerAvatarBadge');
+    const headerGreetingBtnText = document.getElementById('headerGreetingBtnText');
+    const drawerAvatar = document.getElementById('drawerAvatar');
+    const drawerAvatarInitials = document.getElementById('drawerAvatarInitials');
+    const drawerGreetingEmoji = document.getElementById('drawerGreetingEmoji');
+    const drawerGreetingText = document.getElementById('drawerGreetingText');
+    const drawerOwnerName = document.getElementById('drawerOwnerName');
+    const drawerOwnerSub = document.getElementById('drawerOwnerSub');
+    const btnOpenOwnerProfileFromHeader = document.getElementById('btnOpenOwnerProfileFromHeader');
+    const btnOpenOwnerProfileFromMenu = document.getElementById('btnOpenOwnerProfileFromMenu');
+
+    // Elementos del Modal de Edición de Perfil
+    const ownerProfileModal = document.getElementById('ownerProfileModal');
+    const closeOwnerProfileBtn = document.getElementById('closeOwnerProfileBtn');
+    const btnCancelOwnerProfile = document.getElementById('btnCancelOwnerProfile');
+    const ownerProfileForm = document.getElementById('ownerProfileForm');
+    const ownerNameInput = document.getElementById('ownerNameInput');
+    const ownerRoleInput = document.getElementById('ownerRoleInput');
+    const ownerPhotoInput = document.getElementById('ownerPhotoInput');
+    const btnUploadOwnerPhoto = document.getElementById('btnUploadOwnerPhoto');
+    const btnRemoveOwnerPhoto = document.getElementById('btnRemoveOwnerPhoto');
+    const ownerModalAvatarPreview = document.getElementById('ownerModalAvatarPreview');
+    const ownerModalAvatarInitials = document.getElementById('ownerModalAvatarInitials');
+
+    let currentEditingPhotoBase64 = null;
+
+    function getDynamicGreeting() {
+      const hour = new Date().getHours();
+      if (hour >= 6 && hour < 14) {
+        return { text: 'Buenos días', emoji: '☀️' };
+      } else if (hour >= 14 && hour < 21) {
+        return { text: 'Buenas tardes', emoji: '🌤️' };
+      } else {
+        return { text: 'Buenas noches', emoji: '🌙' };
+      }
+    }
+
+    function getInitials(name) {
+      if (!name) return 'BA';
+      const parts = name.trim().split(/\s+/).filter(Boolean);
+      if (parts.length === 1) return parts[0].slice(0, 2).toUpperCase();
+      return (parts[0][0] + parts[parts.length - 1][0]).toUpperCase();
+    }
+
+    function renderOwnerProfile() {
+      const savedName = (localStorage.getItem(OWNER_NAME_KEY) || '').trim();
+      const savedRole = (localStorage.getItem(OWNER_ROLE_KEY) || '').trim();
+      const savedPhoto = localStorage.getItem(OWNER_PHOTO_KEY);
+      const greeting = getDynamicGreeting();
+
+      const initials = getInitials(savedName || 'Buon Appetito');
+
+      // 1. Saludo y Avatar en Cabecera de Ajustes (Drawer)
+      if (drawerGreetingEmoji) drawerGreetingEmoji.textContent = greeting.emoji;
+      if (drawerGreetingText) {
+        drawerGreetingText.textContent = savedName ? `${greeting.text}, ${savedName}` : greeting.text;
+      }
+      if (drawerOwnerName) {
+        drawerOwnerName.textContent = savedName || 'Buon Appetito';
+      }
+      if (drawerOwnerSub) {
+        drawerOwnerSub.textContent = savedRole || 'Gerencia · Andratx';
+      }
+
+      if (drawerAvatar) {
+        if (savedPhoto) {
+          drawerAvatar.style.backgroundImage = `url("${savedPhoto}")`;
+          if (drawerAvatarInitials) drawerAvatarInitials.textContent = '';
+        } else {
+          drawerAvatar.style.backgroundImage = 'none';
+          if (drawerAvatarInitials) drawerAvatarInitials.textContent = initials;
+        }
+      }
+
+      // 2. Avatar y Botón en Cabecera Principal del Panel
+      if (headerAvatarBadge) {
+        if (savedPhoto) {
+          headerAvatarBadge.style.backgroundImage = `url("${savedPhoto}")`;
+          headerAvatarBadge.textContent = '';
+        } else {
+          headerAvatarBadge.style.backgroundImage = 'none';
+          headerAvatarBadge.textContent = initials;
+        }
+      }
+      if (headerGreetingBtnText) {
+        headerGreetingBtnText.textContent = savedName ? savedName.split(' ')[0] : 'Ajustes';
+      }
+    }
+
+    function openOwnerProfileModal() {
+      const savedName = localStorage.getItem(OWNER_NAME_KEY) || '';
+      const savedRole = localStorage.getItem(OWNER_ROLE_KEY) || '';
+      const savedPhoto = localStorage.getItem(OWNER_PHOTO_KEY) || null;
+
+      ownerNameInput.value = savedName;
+      ownerRoleInput.value = savedRole;
+      currentEditingPhotoBase64 = savedPhoto;
+
+      updateModalAvatarPreview(savedName, savedPhoto);
+      lockBackgroundScroll();
+      if (ownerProfileModal) ownerProfileModal.style.display = 'flex';
+    }
+
+    function closeOwnerProfileModal() {
+      unlockBackgroundScroll();
+      if (ownerProfileModal) ownerProfileModal.style.display = 'none';
+    }
+
+    function updateModalAvatarPreview(name, photoUrl) {
+      const initials = getInitials(name || 'Buon Appetito');
+      if (ownerModalAvatarPreview) {
+        if (photoUrl) {
+          ownerModalAvatarPreview.style.backgroundImage = `url("${photoUrl}")`;
+          if (ownerModalAvatarInitials) ownerModalAvatarInitials.textContent = '';
+        } else {
+          ownerModalAvatarPreview.style.backgroundImage = 'none';
+          if (ownerModalAvatarInitials) ownerModalAvatarInitials.textContent = initials;
+        }
+      }
+      if (btnRemoveOwnerPhoto) {
+        btnRemoveOwnerPhoto.style.display = photoUrl ? 'inline-block' : 'none';
+      }
+    }
+
+    if (btnOpenOwnerProfileFromHeader) {
+      btnOpenOwnerProfileFromHeader.addEventListener('click', openOwnerProfileModal);
+    }
+    if (btnOpenOwnerProfileFromMenu) {
+      btnOpenOwnerProfileFromMenu.addEventListener('click', openOwnerProfileModal);
+    }
+    if (closeOwnerProfileBtn) closeOwnerProfileBtn.addEventListener('click', closeOwnerProfileModal);
+    if (btnCancelOwnerProfile) btnCancelOwnerProfile.addEventListener('click', closeOwnerProfileModal);
+
+    if (btnUploadOwnerPhoto) {
+      btnUploadOwnerPhoto.addEventListener('click', () => {
+        if (ownerPhotoInput) ownerPhotoInput.click();
+      });
+    }
+
+    if (ownerPhotoInput) {
+      ownerPhotoInput.addEventListener('change', (e) => {
+        const file = e.target.files && e.target.files[0];
+        if (!file) return;
+
+        // Comprimir/cargar imagen local con FileReader
+        const reader = new FileReader();
+        reader.onload = (ev) => {
+          currentEditingPhotoBase64 = ev.target.result;
+          updateModalAvatarPreview(ownerNameInput.value, currentEditingPhotoBase64);
+        };
+        reader.readAsDataURL(file);
+      });
+    }
+
+    if (btnRemoveOwnerPhoto) {
+      btnRemoveOwnerPhoto.addEventListener('click', () => {
+        currentEditingPhotoBase64 = null;
+        if (ownerPhotoInput) ownerPhotoInput.value = '';
+        updateModalAvatarPreview(ownerNameInput.value, null);
+      });
+    }
+
+    if (ownerNameInput) {
+      ownerNameInput.addEventListener('input', () => {
+        updateModalAvatarPreview(ownerNameInput.value, currentEditingPhotoBase64);
+      });
+    }
+
+    if (ownerProfileForm) {
+      ownerProfileForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const newName = (ownerNameInput.value || '').trim();
+        const newRole = (ownerRoleInput.value || '').trim();
+
+        if (newName) {
+          localStorage.setItem(OWNER_NAME_KEY, newName);
+        } else {
+          localStorage.removeItem(OWNER_NAME_KEY);
+        }
+
+        if (newRole) {
+          localStorage.setItem(OWNER_ROLE_KEY, newRole);
+        } else {
+          localStorage.removeItem(OWNER_ROLE_KEY);
+        }
+
+        if (currentEditingPhotoBase64) {
+          try {
+            localStorage.setItem(OWNER_PHOTO_KEY, currentEditingPhotoBase64);
+          } catch (err) {
+            console.warn('Imagen demasiado grande para localStorage, se omitió foto', err);
+          }
+        } else {
+          localStorage.removeItem(OWNER_PHOTO_KEY);
+        }
+
+        renderOwnerProfile();
+        closeOwnerProfileModal();
+        showToast('Perfil actualizado con éxito');
+      });
+    }
+
+    // ========================================================
     // CONTROL DE VERSIONES & ACTUALIZACIONES PWA
     // ========================================================
-    const CURRENT_APP_VERSION = '2.0.0';
+    const CURRENT_APP_VERSION = '2.1.0';
 
     const headerUpdateDot = document.getElementById('headerUpdateDot');
     const navUpdateDot = document.getElementById('navUpdateDot');
@@ -2876,10 +3190,32 @@
     const popupUpdateNotes = document.getElementById('popupUpdateNotes');
     const btnPopupApplyUpdate = document.getElementById('btnPopupApplyUpdate');
     const btnDismissUpdatePopup = document.getElementById('btnDismissUpdatePopup');
+    const btnCloseUpdatePopupX = document.getElementById('btnCloseUpdatePopupX');
     const popupUpdateSpinner = document.getElementById('popupUpdateSpinner');
     const popupUpdateBtnText = document.getElementById('popupUpdateBtnText');
 
     let pendingTargetVersion = null;
+    let autoDismissUpdateTimer = null;
+
+    function dismissUpdateModal(version) {
+      if (autoDismissUpdateTimer) {
+        clearTimeout(autoDismissUpdateTimer);
+        autoDismissUpdateTimer = null;
+      }
+      unlockBackgroundScroll();
+      if (updatePopupModal) {
+        updatePopupModal.style.opacity = '0';
+        updatePopupModal.style.transition = 'opacity 0.25s ease';
+        setTimeout(() => {
+          updatePopupModal.style.display = 'none';
+          updatePopupModal.style.opacity = '1';
+        }, 250);
+      }
+      const v = version || pendingTargetVersion;
+      if (v) {
+        try { sessionStorage.setItem(`ba_dismiss_update_${v}`, 'true'); } catch (e) {}
+      }
+    }
 
     async function checkForUpdates(isManual = false) {
       if (isManual) {
@@ -2911,6 +3247,12 @@
             if (popupUpdateNotes) popupUpdateNotes.textContent = data.notes || 'Mejoras en edición de cartas, precios decimales y estabilidad general.';
             lockBackgroundScroll();
             updatePopupModal.style.display = 'flex';
+
+            // Auto-cerrar suavemente tras 8.5 segundos si el usuario no interactúa
+            if (autoDismissUpdateTimer) clearTimeout(autoDismissUpdateTimer);
+            autoDismissUpdateTimer = setTimeout(() => {
+              dismissUpdateModal(data.version);
+            }, 8500);
           }
 
           if (isManual) {
@@ -2937,13 +3279,10 @@
     }
 
     if (btnDismissUpdatePopup) {
-      btnDismissUpdatePopup.addEventListener('click', () => {
-        unlockBackgroundScroll();
-        if (updatePopupModal) updatePopupModal.style.display = 'none';
-        if (pendingTargetVersion) {
-          try { sessionStorage.setItem(`ba_dismiss_update_${pendingTargetVersion}`, 'true'); } catch (e) {}
-        }
-      });
+      btnDismissUpdatePopup.addEventListener('click', () => dismissUpdateModal());
+    }
+    if (btnCloseUpdatePopupX) {
+      btnCloseUpdatePopupX.addEventListener('click', () => dismissUpdateModal());
     }
 
     async function applyAppUpdate() {
@@ -3707,11 +4046,12 @@
     // Tecla Escape para cerrar modales
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape') {
-        if (dishModal.style.display === 'flex') closeDishModal();
-        else if (securityModal.style.display === 'flex') closeSecurityModal();
-        else if (pwaModal.style.display === 'flex') closePwaModal();
-        else if (logsModal.style.display === 'flex') closeLogsModal();
-        else if (profileDrawer.style.display === 'flex') closeProfileDrawer();
+        if (dishModal && dishModal.style.display === 'flex') closeDishModal();
+        else if (ownerProfileModal && ownerProfileModal.style.display === 'flex') closeOwnerProfileModal();
+        else if (securityModal && securityModal.style.display === 'flex') closeSecurityModal();
+        else if (pwaModal && pwaModal.style.display === 'flex') closePwaModal();
+        else if (logsModal && logsModal.style.display === 'flex') closeLogsModal();
+        else if (profileDrawer && profileDrawer.style.display === 'flex') closeProfileDrawer();
       }
     });
 

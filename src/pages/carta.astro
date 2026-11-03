@@ -155,7 +155,7 @@ const description = "Carta digital interactiva de Buon Appetito en Port d'Andrat
         
         <!-- Precios e Información Dietética y de Alérgenos -->
         <p id="tax-note" class="tax-note">
-          Precios con IVA incluido (10%).
+          Precios con IVA incluido.
         </p>
         <p id="allergen-note" class="allergen-note">
           Disponemos de opciones sin gluten (pastas y pizzas artesanales). Si tiene alguna alergia o intolerancia alimentaria, por favor comuníqueselo a nuestro equipo antes de realizar su comanda.
@@ -235,7 +235,7 @@ const description = "Carta digital interactiva de Buon Appetito en Port d'Andrat
         btnBack: "Volver",
         btnBackBottom: "Volver al Menú",
         reserveTable: "Reservar mesa",
-        taxIncluded: "Precios con IVA incluido (10%).",
+        taxIncluded: "Precios con IVA incluido.",
         allergensNote: "Disponemos de opciones sin gluten (pastas y pizzas artesanales). Si tiene alguna alergia o intolerancia alimentaria, por favor comuníqueselo a nuestro equipo antes de realizar su comanda.",
         finaleTitle: "Port d'Andratx",
         finaleSub: "TRADICIÓN & COCINA MEDITERRÁNEA",
@@ -249,7 +249,7 @@ const description = "Carta digital interactiva de Buon Appetito en Port d'Andrat
         btnBack: "Back",
         btnBackBottom: "Back to Menu",
         reserveTable: "Book a table",
-        taxIncluded: "All prices include 10% VAT.",
+        taxIncluded: "All prices include VAT.",
         allergensNote: "Gluten-free options available (artisanal pasta and pizzas). If you have any food allergy or intolerance, please inform our team before ordering.",
         finaleTitle: "Port d'Andratx",
         finaleSub: "TRADITION & MEDITERRANEAN CUISINE",
@@ -263,7 +263,7 @@ const description = "Carta digital interactiva de Buon Appetito en Port d'Andrat
         btnBack: "Zurück",
         btnBackBottom: "Zurück zum Menü",
         reserveTable: "Tisch reservieren",
-        taxIncluded: "Alle Preise inklusive 10% MwSt.",
+        taxIncluded: "Alle Preise inklusive MwSt.",
         allergensNote: "Glutenfreie Optionen verfügbar (hausgemachte Pasta und Pizzen). Bitte informieren Sie unser Team vor Ihrer Bestellung über eventuelle Allergien oder Unverträglichkeiten.",
         finaleTitle: "Port d'Andratx",
         finaleSub: "TRADITION & MEDITERRANE KÜCHE",
@@ -459,8 +459,8 @@ const description = "Carta digital interactiva de Buon Appetito en Port d'Andrat
       if (menuData && menuData.categories) {
         const nav = document.getElementById('category-nav');
         if (nav) {
-          // Filtrar Bebidas y Vinos para que en /carta solo aparezca comida
-          const activeCategories = menuData.categories.filter(cat => cat.id !== 'bebidas' && cat.id !== 'vinos' && cat.id !== 'bodega');
+          // Filtrar Vinos para que aparezca la comida con las Bebidas al final
+          const activeCategories = menuData.categories.filter(cat => cat.id !== 'vinos' && cat.id !== 'bodega');
 
           nav.innerHTML = activeCategories.map((cat, idx) => `
             <button type="button" class="cat-nav-link ${idx === 0 ? 'active' : ''}" data-cat="${cat.id}">
@@ -498,8 +498,8 @@ const description = "Carta digital interactiva de Buon Appetito en Port d'Andrat
       if (!contentArea) return;
 
       const items = menuData.items;
-      // Filtrar categorías: la carta digital de comida termina en Pizzas (bebidas y vinos en /vinos)
-      const categories = menuData.categories.filter(c => c.id !== 'bebidas' && c.id !== 'vinos' && c.id !== 'bodega');
+      // Categorías: Comida y Bebidas al final (la bodega oficial de vinos va en /vinos)
+      const categories = menuData.categories.filter(c => c.id !== 'vinos' && c.id !== 'bodega');
 
       let html = '';
       categories.forEach(cat => {

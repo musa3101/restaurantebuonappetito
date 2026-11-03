@@ -3,7 +3,7 @@
 import PizzaMenuLoader from '../components/PizzaMenuLoader.astro';
 import BuonAppetitoWordmark from '../components/ui/BuonAppetitoWordmark';
 const title = "Carta de Vinos & Bodega | Buon Appetito • Port d'Andratx";
-const description = "Selección de vinos, coctelería italiana y bebidas de Buon Appetito en Port d'Andratx. Vinos de Mallorca, clásicos italianos y maridaje selecto.";
+const description = "Carta oficial de vinos y bodega de Buon Appetito en Port d'Andratx. Vinos de Mallorca, grandes denominaciones de España e Italia, y Champagnes seleccionados.";
 ---
 
 <!DOCTYPE html>
@@ -20,11 +20,11 @@ const description = "Selección de vinos, coctelería italiana y bebidas de Buon
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
   <link rel="shortcut icon" href="/favicon.ico" />
 
-  <!-- Google Fonts: Playfair Display & Plus Jakarta Sans -->
+  <!-- Google Fonts: Cormorant Garamond (Elegancia Vinícola) & Plus Jakarta Sans (Claridad Moderna) -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-  <meta name="theme-color" content="#0E2015" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <meta name="theme-color" content="#183321" />
 
   <!-- Control de Scroll Limpio y Restauración Nativa -->
   <script is:inline>
@@ -44,19 +44,18 @@ const description = "Selección de vinos, coctelería italiana y bebidas de Buon
     })(window, document, "clarity", "script", "z6ux9thsuf");
   </script>
 </head>
-<body class="menu-body">
+<body class="wine-body">
 
-  <!-- Loader Oficial con Pizza Artesanal en Horno de Leña -->
+  <!-- Loader Oficial de Buon Appetito -->
   <PizzaMenuLoader />
 
   <!-- ======================================================== -->
-  <!-- 1. TOP HEADER: VERDE CIPRÉS + LOGO COLORIDO               -->
-  <!--    SELECTOR LATERAL DE IDIOMA + VOLVER GORDITO ROJITO    -->
+  <!-- 1. TOP HEADER: VERDE CIPRÉS + LOGO + SELECTOR ES/EN      -->
   <!-- ======================================================== -->
   <header class="site-header">
     <div class="container header-container">
       
-      <!-- Logotipo Oficial con letras blancas, bandera italiana y tomates a color -->
+      <!-- Logotipo Oficial -->
       <a href="/" class="brand-logo-link" title="Buon Appetito Port d'Andratx">
         <img 
           src="/assets/logos/logo-buon-appetito-color-dark.png" 
@@ -65,44 +64,17 @@ const description = "Selección de vinos, coctelería italiana y bebidas de Buon
         />
       </a>
 
-      <!-- Acciones de Cabecera: Selector Lateral Horizontal + Volver Terracota -->
+      <!-- Acciones de Cabecera: Selector Exclusivo ES / EN + Volver -->
       <div class="header-actions">
         
-        <!-- Contenedor de Idioma: Selector Lateral Horizontal dentro del verde del header -->
-        <div class="lang-nav-container" id="lang-nav-container">
-          
-          <!-- Botón disparador compacto -->
-          <button 
-            type="button" 
-            class="lang-pill-btn" 
-            id="lang-pill-btn" 
-            aria-expanded="false" 
-            aria-label="Cambiar idioma"
-            title="Cambiar idioma"
-          >
-            <span id="lang-current-label">ES</span>
-            <svg class="lang-chevron" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <path d="M6 9l6 6 6-6"/>
-            </svg>
-          </button>
-
-          <!-- Menú Lateral Horizontal Desplegable -->
-          <div class="lang-lateral-menu" id="lang-lateral-menu" role="menu" aria-label="Seleccionar idioma">
-            <button type="button" class="lang-opt-btn active" data-lang="es" role="menuitem">ES</button>
-            <span class="lang-opt-sep" aria-hidden="true">·</span>
-            <button type="button" class="lang-opt-btn" data-lang="en" role="menuitem">EN</button>
-            <span class="lang-opt-sep" aria-hidden="true">·</span>
-            <button type="button" class="lang-opt-btn" data-lang="de" role="menuitem">DE</button>
-            <button type="button" class="lang-opt-close" id="lang-opt-close" aria-label="Cerrar selector de idioma">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <path d="M18 6 6 18M6 6l12 12"/>
-              </svg>
-            </button>
-          </div>
-
+        <!-- Selector Bilingüe ES / EN (Sin Alemán) -->
+        <div class="lang-switch-toggle" id="lang-switch" role="group" aria-label="Seleccionar idioma">
+          <button type="button" class="lang-switch-btn active" data-lang="es" aria-pressed="true">ES</button>
+          <span class="lang-switch-divider" aria-hidden="true">|</span>
+          <button type="button" class="lang-switch-btn" data-lang="en" aria-pressed="false">EN</button>
         </div>
 
-        <!-- Botón Volver Atrás: en terracota a la extrema derecha -->
+        <!-- Botón Volver Atrás en terracota -->
         <button type="button" id="btn-back" class="btn-back" aria-label="Volver a la página principal">
           <svg class="back-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <path d="M19 12H5M12 19l-7-7 7-7"/>
@@ -116,32 +88,54 @@ const description = "Selección de vinos, coctelería italiana y bebidas de Buon
   </header>
 
   <!-- ======================================================== -->
-  <!-- 2. HERO EDITORIAL: "Vinos & Bodega"                       -->
+  <!-- 2. HERO EDITORIAL DE BODEGA                              -->
   <!-- ======================================================== -->
-  <section class="menu-hero" id="inicio">
+  <section class="wine-hero" id="inicio">
     <div class="container hero-container">
-      <h1 class="hero-title" id="hero-title">Vinos & Bodega</h1>
-      <span class="hero-subtitle" id="hero-subtitle">SELECCIÓN DE VINOS & BEBIDAS · PORT D'ANDRATX</span>
+      <span class="hero-eyebrow" id="hero-eyebrow">BUON APPETITO · PORT D'ANDRATX</span>
+      <h1 class="hero-title" id="hero-title">Carta de Vinos</h1>
+      <p class="hero-subtitle" id="hero-subtitle">BODEGA SELECCIONADA · MALLORCA, ITALIA & FRANCIA</p>
+      <div class="hero-divider" aria-hidden="true">
+        <span class="line"></span>
+        <svg class="wine-glass-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75">
+          <path d="M8 22h8"/>
+          <path d="M7 10h10"/>
+          <path d="M12 15v7"/>
+          <path d="M12 15a5 5 0 0 0 5-5c0-2-.5-4-2-8H9c-1.5 4-2 6-2 8a5 5 0 0 0 5 5Z"/>
+        </svg>
+        <span class="line"></span>
+      </div>
     </div>
   </section>
 
   <!-- ======================================================== -->
-  <!-- 3. BARRA DE CATEGORÍAS NAVBAR PLANA                      -->
+  <!-- 3. BARRA DE NAVEGACIÓN STICKY DE CATEGORÍAS (SIN EMOJIS) -->
   <!-- ======================================================== -->
   <div class="category-nav-bar">
     <div class="container nav-container">
-      <nav class="category-nav-track" id="category-nav" aria-label="Categorías de bebidas">
-        <!-- Inyectado dinámicamente -->
+      <nav class="category-nav-track" id="category-nav" aria-label="Categorías de vinos">
+        <button type="button" class="cat-nav-link active" data-cat="casa">
+          <span class="cat-text" data-cat-text="casa">Vinos de la Casa</span>
+        </button>
+        <button type="button" class="cat-nav-link" data-cat="mallorca">
+          <span class="cat-text" data-cat-text="mallorca">Vinos de Mallorca</span>
+        </button>
+        <button type="button" class="cat-nav-link" data-cat="otros">
+          <span class="cat-text" data-cat-text="otros">Otros Vinos</span>
+        </button>
+        <button type="button" class="cat-nav-link" data-cat="espumosos">
+          <span class="cat-text" data-cat-text="espumosos">Vinos Espumosos</span>
+        </button>
       </nav>
     </div>
   </div>
 
   <!-- ======================================================== -->
-  <!-- 4. LISTADO EDITORIAL LIMPIO DE BEBIDAS Y BODEGA          -->
+  <!-- 4. CONTENIDO PRINCIPAL: CARTA DE VINOS EDITORIAL LIMPIA   -->
   <!-- ======================================================== -->
   <main class="container main-content">
-    <div id="menu-content" class="menu-content-area">
-      <!-- Se inyecta dinámicamente vía script -->
+    <div id="wine-content" class="wine-content-area">
+      <!-- Inyectado dinámicamente vía script -->
     </div>
   </main>
 
@@ -152,431 +146,315 @@ const description = "Selección de vinos, coctelería italiana y bebidas de Buon
     <div class="container">
       <div class="footer-card">
         
-        <!-- Precios e Información Dietética y de Alérgenos -->
+        <!-- Precios e Información -->
         <p id="tax-note" class="tax-note">
-          Precios con IVA incluido (10%).
+          Precios con IVA incluido.
         </p>
         <p id="allergen-note" class="allergen-note">
-          Disponemos de coctelería tradicional italiana, refrescos, cervezas y combinados. Pregunte a nuestro equipo por recomendaciones de maridaje.
+          Nuestra bodega cuenta con referencias seleccionadas con esmero. Si desea una recomendación especial o conocer las añadas disponibles, no dude en consultar a nuestro personal.
         </p>
 
-        <!-- Enlaces de Acción Inferiores: Reservar Mesa -->
-        <div class="footer-action-links-wrapper">
-          <a href="/#donde-estamos" class="footer-reserve-link" id="footer-reservar-link" title="Reservar mesa en Buon Appetito">
+        <!-- Botones de Acción Rápida -->
+        <div class="footer-actions">
+          <button type="button" id="btn-back-bottom" class="btn-footer-back">
+            <svg class="back-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M19 12H5M12 19l-7-7 7-7"/>
+            </svg>
+            <span id="txt-back-bottom">Volver a la Página Principal</span>
+          </button>
+          
+          <a href="/#reservas" class="btn-footer-reserve" id="footer-reservar-link">
             Reservar mesa
           </a>
         </div>
 
-        <!-- Redes Sociales Oficiales: Instagram & TripAdvisor -->
-        <div class="footer-social-row">
-          <!-- Instagram -->
-          <a 
-            href="https://www.instagram.com/buonappetitomallorca/" 
-            target="_blank" 
-            rel="noopener noreferrer" 
-            class="social-btn instagram-btn" 
-            aria-label="Instagram Buon Appetito"
-            title="Síguenos en Instagram"
-          >
-            <svg class="social-svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-              <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
-            </svg>
-          </a>
-
-          <!-- TripAdvisor -->
-          <a 
-            href="https://www.tripadvisor.es/Restaurant_Review-g616239-d24183908-Reviews-Grand_Pasta-Port_d_Andratx_Majorca_Balearic_Islands.html" 
-            target="_blank" 
-            rel="noopener noreferrer" 
-            class="social-btn tripadvisor-btn" 
-            aria-label="TripAdvisor Buon Appetito"
-            title="Ver opiniones en TripAdvisor"
-          >
-            <svg class="social-svg" width="19" height="19" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-              <path d="M12.006 4.295c-2.67 0-5.338.784-7.645 2.353H0l1.963 2.135a5.997 5.997 0 0 0 4.04 10.43 5.976 5.976 0 0 0 4.075-1.6L12 19.705l1.922-2.09a5.972 5.972 0 0 0 4.072 1.598 6 6 0 0 0 6-5.998 5.982 5.982 0 0 0-1.957-4.432L24 6.648h-4.35a13.573 13.573 0 0 0-7.644-2.353zM12 6.255c1.531 0 3.063.303 4.504.903C13.943 8.138 12 10.43 12 13.1c0-2.671-1.942-4.962-4.504-5.942A11.72 11.72 0 0 1 12 6.256zM6.002 9.157a4.059 4.059 0 1 1 0 8.118 4.059 4.059 0 0 1 0-8.118zm11.992.002a4.057 4.057 0 1 1 .003 8.115 4.057 4.057 0 0 1-.003-8.115zm-11.992 1.93a2.128 2.128 0 0 0 0 4.256 2.128 2.128 0 0 0 0-4.256zm11.992 0a2.128 2.128 0 0 0 0 4.256 2.128 2.128 0 0 0 0-4.256z"/>
-            </svg>
-          </a>
-        </div>
-
-        <!-- Enlaces Legales Oficiales en Verde Muted -->
-        <nav class="footer-legal-nav" aria-label="Enlaces legales">
+        <!-- Enlaces Legales -->
+        <div class="footer-legal">
           <a href="/aviso-legal" class="legal-link" id="legal-aviso">Aviso Legal</a>
-          <span class="legal-divider">·</span>
+          <span class="legal-sep" aria-hidden="true">·</span>
           <a href="/privacidad" class="legal-link" id="legal-privacidad">Privacidad</a>
-          <span class="legal-divider">·</span>
+          <span class="legal-sep" aria-hidden="true">·</span>
           <a href="/cookies" class="legal-link" id="legal-cookies">Cookies</a>
-        </nav>
-
-        <p class="footer-copyright">
-          &copy; 2026 Buon Appetito · Port d'Andratx, Mallorca.
-        </p>
+        </div>
 
       </div>
     </div>
 
-    <!-- Halftone Wordmark Interactivo "Buon Appetito" (Cierre Cinemático) -->
+    <!-- Franja final de marca -->
     <div class="footer-wordmark-wrap">
-      <BuonAppetitoWordmark client:idle />
+      <BuonAppetitoWordmark client:visible />
     </div>
   </footer>
 
-  <!-- Scripts oficiales sincronizados -->
-  <script is:inline src="/data/menu-data.js"></script>
-
+  <!-- ======================================================== -->
+  <!-- SCRIPTS: DATOS, BILINGÜE ES/EN & NAVEGACIÓN              -->
+  <!-- ======================================================== -->
   <script is:inline>
-    // Utilidad de escape para prevenir XSS
+    // Escape XSS
     const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 
     const UI_TEXT = {
       es: {
-        heroTitle: "Vinos & Bodega",
-        heroSubtitle: "SELECCIÓN DE VINOS & BEBIDAS · PORT D'ANDRATX",
+        eyebrow: "BUON APPETITO · PORT D'ANDRATX",
+        heroTitle: "Carta de Vinos",
+        heroSubtitle: "BODEGA SELECCIONADA · MALLORCA, ITALIA & FRANCIA",
         btnBack: "Volver",
-        btnBackBottom: "Volver al Menú",
+        btnBackBottom: "Volver a la Página Principal",
         reserveTable: "Reservar mesa",
-        taxIncluded: "Precios con IVA incluido (10%).",
-        allergensNote: "Disponemos de coctelería tradicional italiana, refrescos, cervezas y combinados. Pregunte a nuestro equipo por recomendaciones de maridaje.",
-        finaleTitle: "Vinos & Bodega",
-        finaleSub: "SELECCIÓN ITALIANA & MEDITERRÁNEA",
+        taxIncluded: "Precios con IVA incluido.",
+        serviceNote: "Nuestra bodega cuenta con referencias seleccionadas con esmero. Si desea una recomendación especial o conocer las añadas disponibles, no dude en consultar a nuestro personal.",
+        cats: {
+          casa: "Vinos de la Casa",
+          mallorca: "Vinos de Mallorca",
+          otros: "Otros Vinos",
+          espumosos: "Vinos Espumosos"
+        },
+        subcats: {
+          blanco: "Blanco",
+          rosado: "Rosado",
+          tinto: "Tinto",
+          espumoso: "Espumoso"
+        },
+        finaleTitle: "Buon Appetito · Bodega",
+        finaleSub: "PASIÓN POR EL VINO Y LA TRADICIÓN MEDITERRÁNEA",
         legalAviso: "Aviso Legal",
         legalPrivacidad: "Privacidad",
         legalCookies: "Cookies"
       },
       en: {
-        heroTitle: "Wines & Cellar",
-        heroSubtitle: "WINE & BEVERAGE SELECTION · PORT D'ANDRATX",
+        eyebrow: "BUON APPETITO · PORT D'ANDRATX",
+        heroTitle: "Wine List",
+        heroSubtitle: "SELECTED CELLAR · MALLORCA, ITALY & FRANCE",
         btnBack: "Back",
-        btnBackBottom: "Back to Menu",
+        btnBackBottom: "Back to Home Page",
         reserveTable: "Book a table",
-        taxIncluded: "All prices include 10% VAT.",
-        allergensNote: "Traditional Italian cocktails, soft drinks, beers and spirits available. Ask our team for pairing recommendations.",
-        finaleTitle: "Wines & Cellar",
-        finaleSub: "ITALIAN & MEDITERRANEAN SELECTION",
+        taxIncluded: "All prices include VAT.",
+        serviceNote: "Our cellar features carefully curated wines. Should you wish for a special recommendation or current vintages, please ask our sommelier team.",
+        cats: {
+          casa: "House Wines",
+          mallorca: "Mallorca Wines",
+          otros: "More Wines",
+          espumosos: "Sparkling Wines"
+        },
+        subcats: {
+          blanco: "White",
+          rosado: "Rosé",
+          tinto: "Red",
+          espumoso: "Sparkling"
+        },
+        finaleTitle: "Buon Appetito · Cellar",
+        finaleSub: "PASSION FOR WINE & MEDITERRANEAN TRADITION",
         legalAviso: "Legal Notice",
         legalPrivacidad: "Privacy Policy",
-        legalCookies: "Cookies"
-      },
-      de: {
-        heroTitle: "Weine & Bodega",
-        heroSubtitle: "WEIN- & GETRÄNKEAUSWAHL · PORT D'ANDRATX",
-        btnBack: "Zurück",
-        btnBackBottom: "Zurück zum Menü",
-        reserveTable: "Tisch reservieren",
-        taxIncluded: "Alle Preise inklusive 10% MwSt.",
-        allergensNote: "Traditionelle italienische Cocktails, alkoholfreie Getränke, Biere und Spirituosen verfügbar. Fragen Sie unser Team nach Empfehlungen.",
-        finaleTitle: "Weine & Bodega",
-        finaleSub: "ITALIENISCHE & MEDITERRANE AUSWAHL",
-        legalAviso: "Impressum",
-        legalPrivacidad: "Datenschutz",
         legalCookies: "Cookies"
       }
     };
 
     let currentLang = 'es';
-    let menuData = null;
+    let vinosData = null;
 
-    async function initVinos() {
-      // 1. Sincronización en vivo con base de datos
+    async function initVinosPage() {
+      // 1. Cargar datos de la carta oficial
       try {
-        const { createClient } = await import('https://esm.sh/@insforge/sdk@1.5.2');
-        const liveClient = createClient({
-          baseUrl: 'https://pz3qiueg.eu-central.insforge.app',
-          anonKey: 'anon_64c904f7d36d64a81882dd8b41b193c03240d144f6de6a656b1d85ba0683ccec'
-        });
-        const [catsRes, itemsRes] = await Promise.all([
-          liveClient.database.from('menu_categories').select().order('display_order', { ascending: true }),
-          liveClient.database.from('menu_items').select().order('display_order', { ascending: true })
-        ]);
-
-        if (catsRes.data && itemsRes.data && catsRes.data.length && itemsRes.data.length) {
-          menuData = {
-            restaurant: "Buon Appetito",
-            categories: catsRes.data.map(c => ({
-              id: c.id,
-              order: c.display_order,
-              es: c.name_es,
-              en: c.name_en || c.name_es,
-              de: c.name_de || c.name_es,
-              icon: c.icon || 'restaurant'
-            })),
-            items: itemsRes.data.map(i => ({
-              id: i.item_code || i.id,
-              num: i.display_order,
-              category: i.category_id,
-              price: parseFloat(i.price),
-              is_available: i.is_available,
-              es: { title: i.title_es, description: i.description_es },
-              en: { title: i.title_en || i.title_es, description: i.description_en || i.description_es },
-              de: { title: i.title_de || i.title_es, description: i.description_de || i.description_es }
-            }))
-          };
+        const res = await fetch('/data/vinos.json');
+        if (res.ok) {
+          vinosData = await res.json();
         }
       } catch (e) {
-        console.warn('Fallback a datos locales de vinos:', e);
+        console.warn('Error al cargar /data/vinos.json:', e);
       }
 
-      // 2. Fallback local si no hay conexión o falla la red
-      if (!menuData) {
-        if (window.MENU_DATA) {
-          menuData = window.MENU_DATA;
-        } else {
-          try {
-            const res = await fetch('/data/menu.json');
-            if (res.ok) menuData = await res.json();
-          } catch (e) {
-            console.warn('Error loading menu.json', e);
-          }
+      // 2. Control de Botón Volver (Vuelve a #menu)
+      const handleBack = () => {
+        try {
+          const lastSec = sessionStorage.getItem('buon_last_section') || '#menu';
+          window.location.href = '/' + lastSec;
+        } catch (e) {
+          window.location.href = '/#menu';
         }
-      }
+      };
 
-      setupEventListeners();
-      updateUILanguage();
-      renderVinos();
-    }
-
-    function goBackToMenu() {
-      if (window.history.length > 1 && document.referrer && document.referrer.includes(window.location.host)) {
-        window.history.back();
-      } else {
-        window.location.href = '/#menu';
-      }
-    }
-
-    function setupEventListeners() {
       const btnBack = document.getElementById('btn-back');
-      if (btnBack) {
-        btnBack.addEventListener('click', goBackToMenu);
-      }
+      if (btnBack) btnBack.addEventListener('click', handleBack);
+
       const btnBackBottom = document.getElementById('btn-back-bottom');
-      if (btnBackBottom) {
-        btnBackBottom.addEventListener('click', goBackToMenu);
-      }
+      if (btnBackBottom) btnBackBottom.addEventListener('click', handleBack);
 
-      const langContainer = document.getElementById('lang-nav-container');
-      const langPillBtn = document.getElementById('lang-pill-btn');
-      const langCloseBtn = document.getElementById('lang-opt-close');
-      const langLabel = document.getElementById('lang-current-label');
+      // 3. Selector de Idioma Exclusivo ES / EN
+      const switchButtons = document.querySelectorAll('.lang-switch-btn');
+      switchButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+          const lang = btn.getAttribute('data-lang');
+          if (lang === currentLang) return;
+          currentLang = lang;
 
-      if (langPillBtn && langContainer) {
-        langPillBtn.addEventListener('click', (e) => {
-          e.stopPropagation();
-          langContainer.classList.add('open');
-          langPillBtn.setAttribute('aria-expanded', 'true');
-        });
-
-        if (langCloseBtn) {
-          langCloseBtn.addEventListener('click', (e) => {
-            e.stopPropagation();
-            langContainer.classList.remove('open');
-            langPillBtn.setAttribute('aria-expanded', 'false');
+          switchButtons.forEach(b => {
+            const isActive = b.getAttribute('data-lang') === currentLang;
+            b.classList.toggle('active', isActive);
+            b.setAttribute('aria-pressed', isActive ? 'true' : 'false');
           });
-        }
 
-        document.addEventListener('click', (e) => {
-          if (langContainer && !langContainer.contains(e.target)) {
-            langContainer.classList.remove('open');
-            langPillBtn.setAttribute('aria-expanded', 'false');
-          }
+          updateUIText();
+          renderWineList();
         });
+      });
 
-        window.addEventListener('scroll', () => {
-          if (langContainer.classList.contains('open')) {
-            langContainer.classList.remove('open');
-            langPillBtn.setAttribute('aria-expanded', 'false');
-          }
-        }, { passive: true });
+      // 4. Navegación por categorías con scroll suave
+      setupCategoryNav();
 
-        document.querySelectorAll('.lang-opt-btn').forEach(btn => {
-          btn.addEventListener('click', () => {
-            const selected = btn.getAttribute('data-lang');
-            if (selected && selected !== currentLang) {
-              const langMessages = {
-                es: 'ACTUALIZANDO BODEGA...',
-                en: 'UPDATING CELLAR...',
-                de: 'WEINKARTE WIRD GELADEN...'
-              };
-              if (typeof window.showPizzaMenuLoader === 'function') {
-                window.showPizzaMenuLoader(langMessages[selected] || 'ACTUALIZANDO BODEGA...', 750);
-              }
-
-              currentLang = selected;
-              if (langLabel) langLabel.textContent = selected.toUpperCase();
-              document.querySelectorAll('.lang-opt-btn').forEach(el => {
-                el.classList.toggle('active', el.getAttribute('data-lang') === selected);
-              });
-              langContainer.classList.remove('open');
-              langPillBtn.setAttribute('aria-expanded', 'false');
-              updateUILanguage();
-              renderVinos();
-            } else {
-              langContainer.classList.remove('open');
-              langPillBtn.setAttribute('aria-expanded', 'false');
-            }
-          });
-        });
-      }
+      // 5. Renderizado Inicial
+      updateUIText();
+      renderWineList();
     }
 
-    function updateUILanguage() {
+    function setupCategoryNav() {
+      const navLinks = document.querySelectorAll('.cat-nav-link');
+      navLinks.forEach(btn => {
+        btn.addEventListener('click', () => {
+          navLinks.forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+
+          const catId = btn.getAttribute('data-cat');
+          const target = document.getElementById(`sec-${catId}`);
+          if (target) {
+            const headerOffset = 120;
+            const elementPosition = target.getBoundingClientRect().top;
+            const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+            window.scrollTo({
+              top: offsetPosition,
+              behavior: 'smooth'
+            });
+          }
+        });
+      });
+
+      // Scroll Spy para actualizar categoría activa al hacer scroll
+      window.addEventListener('scroll', () => {
+        const sections = document.querySelectorAll('.wine-category-section');
+        const scrollPos = window.pageYOffset + 140;
+
+        sections.forEach(sec => {
+          const top = sec.offsetTop;
+          const height = sec.offsetHeight;
+          const id = sec.id.replace('sec-', '');
+
+          if (scrollPos >= top && scrollPos < top + height) {
+            navLinks.forEach(link => {
+              if (link.getAttribute('data-cat') === id) {
+                link.classList.add('active');
+              } else {
+                link.classList.remove('active');
+              }
+            });
+          }
+        });
+      }, { passive: true });
+    }
+
+    function updateUIText() {
       const t = UI_TEXT[currentLang];
       if (!t) return;
 
+      const eyebrowEl = document.getElementById('hero-eyebrow');
       const titleEl = document.getElementById('hero-title');
       const subTitleEl = document.getElementById('hero-subtitle');
       const txtBackEl = document.getElementById('txt-back');
       const txtBackBottomEl = document.getElementById('txt-back-bottom');
       const taxNoteEl = document.getElementById('tax-note');
       const allergenNoteEl = document.getElementById('allergen-note');
+      const linkReservarEl = document.getElementById('footer-reservar-link');
       const legalAvisoEl = document.getElementById('legal-aviso');
       const legalPrivacidadEl = document.getElementById('legal-privacidad');
       const legalCookiesEl = document.getElementById('legal-cookies');
 
+      if (eyebrowEl) eyebrowEl.textContent = t.eyebrow;
       if (titleEl) titleEl.textContent = t.heroTitle;
       if (subTitleEl) subTitleEl.textContent = t.heroSubtitle;
       if (txtBackEl) txtBackEl.textContent = t.btnBack;
-      if (txtBackBottomEl) txtBackBottomEl.textContent = t.btnBackBottom || t.btnBack;
+      if (txtBackBottomEl) txtBackBottomEl.textContent = t.btnBackBottom;
       if (taxNoteEl) taxNoteEl.textContent = t.taxIncluded;
-      if (allergenNoteEl) allergenNoteEl.textContent = t.allergensNote;
+      if (allergenNoteEl) allergenNoteEl.textContent = t.serviceNote;
+      if (linkReservarEl) linkReservarEl.textContent = t.reserveTable;
       if (legalAvisoEl) legalAvisoEl.textContent = t.legalAviso;
       if (legalPrivacidadEl) legalPrivacidadEl.textContent = t.legalPrivacidad;
       if (legalCookiesEl) legalCookiesEl.textContent = t.legalCookies;
-      const linkReservarEl = document.getElementById('footer-reservar-link');
-      if (linkReservarEl) linkReservarEl.textContent = t.reserveTable;
 
-      const nav = document.getElementById('category-nav');
-      if (nav) {
-        const labelBebidas = currentLang === 'en' ? 'Beverages & Cocktails' : (currentLang === 'de' ? 'Getränke & Cocktails' : 'Bebidas & Cócteles');
-        const labelVinos = currentLang === 'en' ? 'Wine Cellar' : (currentLang === 'de' ? 'Bodega & Weine' : 'Bodega & Vinos');
-        const hasVinosItems = menuData && menuData.items && menuData.items.some(i => i.category === 'vinos' || i.category === 'bodega');
+      // Actualizar etiquetas en la barra de navegación (texto puro, sin emojis)
+      document.querySelectorAll('[data-cat-text]').forEach(el => {
+        const catKey = el.getAttribute('data-cat-text');
+        if (t.cats[catKey]) {
+          el.textContent = t.cats[catKey];
+        }
+      });
+    }
 
-        let navHtml = `
-          <button type="button" class="cat-nav-link active" data-cat="bebidas">
-            <span class="cat-svg-box">
-              <svg class="cat-svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 22h8"/><path d="M12 15v7"/><path d="M5 3h14l-5 7.5v4.5h-4V10.5L5 3Z"/><path d="M6.5 6h11"/></svg>
-            </span>
-            <span class="cat-text">${labelBebidas}</span>
-          </button>
+    function renderWineList() {
+      const container = document.getElementById('wine-content');
+      if (!container || !vinosData || !vinosData.sections) return;
+
+      const t = UI_TEXT[currentLang];
+      let html = '';
+
+      vinosData.sections.forEach(sec => {
+        const secTitle = sec.title[currentLang] || sec.title.es;
+        const secSubtitle = sec.subtitle ? (sec.subtitle[currentLang] || sec.subtitle.es) : '';
+
+        html += `
+          <section class="wine-category-section" id="sec-${esc(sec.id)}">
+            <div class="wine-category-header">
+              <div class="wine-category-title-wrap">
+                <h2 class="wine-category-heading">${esc(secTitle)}</h2>
+                ${secSubtitle ? `<p class="wine-category-sub">${esc(secSubtitle)}</p>` : ''}
+              </div>
+              <div class="wine-header-rule" aria-hidden="true"></div>
+            </div>
         `;
 
-        if (hasVinosItems) {
-          navHtml += `
-            <button type="button" class="cat-nav-link" data-cat="vinos">
-              <span class="cat-svg-box">
-                <svg class="cat-svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 22h8"/><path d="M7 10h10"/><path d="M12 15v7"/><path d="M12 15a5 5 0 0 0 5-5c0-2-.5-4-2-8H9c-1.5 4-2 6-2 8a5 5 0 0 0 5 5Z"/></svg>
-              </span>
-              <span class="cat-text">${labelVinos}</span>
-            </button>
+        // Caso 1: Sección con subsecciones (Blanco, Rosado, Tinto)
+        if (sec.subsections && sec.subsections.length > 0) {
+          sec.subsections.forEach(sub => {
+            const subTitle = sub.title[currentLang] || sub.title.es;
+
+            html += `
+              <div class="wine-subsection">
+                <div class="wine-sub-header">
+                  <h3 class="wine-sub-title">${esc(subTitle.toUpperCase())}</h3>
+                  <span class="wine-sub-line"></span>
+                </div>
+
+                <div class="wine-editorial-list">
+                  ${sub.items.map(item => renderWineRow(item)).join('')}
+                </div>
+              </div>
+            `;
+          });
+        } 
+        // Caso 2: Sección con items directos (Vinos de la Casa, Espumosos)
+        else if (sec.items && sec.items.length > 0) {
+          html += `
+            <div class="wine-editorial-list">
+              ${sec.items.map(item => renderWineRow(item)).join('')}
+            </div>
           `;
         }
 
-        nav.innerHTML = navHtml;
-        nav.querySelectorAll('.cat-nav-link').forEach(btn => {
-          btn.addEventListener('click', () => {
-            nav.querySelectorAll('.cat-nav-link').forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-            const catId = btn.getAttribute('data-cat');
-            const target = document.getElementById(`cat-${catId}`);
-            if (target) {
-              const headerOffset = 120;
-              const elementPosition = target.getBoundingClientRect().top;
-              const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-              window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
-            }
-          });
-        });
-      }
-    }
+        html += `</section>`;
+      });
 
-    function renderVinos() {
-      if (!menuData || !menuData.items) return;
-      const t = UI_TEXT[currentLang];
-
-      const contentArea = document.getElementById('menu-content');
-      if (!contentArea) return;
-
-      const bebidasItems = menuData.items.filter(i => i.category === 'bebidas');
-      const vinosItems = menuData.items.filter(i => i.category === 'vinos' || i.category === 'bodega');
-      const sectionTitle = currentLang === 'en' ? 'Beverages & Italian Cocktails' : (currentLang === 'de' ? 'Getränke & Italienische Cocktails' : 'Bebidas & Coctelería Italiana');
-      const vinosSectionTitle = currentLang === 'en' ? 'Wine Cellar & Selection' : (currentLang === 'de' ? 'Weinkeller & Bodega' : 'Bodega & Selección de Vinos');
-
-      let html = `
-        <section class="menu-category-section" id="cat-bebidas">
-          <div class="menu-category-header">
-            <h2 class="category-heading">${esc(sectionTitle)}</h2>
-          </div>
-
-          <div class="menu-editorial-list">
-            ${bebidasItems.map(item => {
-              const trans = item[currentLang] || item.es;
-              const hasDesc = Boolean(trans.description && trans.description.trim().length > 0);
-              const isAvail = item.is_available !== false;
-              const soldOutLabel = currentLang === 'en' ? 'Sold out today' : (currentLang === 'de' ? 'Heute ausverkauft' : 'Agotado hoy');
-
-              return `
-                <article class="menu-item-row ${!isAvail ? 'opacity-50 grayscale' : ''}" id="item-${esc(item.id)}">
-                  <div class="menu-item-top">
-                    <div class="menu-item-title-group">
-                      <h3 class="menu-item-title">${esc(trans.title)}</h3>
-                      ${!isAvail ? `<span class="inline-block text-[10px] font-bold text-rose-800 bg-rose-50 border border-rose-200 px-2 py-0.5 rounded-full uppercase tracking-wider ml-2">${soldOutLabel}</span>` : ''}
-                    </div>
-                    <span class="menu-item-dots" aria-hidden="true"></span>
-                    <span class="menu-item-price">${Number(item.price).toFixed(2)} €</span>
-                  </div>
-                  ${hasDesc ? `<p class="menu-item-desc">${esc(trans.description)}</p>` : ''}
-                </article>
-              `;
-            }).join('')}
-          </div>
-        </section>
-      `;
-
-      if (vinosItems.length > 0) {
-        html += `
-          <section class="menu-category-section" id="cat-vinos">
-            <div class="menu-category-header">
-              <h2 class="category-heading">${esc(vinosSectionTitle)}</h2>
-            </div>
-
-            <div class="menu-editorial-list">
-              ${vinosItems.map(item => {
-                const trans = item[currentLang] || item.es;
-                const hasDesc = Boolean(trans.description && trans.description.trim().length > 0);
-                const isAvail = item.is_available !== false;
-                const soldOutLabel = currentLang === 'en' ? 'Sold out today' : (currentLang === 'de' ? 'Heute ausverkauft' : 'Agotado hoy');
-
-                return `
-                  <article class="menu-item-row ${!isAvail ? 'opacity-50 grayscale' : ''}" id="item-${esc(item.id)}">
-                    <div class="menu-item-top">
-                      <div class="menu-item-title-group">
-                        <h3 class="menu-item-title">${esc(trans.title)}</h3>
-                        ${!isAvail ? `<span class="inline-block text-[10px] font-bold text-rose-800 bg-rose-50 border border-rose-200 px-2 py-0.5 rounded-full uppercase tracking-wider ml-2">${soldOutLabel}</span>` : ''}
-                      </div>
-                      <span class="menu-item-dots" aria-hidden="true"></span>
-                      <span class="menu-item-price">${Number(item.price).toFixed(2)} €</span>
-                    </div>
-                    ${hasDesc ? `<p class="menu-item-desc">${esc(trans.description)}</p>` : ''}
-                  </article>
-                `;
-              }).join('')}
-            </div>
-          </section>
-        `;
-      }
-
-      // Grabado editorial de bodega y vino al final
+      // Grabado editorial elegante de cierre
       html += `
-        <div class="menu-finale-engraving menu-finale-wine-expanded" aria-hidden="true">
+        <div class="menu-finale-engraving" aria-hidden="true">
           <img 
             src="/assets/decorations/grabado_vino_panoramico.png" 
-            alt="Vinos & Bodega · Buon Appetito Port d'Andratx"
+            alt="Bodega Buon Appetito"
             class="finale-wine-expanded-img" 
             loading="lazy"
           />
           <div class="finale-caption">
-            <span class="finale-title">${t ? t.finaleTitle : "Vinos & Bodega"}</span>
-            <span class="finale-sub">${t ? t.finaleSub : "SELECCIÓN ITALIANA & MEDITERRÁNEA"}</span>
+            <span class="finale-title">${esc(t.finaleTitle)}</span>
+            <span class="finale-sub">${esc(t.finaleSub)}</span>
           </div>
-          <div class="finale-divider finale-divider-footer">
+          <div class="finale-divider">
             <span class="divider-line"></span>
             <span class="divider-diamond">◆</span>
             <span class="divider-line"></span>
@@ -584,10 +462,27 @@ const description = "Selección de vinos, coctelería italiana y bebidas de Buon
         </div>
       `;
 
-      contentArea.innerHTML = html;
+      container.innerHTML = html;
     }
 
-    document.addEventListener('DOMContentLoaded', initVinos);
+    function renderWineRow(item) {
+      const name = typeof item.name === 'object' ? (item.name[currentLang] || item.name.es) : item.name;
+      const detail = typeof item.detail === 'object' ? (item.detail[currentLang] || item.detail.es) : item.detail;
+      const formattedPrice = Number(item.price).toFixed(0);
+
+      return `
+        <article class="wine-item-row">
+          <div class="wine-item-top">
+            <h4 class="wine-item-name">${esc(name)}</h4>
+            <span class="wine-item-dots" aria-hidden="true"></span>
+            <span class="wine-item-price">${formattedPrice} €</span>
+          </div>
+          ${detail ? `<p class="wine-item-desc">${esc(detail)}</p>` : ''}
+        </article>
+      `;
+    }
+
+    document.addEventListener('DOMContentLoaded', initVinosPage);
   </script>
 
 </body>
@@ -595,36 +490,34 @@ const description = "Selección de vinos, coctelería italiana y bebidas de Buon
 
 <style is:global>
 /* ========================================================
-   ESTILOS DE CARTA DIGITAL & VINOS · BUON APPETITO
+   ESTILOS DE CARTA DE VINOS · BUON APPETITO (ALTA ENOLOGÍA)
    ======================================================== */
 :root {
-  --bg-page: #FAF9F6;
-  --bg-surface: #FFFFFF;
-  --bg-surface-subtle: #F3F5F1;
+  --wine-bg: #FAF8F5;
+  --wine-surface: #FFFFFF;
+  
+  --color-forest: #183321;
+  --color-forest-deep: #0E2015;
+  --color-terracotta: #9E4221;
+  --color-terracotta-hover: #7E3114;
+  --color-gold: #C5A880;
+  --color-gold-deep: #A78453;
 
-  --color-primary: #183321;
-  --color-primary-light: #2A4F36;
-  --color-accent: #9E4221;
-  --color-accent-hover: #833519;
+  --color-text-main: #191C19;
+  --color-text-body: #5A655C;
+  --color-text-muted: #7A867E;
 
-  --color-text: #191C19;
-  --color-text-muted: #5A655C;
-  --color-text-faint: #8F998F;
-
-  --color-border: #E8ECE6;
-  --color-border-subtle: #F1F4EE;
-  --color-dots: #B0B7AC;
+  --border-subtle: #E8ECE6;
+  --color-dots: rgba(24, 51, 33, 0.22);
 
   --footer-bg: linear-gradient(180deg, #E2EAE3 0%, #D8E3DA 50%, #CDDCD0 100%);
   --footer-border: #B8CEBC;
   --footer-text: #183321;
   --footer-muted: #2C4132;
 
-  --shadow-sm: 0 1px 3px rgba(24, 51, 33, 0.05);
-  --shadow-md: 0 4px 14px rgba(24, 51, 33, 0.08);
-
-  --font-serif: "Playfair Display", Georgia, serif;
-  --font-sans: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  /* Tipografías: Cormorant Garamond para enología pura */
+  --font-wine-serif: "Cormorant Garamond", Georgia, "Times New Roman", serif;
+  --font-wine-sans: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 }
 
 * {
@@ -633,29 +526,29 @@ const description = "Selección de vinos, coctelería italiana y bebidas de Buon
   padding: 0;
 }
 
-body.menu-body {
-  background-color: var(--bg-page);
-  color: var(--color-text);
-  font-family: var(--font-sans);
+body.wine-body {
+  background-color: var(--wine-bg);
+  color: var(--color-text-main);
+  font-family: var(--font-wine-sans);
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
 }
 
 .container {
   width: 100%;
-  max-width: 860px;
+  max-width: 840px;
   margin: 0 auto;
   padding: 0 20px;
 }
 
-/* 1. Header */
+/* 1. Top Header */
 .site-header {
   position: sticky;
   top: 0;
   z-index: 100;
-  background: var(--color-primary);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.14);
+  background: var(--color-forest);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
 }
 
 .header-container {
@@ -675,160 +568,157 @@ body.menu-body {
   height: 38px;
   width: auto;
   object-fit: contain;
-  filter: drop-shadow(0 1px 2px rgba(0,0,0,0.15));
+  filter: drop-shadow(0 1px 2px rgba(0,0,0,0.2));
 }
 
 .header-actions {
   display: flex;
   align-items: center;
-  gap: 10px;
-  position: relative;
+  gap: 12px;
 }
 
+/* Selector Exclusivo ES / EN */
+.lang-switch-toggle {
+  display: inline-flex;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.24);
+  border-radius: 9999px;
+  padding: 3px 8px;
+  gap: 6px;
+}
+
+.lang-switch-btn {
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, 0.65);
+  font-family: var(--font-wine-sans);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  padding: 2px 6px;
+  cursor: pointer;
+  border-radius: 999px;
+  transition: all 0.2s ease;
+}
+
+.lang-switch-btn.active {
+  color: #183321;
+  background: #FFFFFF;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15);
+}
+
+.lang-switch-btn:hover:not(.active) {
+  color: #FFFFFF;
+}
+
+.lang-switch-divider {
+  color: rgba(255, 255, 255, 0.25);
+  font-size: 0.75rem;
+}
+
+/* Botón Volver */
 .btn-back {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  background: var(--color-accent);
+  background: var(--color-terracotta);
   color: #FFFFFF;
   border: none;
   border-radius: 9999px;
   padding: 7px 18px;
-  font-family: var(--font-sans);
+  font-family: var(--font-wine-sans);
   font-size: 0.85rem;
   font-weight: 700;
   cursor: pointer;
   text-decoration: none;
-  box-shadow: 0 2px 8px rgba(158, 66, 33, 0.35);
+  box-shadow: 0 2px 10px rgba(158, 66, 33, 0.35);
   transition: all 0.2s ease;
 }
 
 .btn-back:hover {
-  background: var(--color-accent-hover);
+  background: var(--color-terracotta-hover);
   transform: translateY(-1px);
 }
 
-/* Selector lateral de idioma */
-.lang-nav-container {
-  position: relative;
-  display: inline-flex;
-  align-items: center;
-}
-
-.lang-pill-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 5px;
-  background: rgba(255, 255, 255, 0.12);
-  border: 1px solid rgba(255, 255, 255, 0.22);
-  color: #FFFFFF;
-  border-radius: 9999px;
-  padding: 5px 10px;
-  font-family: var(--font-sans);
-  font-size: 0.78rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-
-.lang-lateral-menu {
-  position: absolute;
-  right: 0;
-  top: 50%;
-  transform: translateY(-50%) scale(0.95);
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  background: var(--color-primary);
-  border: 1px solid rgba(255, 255, 255, 0.25);
-  padding: 5px 12px;
-  border-radius: 9999px;
-  opacity: 0;
-  pointer-events: none;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
-  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-  z-index: 10;
-}
-
-.lang-nav-container.open .lang-lateral-menu {
-  opacity: 1;
-  pointer-events: auto;
-  transform: translateY(-50%) scale(1);
-}
-
-.lang-opt-btn {
-  background: none;
-  border: none;
-  color: rgba(255, 255, 255, 0.7);
-  font-size: 0.8rem;
-  font-weight: 600;
-  cursor: pointer;
-  padding: 2px 4px;
-  transition: color 0.15s ease;
-}
-
-.lang-opt-btn.active, .lang-opt-btn:hover {
-  color: #FFFFFF;
-}
-
-.lang-opt-sep {
-  color: rgba(255, 255, 255, 0.3);
-  font-size: 0.8rem;
-}
-
-.lang-opt-close {
-  background: none;
-  border: none;
-  color: rgba(255, 255, 255, 0.5);
-  display: inline-flex;
-  cursor: pointer;
-  margin-left: 2px;
-}
-
-/* 2. Hero Editorial */
-.menu-hero {
+/* 2. Hero Editorial Vinícola */
+.wine-hero {
   text-align: center;
-  padding: 38px 0 24px;
+  padding: 42px 0 24px;
+  background: radial-gradient(ellipse at 50% 0%, rgba(197, 168, 128, 0.1) 0%, rgba(250, 248, 245, 0) 70%);
+}
+
+.hero-eyebrow {
+  display: inline-block;
+  font-family: var(--font-wine-sans);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--color-gold-deep);
+  margin-bottom: 6px;
 }
 
 .hero-title {
-  font-family: var(--font-serif);
-  font-size: 2.75rem;
+  font-family: var(--font-wine-serif);
+  font-size: clamp(2.6rem, 5.5vw, 3.8rem);
   font-weight: 600;
-  color: var(--color-primary);
+  color: var(--color-forest);
   letter-spacing: -0.01em;
-  line-height: 1.15;
+  line-height: 1.1;
+  margin: 0;
 }
 
 .hero-subtitle {
-  display: block;
-  font-size: 0.74rem;
-  letter-spacing: 0.22em;
+  font-family: var(--font-wine-sans);
+  font-size: 0.76rem;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: var(--color-accent);
-  margin-top: 6px;
+  color: var(--color-terracotta);
+  margin-top: 8px;
   font-weight: 700;
 }
 
-/* 3. Barra de navegación de categorías */
+.hero-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  margin: 18px auto 0;
+  max-width: 220px;
+  color: var(--color-gold-deep);
+}
+
+.hero-divider .line {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--color-gold), transparent);
+}
+
+.wine-glass-icon {
+  color: var(--color-terracotta);
+}
+
+/* 3. Barra de navegación Sticky (Limpia, sin emojis) */
 .category-nav-bar {
   position: sticky;
   top: 64px;
   z-index: 90;
   width: 100%;
-  background: rgba(250, 249, 246, 0.95);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border-bottom: 1px solid var(--color-border);
+  background: rgba(250, 248, 245, 0.94);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--border-subtle);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
 }
 
 .category-nav-track {
   display: flex;
   align-items: center;
-  gap: 2px;
+  gap: 6px;
   overflow-x: auto;
   scrollbar-width: none;
-  padding: 0;
+  padding: 10px 0;
 }
 
 .category-nav-track::-webkit-scrollbar {
@@ -839,126 +729,185 @@ body.menu-body {
   flex-shrink: 0;
   display: inline-flex;
   align-items: center;
-  gap: 7px;
-  padding: 12px 18px;
-  background: transparent;
-  border: none;
-  border-bottom: 2px solid transparent;
-  color: var(--color-text-muted);
-  font-family: var(--font-sans);
-  font-size: 0.9rem;
+  padding: 8px 18px;
+  background: rgba(255, 255, 255, 0.7);
+  border: 1px solid var(--border-subtle);
+  border-radius: 9999px;
+  color: var(--color-text-body);
+  font-family: var(--font-wine-sans);
+  font-size: 0.86rem;
   font-weight: 600;
   cursor: pointer;
+  transition: all 0.2s ease;
 }
 
 .cat-nav-link.active {
-  color: var(--color-accent);
-  border-bottom-color: var(--color-accent);
+  background: var(--color-forest);
+  border-color: var(--color-forest);
+  color: #FAF8F5;
+  box-shadow: 0 2px 8px rgba(24, 51, 33, 0.16);
 }
 
-.cat-svg-box {
-  display: inline-flex;
+.cat-nav-link:hover:not(.active) {
+  background: #FFFFFF;
+  border-color: var(--color-gold);
+  color: var(--color-forest);
 }
 
-/* 4. Listado editorial */
+/* 4. Listado Editorial Limpio de Vinos (Sin Cajas) */
 .main-content {
-  padding-top: 24px;
+  padding-top: 32px;
   padding-bottom: 60px;
 }
 
-.menu-category-section {
-  margin-bottom: 36px;
+.wine-category-section {
+  margin-bottom: 50px;
+  scroll-margin-top: 130px;
 }
 
-.category-heading {
-  font-family: var(--font-serif);
-  font-size: 1.55rem;
-  color: var(--color-primary);
-  border-bottom: 1px solid var(--color-border);
-  padding-bottom: 8px;
-  margin-bottom: 16px;
+.wine-category-header {
+  margin-bottom: 22px;
 }
 
-.menu-editorial-list {
+.wine-category-heading {
+  font-family: var(--font-wine-serif);
+  font-size: clamp(2rem, 3.5vw, 2.5rem);
+  font-weight: 600;
+  color: var(--color-forest);
+  line-height: 1.2;
+}
+
+.wine-category-sub {
+  font-family: var(--font-wine-sans);
+  font-size: 0.86rem;
+  color: var(--color-text-muted);
+  margin-top: 4px;
+}
+
+.wine-header-rule {
+  height: 1px;
+  background: linear-gradient(90deg, var(--color-gold) 0%, var(--border-subtle) 70%, transparent 100%);
+  margin-top: 10px;
+}
+
+/* Subsecciones Clásicas (BLANCO, ROSADO, TINTO) */
+.wine-subsection {
+  margin-top: 28px;
+  margin-bottom: 12px;
+}
+
+.wine-sub-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 12px;
+  padding-top: 6px;
+}
+
+.wine-sub-title {
+  font-family: var(--font-wine-sans);
+  font-size: 0.82rem;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--color-terracotta);
+  white-space: nowrap;
+}
+
+.wine-sub-line {
+  flex: 1;
+  height: 1px;
+  background: var(--border-subtle);
+}
+
+/* Lista Editorial Continua */
+.wine-editorial-list {
   display: flex;
   flex-direction: column;
 }
 
-.menu-item-row {
-  padding: 10px 4px;
-  border-bottom: 1px dashed rgba(24, 51, 33, 0.08);
+.wine-item-row {
+  padding: 13px 4px;
+  border-bottom: 1px solid rgba(24, 51, 33, 0.08);
+  transition: background-color 0.15s ease;
 }
 
-.menu-item-top {
+.wine-item-row:hover {
+  background-color: rgba(255, 255, 255, 0.5);
+}
+
+.wine-item-top {
   display: flex;
   align-items: baseline;
   justify-content: space-between;
+  width: 100%;
 }
 
-.menu-item-title-group {
-  max-width: calc(100% - 85px);
-}
-
-.menu-item-title {
-  font-family: var(--font-serif);
-  font-size: 1.05rem;
-  color: var(--color-text);
+.wine-item-name {
+  font-family: var(--font-wine-serif);
+  font-size: clamp(1.22rem, 2.2vw, 1.38rem);
   font-weight: 600;
+  color: var(--color-text-main);
+  letter-spacing: -0.01em;
+  line-height: 1.3;
 }
 
-.menu-item-dots {
+.wine-item-dots {
   flex: 1;
   border-bottom: 1px dotted var(--color-dots);
-  margin: 0 10px;
-  min-width: 12px;
+  margin: 0 12px;
+  min-width: 16px;
   height: 1px;
 }
 
-.menu-item-price {
-  font-family: var(--font-sans);
-  font-size: 1.05rem;
+.wine-item-price {
+  font-family: var(--font-wine-sans);
+  font-size: 1.15rem;
   font-weight: 700;
-  color: var(--color-accent);
+  color: var(--color-terracotta);
   white-space: nowrap;
 }
 
-.menu-item-desc {
-  font-size: 0.85rem;
-  color: var(--color-text-muted);
-  margin-top: 2px;
-  line-height: 1.4;
+.wine-item-desc {
+  font-family: var(--font-wine-sans);
+  font-size: 0.86rem;
+  color: var(--color-text-body);
+  font-style: italic;
+  margin-top: 3px;
+  line-height: 1.45;
 }
 
-/* Grabado de bodega */
+/* Grabado editorial final */
 .menu-finale-engraving {
   text-align: center;
-  margin-top: 48px;
-  padding-top: 20px;
+  margin-top: 50px;
+  padding-top: 24px;
 }
 
 .finale-wine-expanded-img {
   max-width: 100%;
   height: auto;
   border-radius: 12px;
-  box-shadow: var(--shadow-sm);
+  box-shadow: 0 4px 14px rgba(24, 51, 33, 0.06);
 }
 
 .finale-caption {
-  margin-top: 14px;
+  margin-top: 16px;
 }
 
 .finale-title {
   display: block;
-  font-family: var(--font-serif);
-  font-size: 1.4rem;
-  color: var(--color-primary);
+  font-family: var(--font-wine-serif);
+  font-size: 1.55rem;
+  font-weight: 600;
+  color: var(--color-forest);
 }
 
 .finale-sub {
-  font-size: 0.72rem;
-  letter-spacing: 0.18em;
+  font-size: 0.74rem;
+  letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: var(--color-accent);
+  color: var(--color-terracotta);
   font-weight: 700;
 }
 
@@ -968,17 +917,17 @@ body.menu-body {
   justify-content: center;
   gap: 12px;
   margin-top: 16px;
-  color: var(--color-border);
+  color: var(--border-subtle);
 }
 
 .divider-line {
   height: 1px;
   width: 60px;
-  background: var(--color-border);
+  background: var(--border-subtle);
 }
 
 .divider-diamond {
-  color: var(--color-accent);
+  color: var(--color-terracotta);
   font-size: 10px;
 }
 
@@ -986,148 +935,120 @@ body.menu-body {
 .site-footer {
   background: var(--footer-bg);
   border-top: 1px solid var(--footer-border);
-  padding: 32px 0 0;
+  padding: 36px 0 0;
   color: var(--footer-text);
 }
 
+.footer-card {
+  text-align: center;
+  padding-bottom: 28px;
+}
+
+.tax-note {
+  font-size: 0.86rem;
+  font-weight: 700;
+  color: var(--footer-text);
+  margin-bottom: 6px;
+}
+
+.allergen-note {
+  font-size: 0.84rem;
+  color: var(--footer-muted);
+  max-width: 580px;
+  margin: 0 auto 24px;
+  line-height: 1.5;
+}
+
+.footer-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+@media (min-width: 520px) {
+  .footer-actions {
+    flex-direction: row;
+    gap: 16px;
+  }
+}
+
+.btn-footer-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #FFFFFF;
+  color: var(--color-forest);
+  border: 1px solid var(--footer-border);
+  border-radius: 9999px;
+  padding: 10px 20px;
+  font-family: var(--font-wine-sans);
+  font-size: 0.88rem;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(24, 51, 33, 0.06);
+  transition: all 0.2s ease;
+}
+
+.btn-footer-back:hover {
+  background: #F3F5F1;
+  border-color: var(--color-forest);
+  transform: translateY(-1px);
+}
+
+.btn-footer-reserve {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-forest);
+  color: #FAF8F5;
+  border-radius: 9999px;
+  padding: 10px 24px;
+  font-family: var(--font-wine-sans);
+  font-size: 0.88rem;
+  font-weight: 700;
+  text-decoration: none;
+  box-shadow: 0 4px 12px rgba(24, 51, 33, 0.2);
+  transition: all 0.2s ease;
+}
+
+.btn-footer-reserve:hover {
+  background: #254b32;
+  transform: translateY(-1px);
+}
+
+.footer-legal {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-size: 0.78rem;
+  color: var(--footer-muted);
+}
+
+.legal-link {
+  color: inherit;
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+
+.legal-link:hover {
+  color: var(--color-terracotta);
+  text-decoration: underline;
+}
+
+.legal-sep {
+  opacity: 0.4;
+}
+
 .footer-wordmark-wrap {
-  margin-top: 28px;
-  background-color: #183321;
+  margin-top: 24px;
+  background-color: var(--color-forest);
   border-top: 1px solid rgba(24, 51, 33, 0.2);
   position: relative;
   overflow: hidden;
   width: 100%;
 }
-
-.footer-card {
-  text-align: center;
-}
-
-.tax-note, .allergen-note {
-  font-size: 0.82rem;
-  color: var(--footer-muted);
-  max-width: 600px;
-  margin: 0 auto 8px;
-}
-
-/* Enlaces de Acción Inferiores (Volver al Menú + Reservar Mesa) */
-.footer-action-links-wrapper {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 14px;
-  flex-wrap: wrap;
-  margin: 22px 0 20px;
-}
-
-.footer-back-bottom-btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
-  font-family: var(--font-sans);
-  font-size: 0.82rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: var(--color-green-deep);
-  background: rgba(24, 51, 33, 0.08);
-  border: 1px solid rgba(24, 51, 33, 0.18);
-  border-radius: 999px;
-  padding: 8px 18px;
-  cursor: pointer;
-  transition: all 0.25s ease;
-}
-
-.footer-back-bottom-btn:hover {
-  background: var(--color-green-deep);
-  color: #FFFFFF;
-  transform: translateY(-1px);
-}
-
-.footer-reserve-link {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  font-family: var(--font-serif);
-  font-size: 1.15rem;
-  font-style: italic;
-  font-weight: 600;
-  color: var(--color-accent);
-  text-decoration: none;
-  padding: 8px 18px;
-  border-bottom: 1px solid rgba(158, 66, 33, 0.35);
-  transition: all 0.25s ease;
-}
-
-.footer-reserve-link:hover {
-  color: var(--color-accent-hover);
-  border-bottom-color: var(--color-accent);
-  transform: translateY(-1px);
-}
-
-.footer-social-row {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 12px;
-  margin-bottom: 20px;
-}
-
-.social-btn {
-  display: inline-flex;
-  padding: 8px;
-  border-radius: 50%;
-  background: rgba(24, 51, 33, 0.08);
-  color: var(--color-primary);
-  text-decoration: none;
-  transition: all 0.2s ease;
-}
-
-.social-btn:hover {
-  background: var(--color-primary);
-  color: #FFFFFF;
-}
-
-.footer-legal-nav {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  font-size: 0.82rem;
-  margin-bottom: 12px;
-}
-
-.legal-link {
-  color: var(--color-primary);
-  text-decoration: none;
-  font-weight: 600;
-}
-
-.legal-divider {
-  color: var(--footer-muted);
-}
-
-.footer-copyright {
-  font-size: 0.78rem;
-  color: var(--footer-muted);
-}
-
-/* Móvil */
-@media (max-width: 640px) {
-  .header-container {
-    height: 58px;
-  }
-  .brand-logo {
-    height: 33px;
-  }
-  .category-nav-bar {
-    top: 58px;
-  }
-  .hero-title {
-    font-size: 2.15rem;
-  }
-}
 </style>
-

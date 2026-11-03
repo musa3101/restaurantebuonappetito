@@ -1,0 +1,535 @@
+{
+  "restaurant": "Buon Appetito",
+  "title": {
+    "es": "Carta de Vinos",
+    "en": "Wine List"
+  },
+  "subtitle": {
+    "es": "Bodega seleccionada · Port d'Andratx",
+    "en": "Selected Cellar · Port d'Andratx"
+  },
+  "sections": [
+    {
+      "id": "casa",
+      "order": 1,
+      "title": {
+        "es": "Vinos de la Casa",
+        "en": "House Wines"
+      },
+      "subtitle": {
+        "es": "Nuestra cuidada selección por copa y botella",
+        "en": "Our curated selection by glass and bottle"
+      },
+      "items": [
+        {
+          "id": "casa-blanco",
+          "name": {
+            "es": "Blanco",
+            "en": "White"
+          },
+          "detail": {
+            "es": "Verdejo – D.O. Rueda",
+            "en": "Verdejo – D.O. Rueda"
+          },
+          "origin": "D.O. Rueda",
+          "type": "blanco",
+          "price": 24.00
+        },
+        {
+          "id": "casa-rosado",
+          "name": {
+            "es": "Rosado",
+            "en": "Rosé"
+          },
+          "detail": {
+            "es": "D.O.Ca. Rioja",
+            "en": "D.O.Ca. Rioja"
+          },
+          "origin": "D.O.Ca. Rioja",
+          "type": "rosado",
+          "price": 24.00
+        },
+        {
+          "id": "casa-tinto",
+          "name": {
+            "es": "Tinto",
+            "en": "Red"
+          },
+          "detail": {
+            "es": "Crianza – D.O.Ca. Rioja",
+            "en": "Crianza – D.O.Ca. Rioja"
+          },
+          "origin": "D.O.Ca. Rioja",
+          "type": "tinto",
+          "price": 24.00
+        },
+        {
+          "id": "casa-cava",
+          "name": {
+            "es": "Cava Brut",
+            "en": "Cava Brut"
+          },
+          "detail": {
+            "es": "Espumoso",
+            "en": "Sparkling"
+          },
+          "origin": "Espumoso",
+          "type": "espumoso",
+          "price": 22.00
+        }
+      ]
+    },
+    {
+      "id": "mallorca",
+      "order": 2,
+      "title": {
+        "es": "Vinos de Mallorca",
+        "en": "Mallorca Wines"
+      },
+      "subtitle": {
+        "es": "El carácter y la esencia de nuestra tierra",
+        "en": "The character and essence of our island"
+      },
+      "subsections": [
+        {
+          "type": "blanco",
+          "title": {
+            "es": "Blanco",
+            "en": "White"
+          },
+          "items": [
+            {
+              "id": "mal-blanco-1",
+              "name": {
+                "es": "Macià Batle Blanc de Blancs",
+                "en": "Macià Batle Blanc de Blancs"
+              },
+              "detail": {
+                "es": "Prensal Blanc, Chardonnay",
+                "en": "Prensal Blanc, Chardonnay"
+              },
+              "origin": "Mallorca",
+              "price": 32.00
+            },
+            {
+              "id": "mal-blanco-2",
+              "name": {
+                "es": "Nounat de Binigrau",
+                "en": "Nounat de Binigrau"
+              },
+              "detail": {
+                "es": "Prensal Blanc, Chardonnay",
+                "en": "Prensal Blanc, Chardonnay"
+              },
+              "origin": "Mallorca · Biniali",
+              "price": 40.00
+            }
+          ]
+        },
+        {
+          "type": "rosado",
+          "title": {
+            "es": "Rosado",
+            "en": "Rosé"
+          },
+          "items": [
+            {
+              "id": "mal-rosado-1",
+              "name": {
+                "es": "Macià Batle",
+                "en": "Macià Batle"
+              },
+              "detail": {
+                "es": "Syrah, Callet, Manto Negro, Merlot",
+                "en": "Syrah, Callet, Manto Negro, Merlot"
+              },
+              "origin": "Mallorca",
+              "price": 28.00
+            },
+            {
+              "id": "mal-rosado-2",
+              "name": {
+                "es": "Alada",
+                "en": "Alada"
+              },
+              "detail": {
+                "es": "Vino Rosado de la Tierra de Mallorca",
+                "en": "Mallorca Rosé Wine"
+              },
+              "origin": "Mallorca",
+              "price": 30.00
+            }
+          ]
+        },
+        {
+          "type": "tinto",
+          "title": {
+            "es": "Tinto",
+            "en": "Red"
+          },
+          "items": [
+            {
+              "id": "mal-tinto-1",
+              "name": {
+                "es": "Obac",
+                "en": "Obac"
+              },
+              "detail": {
+                "es": "Merlot, Callet, Manto Negro, Syrah, Cabernet Sauvignon",
+                "en": "Merlot, Callet, Manto Negro, Syrah, Cabernet Sauvignon"
+              },
+              "origin": "Mallorca · Binigrau",
+              "price": 38.00
+            },
+            {
+              "id": "mal-tinto-2",
+              "name": {
+                "es": "Ribas Sió",
+                "en": "Ribas Sió"
+              },
+              "detail": {
+                "es": "Syrah, Cabernet Sauvignon, Merlot",
+                "en": "Syrah, Cabernet Sauvignon, Merlot"
+              },
+              "origin": "Mallorca · Bodegas Ribas",
+              "price": 45.00
+            },
+            {
+              "id": "mal-tinto-3",
+              "name": {
+                "es": "Finca Binigual Verán",
+                "en": "Finca Binigual Verán"
+              },
+              "detail": {
+                "es": "Syrah, Cabernet Sauvignon, Manto Negro",
+                "en": "Syrah, Cabernet Sauvignon, Manto Negro"
+              },
+              "origin": "Mallorca · Binissalem",
+              "price": 62.00
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "otros",
+      "order": 3,
+      "title": {
+        "es": "Otros Vinos",
+        "en": "More Wines"
+      },
+      "subtitle": {
+        "es": "Grandes denominaciones de España, Italia y Francia",
+        "en": "Distinguished appellations from Spain, Italy & France"
+      },
+      "subsections": [
+        {
+          "type": "blanco",
+          "title": {
+            "es": "Blanco",
+            "en": "White"
+          },
+          "items": [
+            {
+              "id": "otros-blanco-1",
+              "name": {
+                "es": "Sartori Pinot Grigio",
+                "en": "Sartori Pinot Grigio"
+              },
+              "detail": {
+                "es": "Pinot Grigio – Veneto, Italia",
+                "en": "Pinot Grigio – Veneto, Italy"
+              },
+              "origin": "Veneto, Italia",
+              "price": 26.00
+            },
+            {
+              "id": "otros-blanco-2",
+              "name": {
+                "es": "José Pariente",
+                "en": "José Pariente"
+              },
+              "detail": {
+                "es": "Verdejo – D.O. Rueda",
+                "en": "Verdejo – D.O. Rueda"
+              },
+              "origin": "D.O. Rueda",
+              "price": 30.00
+            },
+            {
+              "id": "otros-blanco-3",
+              "name": {
+                "es": "O Luar do Sil",
+                "en": "O Luar do Sil"
+              },
+              "detail": {
+                "es": "Godello – D.O. Valdeorras",
+                "en": "Godello – D.O. Valdeorras"
+              },
+              "origin": "D.O. Valdeorras",
+              "price": 32.00
+            },
+            {
+              "id": "otros-blanco-4",
+              "name": {
+                "es": "Terras Gauda",
+                "en": "Terras Gauda"
+              },
+              "detail": {
+                "es": "Albariño – D.O. Rías Baixas",
+                "en": "Albariño – D.O. Rías Baixas"
+              },
+              "origin": "D.O. Rías Baixas",
+              "price": 34.00
+            },
+            {
+              "id": "otros-blanco-5",
+              "name": {
+                "es": "Le Monde",
+                "en": "Le Monde"
+              },
+              "detail": {
+                "es": "Sauvignon Blanc – Friuli, Italia",
+                "en": "Sauvignon Blanc – Friuli, Italy"
+              },
+              "origin": "Friuli, Italia",
+              "price": 32.00
+            }
+          ]
+        },
+        {
+          "type": "rosado",
+          "title": {
+            "es": "Rosado",
+            "en": "Rosé"
+          },
+          "items": [
+            {
+              "id": "otros-rosado-1",
+              "name": {
+                "es": "Sartori Pinot Grigio Blush",
+                "en": "Sartori Pinot Grigio Blush"
+              },
+              "detail": {
+                "es": "Veneto, Italia",
+                "en": "Veneto, Italy"
+              },
+              "origin": "Veneto, Italia",
+              "price": 26.00
+            },
+            {
+              "id": "otros-rosado-2",
+              "name": {
+                "es": "Le Bijou de Sophie Valrose",
+                "en": "Le Bijou de Sophie Valrose"
+              },
+              "detail": {
+                "es": "Grenache, Cinsault, Syrah – Francia",
+                "en": "Grenache, Cinsault, Syrah – France"
+              },
+              "origin": "Languedoc, Francia",
+              "price": 32.00
+            },
+            {
+              "id": "otros-rosado-3",
+              "name": {
+                "es": "Rosa dei Frati, Cà dei Frati",
+                "en": "Rosa dei Frati, Cà dei Frati"
+              },
+              "detail": {
+                "es": "Groppello, Marzemino, Sangiovese, Barbera – Lombardia, Italia",
+                "en": "Groppello, Marzemino, Sangiovese, Barbera – Lombardia, Italy"
+              },
+              "origin": "Lombardia, Italia",
+              "price": 34.00
+            },
+            {
+              "id": "otros-rosado-4",
+              "name": {
+                "es": "Minuty M",
+                "en": "Minuty M"
+              },
+              "detail": {
+                "es": "Grenache, Cinsault – Côtes de Provence, Francia",
+                "en": "Grenache, Cinsault – Côtes de Provence, France"
+              },
+              "origin": "Côtes de Provence, Francia",
+              "price": 45.00
+            }
+          ]
+        },
+        {
+          "type": "tinto",
+          "title": {
+            "es": "Tinto",
+            "en": "Red"
+          },
+          "items": [
+            {
+              "id": "otros-tinto-1",
+              "name": {
+                "es": "Montepulciano d'Abruzzo",
+                "en": "Montepulciano d'Abruzzo"
+              },
+              "detail": {
+                "es": "Montepulciano – Abruzzo, Italia",
+                "en": "Montepulciano – Abruzzo, Italy"
+              },
+              "origin": "Abruzzo, Italia",
+              "price": 32.00
+            },
+            {
+              "id": "otros-tinto-2",
+              "name": {
+                "es": "Chianti Classico",
+                "en": "Chianti Classico"
+              },
+              "detail": {
+                "es": "Sangiovese – Toscana, Italia",
+                "en": "Sangiovese – Toscana, Italy"
+              },
+              "origin": "Toscana, Italia",
+              "price": 34.00
+            },
+            {
+              "id": "otros-tinto-3",
+              "name": {
+                "es": "Viña Mayor Crianza",
+                "en": "Viña Mayor Crianza"
+              },
+              "detail": {
+                "es": "Tempranillo – D.O. Ribera del Duero",
+                "en": "Tempranillo – D.O. Ribera del Duero"
+              },
+              "origin": "D.O. Ribera del Duero",
+              "price": 34.00
+            },
+            {
+              "id": "otros-tinto-4",
+              "name": {
+                "es": "Viña Eguía Reserva",
+                "en": "Viña Eguía Reserva"
+              },
+              "detail": {
+                "es": "Tempranillo – D.O.Ca. Rioja",
+                "en": "Tempranillo – D.O.Ca. Rioja"
+              },
+              "origin": "D.O.Ca. Rioja",
+              "price": 36.00
+            },
+            {
+              "id": "otros-tinto-5",
+              "name": {
+                "es": "Mezzapezza Primitivo",
+                "en": "Mezzapezza Primitivo"
+              },
+              "detail": {
+                "es": "Primitivo – Salento, Italia",
+                "en": "Primitivo – Salento, Italy"
+              },
+              "origin": "Salento, Italia",
+              "price": 38.00
+            },
+            {
+              "id": "otros-tinto-6",
+              "name": {
+                "es": "Le Volte dell'Ornellaia",
+                "en": "Le Volte dell'Ornellaia"
+              },
+              "detail": {
+                "es": "Cabernet Sauvignon, Merlot, Sangiovese – Toscana, Italia",
+                "en": "Cabernet Sauvignon, Merlot, Sangiovese – Toscana, Italy"
+              },
+              "origin": "Toscana, Italia",
+              "price": 58.00
+            },
+            {
+              "id": "otros-tinto-7",
+              "name": {
+                "es": "Aalto",
+                "en": "Aalto"
+              },
+              "detail": {
+                "es": "Tempranillo – D.O. Ribera del Duero",
+                "en": "Tempranillo – D.O. Ribera del Duero"
+              },
+              "origin": "D.O. Ribera del Duero",
+              "price": 75.00
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "espumosos",
+      "order": 4,
+      "title": {
+        "es": "Vinos Espumosos",
+        "en": "Sparkling Wines"
+      },
+      "subtitle": {
+        "es": "Burbujas finas, Prosecco italiano y grandes Champagnes franceses",
+        "en": "Fine bubbles, Italian Prosecco & grand French Champagnes"
+      },
+      "items": [
+        {
+          "id": "esp-1",
+          "name": {
+            "es": "Prosecco Brut Erfo Sartori",
+            "en": "Prosecco Brut Erfo Sartori"
+          },
+          "detail": {
+            "es": "Glera – Italia",
+            "en": "Glera – Italy"
+          },
+          "origin": "Veneto, Italia",
+          "type": "espumoso",
+          "price": 30.00
+        },
+        {
+          "id": "esp-2",
+          "name": {
+            "es": "Prosecco Rosé Erfo Sartori",
+            "en": "Prosecco Rosé Erfo Sartori"
+          },
+          "detail": {
+            "es": "Glera, Pinot Nero – Italia",
+            "en": "Glera, Pinot Nero – Italy"
+          },
+          "origin": "Veneto, Italia",
+          "type": "espumoso",
+          "price": 30.00
+        },
+        {
+          "id": "esp-3",
+          "name": {
+            "es": "Moët & Chandon Impérial Brut",
+            "en": "Moët & Chandon Impérial Brut"
+          },
+          "detail": {
+            "es": "Pinot Noir, Chardonnay – Champagne, Francia",
+            "en": "Pinot Noir, Chardonnay – Champagne, France"
+          },
+          "origin": "Champagne, Francia",
+          "type": "espumoso",
+          "price": 90.00
+        },
+        {
+          "id": "esp-4",
+          "name": {
+            "es": "Moët & Chandon Impérial Rosé Brut",
+            "en": "Moët & Chandon Impérial Rosé Brut"
+          },
+          "detail": {
+            "es": "Pinot Meunier, Pinot Noir, Chardonnay – Champagne, Francia",
+            "en": "Pinot Meunier, Pinot Noir, Chardonnay – Champagne, France"
+          },
+          "origin": "Champagne, Francia",
+          "type": "espumoso",
+          "price": 90.00
+        }
+      ]
+    }
+  ]
+}
+
