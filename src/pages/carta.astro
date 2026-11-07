@@ -2,8 +2,44 @@
 // Carta & Menú Digital Oficial · Buon Appetito (Port d'Andratx)
 import PizzaMenuLoader from '../components/PizzaMenuLoader.astro';
 import BuonAppetitoWordmark from '../components/ui/BuonAppetitoWordmark';
-const title = "Carta & Menú Digital | Buon Appetito • Port d'Andratx";
-const description = "Carta digital interactiva de Buon Appetito en Port d'Andratx. Cocina mediterránea tradicional italiana, pastas caseras, pizzas artesanales crujientes y pescados frescos de Mallorca.";
+import menuData from '../../public/data/menu.json';
+
+const title = "Carta & Menú Digital (105 Platos) | Buon Appetito • Port d'Andratx, Mallorca";
+const description = "Carta digital oficial de Buon Appetito en Port d'Andratx, Mallorca (ES/EN/DE). 105 platos de cocina mediterránea e italiana: pizzas artesanales, calzone tradicional, pastas con trufa, pescados frescos de lonja, paellas, carnes y opciones sin gluten.";
+const siteUrl = "https://restaurantebuonappetito.com";
+const canonicalUrl = `${siteUrl}/carta`;
+
+const cartaSchemaJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Menu",
+  "@id": `${canonicalUrl}#menu`,
+  "name": "Carta Oficial · Restaurante Buon Appetito Port d'Andratx, Mallorca",
+  "description": description,
+  "url": canonicalUrl,
+  "inLanguage": ["es", "en", "de"],
+  "mainEntityOfPage": canonicalUrl,
+  "hasMenuSection": (menuData.categories || []).map((cat: any) => ({
+    "@type": "MenuSection",
+    "name": `${cat.es} / ${cat.en} / ${cat.de}`,
+    "hasMenuItem": (menuData.items || [])
+      .filter((item: any) => item.category === cat.id)
+      .map((item: any) => ({
+        "@type": "MenuItem",
+        "name": item.es?.title || "",
+        "alternateName": [item.en?.title, item.de?.title].filter(Boolean),
+        "description": [
+          item.es?.description ? `ES: ${item.es.description}` : "",
+          item.en?.description ? `EN: ${item.en.description}` : "",
+          item.de?.description ? `DE: ${item.de.description}` : ""
+        ].filter(Boolean).join(" | "),
+        "offers": {
+          "@type": "Offer",
+          "price": typeof item.price === "number" ? item.price.toFixed(2) : String(item.price),
+          "priceCurrency": "EUR"
+        }
+      }))
+  }))
+};
 ---
 
 <!DOCTYPE html>
@@ -13,6 +49,22 @@ const description = "Carta digital interactiva de Buon Appetito en Port d'Andrat
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover" />
   <title>{title}</title>
   <meta name="description" content={description} />
+  <link rel="canonical" href={canonicalUrl} />
+  <link rel="alternate" type="text/plain" href="/llms.txt" title="Official AI & LLM Restaurant Guide" />
+  <link rel="alternate" type="text/plain" href="/llms-full.txt" title="Complete Menu & Wine List for AI Assistants" />
+
+  <meta property="og:site_name" content="Buon Appetito · Port d'Andratx" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:url" content={canonicalUrl} />
+  <meta property="og:image" content={`${siteUrl}/assets/og-buon-appetito.png`} />
+  <meta name="geo.region" content="ES-IB" />
+  <meta name="geo.placename" content="Port d'Andratx, Mallorca, Illes Balears" />
+  <meta name="geo.position" content="39.544344;2.388291" />
+  <meta name="ICBM" content="39.544344, 2.388291" />
+
+  <script type="application/ld+json" set:html={JSON.stringify(cartaSchemaJsonLd)} />
   
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <link rel="icon" type="image/png" sizes="192x192" href="/favicon-192x192.png" />
@@ -147,6 +199,33 @@ const description = "Carta digital interactiva de Buon Appetito en Port d'Andrat
     <div id="menu-content" class="menu-content-area">
       <!-- Se inyecta dinámicamente vía script -->
     </div>
+
+    <!-- Catálogo Semántico Estático (SSR) para Motores de IA Generativa (ChatGPT, Gemini, Claude, Perplexity) y Accesibilidad -->
+    <section
+      style="position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;"
+      aria-label="Carta completa de platos e ingredientes de Buon Appetito Port d'Andratx en Español, Inglés y Alemán"
+    >
+      <h2>Carta Completa · Restaurante Buon Appetito Port d'Andratx, Mallorca (ES / EN / DE)</h2>
+      <p>Dirección: Avenida Mateo Bosch, 24, 07157 Port d'Andratx, Mallorca. Abierto todos los días de 11:30 a 23:30 h. Opciones sin gluten (pizzas y pastas para celíacos) y vegetarianas disponibles.</p>
+      {(menuData.categories || []).map((cat: any) => {
+        const items = (menuData.items || []).filter((i: any) => i.category === cat.id);
+        return (
+          <article>
+            <h3>{cat.es} / {cat.en} / {cat.de}</h3>
+            <ul>
+              {items.map((item: any) => (
+                <li>
+                  <strong>{item.es?.title}</strong> {item.es?.description ? `(${item.es.description})` : ''} —
+                  <span lang="en">{item.en?.title} {item.en?.description ? `(${item.en.description})` : ''}</span> —
+                  <span lang="de">{item.de?.title} {item.de?.description ? `(${item.de.description})` : ''}</span> —
+                  <span>{typeof item.price === 'number' ? `${item.price.toFixed(2)} €` : item.price}</span>
+                </li>
+              ))}
+            </ul>
+          </article>
+        );
+      })}
+    </section>
   </main>
 
   <!-- ======================================================== -->

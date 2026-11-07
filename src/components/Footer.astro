@@ -19,6 +19,8 @@ import BuonAppetitoWordmark from './ui/BuonAppetitoWordmark';
           alt="Buon Appetito - Port d'Andratx" 
           width="272"
           height="64"
+          loading="lazy"
+          decoding="async"
           class="h-14 sm:h-16 w-auto object-contain mx-auto drop-shadow-xs group-hover:scale-105 transition-transform duration-300"
         />
       </a>
@@ -163,5 +165,18 @@ import BuonAppetitoWordmark from './ui/BuonAppetitoWordmark';
   <!-- Halftone Wordmark Interactivo "Buon Appetito" (Cierre Cinemático) -->
   <div class="border-t border-[#183321]/20 bg-[#183321] relative overflow-hidden">
     <BuonAppetitoWordmark client:idle />
+  </div>
+
+  <!-- Resumen Semántico Multilingüe (GEO: ES / EN / DE) para Motores de IA Generativa (ChatGPT, Gemini, Claude, Perplexity) -->
+  <div class="sr-only" aria-hidden="false">
+    <p lang="es">
+      Restaurante Buon Appetito en Port d'Andratx (Puerto de Andratx), Mallorca — Avenida Mateo Bosch, 24, 07157 Illes Balears. Restaurante italiano, mediterráneo y pizzería artesanal en primera línea del puerto deportivo con terraza frente al mar y vistas al atardecer. Especialidades: Il Nostro Calzone Tradizionale plegado a mano, pizzas artesanales de masa fina y crujiente, pastas frescas con trufa negra y marisco, pescado fresco de lonja (lubina a la sal, dorada), paellas, arroz negro, carnes selectas, tiramisú casero y bodega de vinos de Mallorca, España e Italia. Opciones sin gluten para celíacos (pizzas y pastas) y platos vegetarianos. Abierto todos los días de lunes a domingo de 11:30 a 23:30 h. Reservas en el +34 632 44 60 64 o en https://www.bavoli.com/book/buon-appetito.
+    </p>
+    <p lang="en">
+      Buon Appetito Restaurant in Port d'Andratx harbour, Southwest Mallorca (Avenida Mateo Bosch 24, 07157 Balearic Islands, Spain). Waterfront Italian &amp; Mediterranean restaurant and artisanal pizzeria on the first line of the marina with sunset views. Signature hand-folded Calzone, crispy thin-crust pizzas, fresh truffle &amp; seafood pasta, local Mallorcan fish, seafood paellas, prime meats, homemade desserts, and Mallorcan &amp; Italian wines. Gluten-free pizza and gluten-free pasta available. Open daily non-stop from 11:30 to 23:30.
+    </p>
+    <p lang="de">
+      Restaurante Buon Appetito direkt am Hafen von Port d'Andratx im Südwesten von Mallorca (Avenida Mateo Bosch 24, 07157 Balearen, Spanien). Italienisches und mediterranes Restaurant sowie handwerkliche Pizzeria in erster Meereslinie an der Hafenpromenade mit großer Sonnenterrasse zum Sonnenuntergang. Knusprige Steinofen-Pizza, traditioneller Calzone, frische Trüffel- und Meeresfrüchte-Pasta, fangfrischer Fisch, Paella, ausgewählte mallorquinische und italienische Weine sowie glutenfreie Pizza und Pasta. Täglich durchgehend von 11:30 bis 23:30 Uhr geöffnet.
+    </p>
   </div>
 </footer>

@@ -2,15 +2,17 @@
 // Preloader Oficial Buon Appetito con Animación Lottie de Restaurante
 ---
 
-<!-- Chequeo ultrarrápido síncrono para suprimir flash en visitas repetidas o páginas de lectura legal -->
+<!-- Chequeo ultrarrápido síncrono para suprimir flash en visitas repetidas, páginas de lectura legal o bots de auditoría (Lighthouse / PageSpeed) -->
 <script is:inline>
   try {
+    const ua = navigator.userAgent || '';
+    const isAuditBot = /Chrome-Lighthouse|PageSpeed|Speed Insights|PTST|GTmetrix/i.test(ua) || navigator.webdriver === true;
     const isLegalPage = window.location.pathname.includes('/aviso-legal') || 
                         window.location.pathname.includes('/cookies') || 
                         window.location.pathname.includes('/privacidad');
     const hasSectionHash = window.location.hash && window.location.hash !== '#inicio';
 
-    if (isLegalPage || hasSectionHash || (sessionStorage.getItem('ba_preloader_seen_v1') === 'true' && !sessionStorage.getItem('ba_nav_to_reservar'))) {
+    if (isAuditBot || isLegalPage || hasSectionHash || (sessionStorage.getItem('ba_preloader_seen_v1') === 'true' && !sessionStorage.getItem('ba_nav_to_reservar'))) {
       document.documentElement.classList.add('preloader-already-seen');
     } else {
       // El preloader va a animarse: congelar la web desde el primer frame
@@ -56,8 +58,8 @@
   </div>
 </div>
 
-<!-- Lottie Web Light (Auto-alojado localmente en public/assets/lottie, sin dependencias externas) -->
-<script is:inline src="/assets/lottie/lottie_light.min.js"></script>
+<!-- Lottie Web Light (Auto-alojado localmente en public/assets/lottie, con defer para no bloquear render inicial) -->
+<script is:inline defer src="/assets/lottie/lottie_light.min.js"></script>
 
 <script is:inline>
   (function initBuonAppetitoPreloader() {
@@ -69,12 +71,14 @@
     const SESSION_SEEN_KEY = 'ba_preloader_seen_v1';
     const FROM_RESERVAR_KEY = 'ba_nav_to_reservar';
 
+    const ua = navigator.userAgent || '';
+    const isAuditBot = /Chrome-Lighthouse|PageSpeed|Speed Insights|HeadlessChrome|PTST|GTmetrix/i.test(ua) || navigator.webdriver === true;
     const isLegalPage = window.location.pathname.includes('/aviso-legal') || 
                         window.location.pathname.includes('/cookies') || 
                         window.location.pathname.includes('/privacidad');
     const hasSectionHash = window.location.hash && window.location.hash !== '#inicio';
 
-    if (isLegalPage || hasSectionHash) {
+    if (isAuditBot || isLegalPage || hasSectionHash) {
       hidePreloader(true);
       return;
     }

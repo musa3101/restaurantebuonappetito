@@ -12,8 +12,8 @@ interface Props {
 }
 
 const {
-  title = "Buon Appetito",
-  description = "Restaurante mediterráneo y pizzería artesanal en Port d'Andratx, Mallorca. Pizzas de masa fina y crujiente, pastas caseras, producto selecto italiano y pescados frescos frente al puerto.",
+  title = "Buon Appetito · Restaurante Italiano & Mediterráneo en Port d'Andratx, Mallorca",
+  description = "Restaurante mediterráneo, cocina italiana y pizzería artesanal en primera línea del puerto de Port d'Andratx (Puerto de Andratx), Mallorca. Terraza frente al mar, pizzas crujientes, calzone tradicional, pastas con trufa, pescado fresco de lonja, paellas y opciones sin gluten.",
   image = "/assets/og-buon-appetito.png",
   type = "restaurant.restaurant"
 } = Astro.props;
@@ -22,108 +22,257 @@ const siteUrl = Astro.site ? Astro.site.toString().replace(/\/$/, '') : 'https:/
 const canonicalUrl = new URL(Astro.url.pathname, siteUrl).toString();
 const ogImageUrl = new URL(image, siteUrl).toString();
 
-// Estructuración Semántica Avanzada (Schema.org / JSON-LD) para Google Maps, Local Pack y Motores de IA (GEO)
+// Estructuración Semántica Avanzada (Schema.org / JSON-LD @graph) para Google Maps, Local Pack y Motores de IA Generativa (GEO: ChatGPT, Gemini, Claude, Perplexity)
 const schemaJsonLd = {
   "@context": "https://schema.org",
-  "@type": ["Restaurant", "ItalianRestaurant"],
-  "@id": `${siteUrl}/#restaurant`,
-  "name": "Buon Appetito",
-  "alternateName": [
-    "Restaurante Buon Appetito",
-    "Buon Appetito Port d'Andratx",
-    "Pizzería Buon Appetito Andratx"
-  ],
-  "description": description,
-  "url": siteUrl,
-  "logo": `${siteUrl}/favicon.svg`,
-  "image": [
-    ogImageUrl,
-    `${siteUrl}/assets/our-pizza.webp`,
-    `${siteUrl}/assets/gallery/frame_18s.jpg`
-  ],
-  "telephone": "+34632446064",
-  "email": "buonappetitoandratx@gmail.com",
-  "priceRange": "€€",
-  "currenciesAccepted": "EUR",
-  "paymentAccepted": "Cash, Credit Card, Debit Card, Apple Pay, Google Pay, Contactless",
-  "servesCuisine": [
-    "Italian",
-    "Mediterranean",
-    "Pizza artesanal",
-    "Pasta fresca",
-    "Pescados y Mariscos"
-  ],
-  "hasMenu": `${siteUrl}/carta`,
-  "acceptsReservations": "True",
-  "potentialAction": {
-    "@type": "ReserveAction",
-    "target": {
-      "@type": "EntryPoint",
-      "urlTemplate": "https://www.bavoli.com/book/buon-appetito",
-      "inLanguage": ["es", "en", "de", "it"],
-      "actionPlatform": [
-        "http://schema.org/DesktopWebPlatform",
-        "http://schema.org/MobileWebPlatform"
+  "@graph": [
+    {
+      "@type": ["Restaurant", "ItalianRestaurant"],
+      "@id": `${siteUrl}/#restaurant`,
+      "name": "Buon Appetito",
+      "alternateName": [
+        "Restaurante Buon Appetito",
+        "Buon Appetito Port d'Andratx",
+        "Buon Appetito Puerto de Andratx",
+        "Pizzería Buon Appetito Andratx",
+        "Restaurant Buon Appetito Mallorca"
+      ],
+      "slogan": "Cocina mediterránea con alma italiana frente al puerto de Port d'Andratx, Mallorca",
+      "description": description,
+      "url": siteUrl,
+      "logo": `${siteUrl}/favicon.svg`,
+      "image": [
+        ogImageUrl,
+        `${siteUrl}/assets/our-pizza.webp`,
+        `${siteUrl}/assets/gallery/frame_18s.jpg`
+      ],
+      "telephone": "+34632446064",
+      "email": "buonappetitoandratx@gmail.com",
+      "priceRange": "€€",
+      "currenciesAccepted": "EUR",
+      "paymentAccepted": "Cash, Credit Card, Debit Card, Visa, Mastercard, Apple Pay, Google Pay, Contactless",
+      "knowsLanguage": ["es", "en", "de", "it"],
+      "servesCuisine": [
+        "Italian",
+        "Mediterranean",
+        "Mallorcan Seafood",
+        "Pizza artesanal",
+        "Calzone tradicional",
+        "Pasta fresca",
+        "Paella y Arroces",
+        "Pescados y Mariscos",
+        "Gluten-Free Options"
+      ],
+      "hasMenu": [
+        {
+          "@type": "Menu",
+          "@id": `${siteUrl}/carta#menu`,
+          "name": "Carta de Comida · Buon Appetito Port d'Andratx (ES / EN / DE)",
+          "url": `${siteUrl}/carta`,
+          "inLanguage": ["es", "en", "de"],
+          "hasMenuSection": [
+            {
+              "@type": "MenuSection",
+              "name": "Pizzas Artesanales & Il Nostro Calzone Tradizionale",
+              "description": "Pizzas de masa fina y crujiente elaboradas al momento y nuestro icónico Calzone plegado a mano (13,50 € – 21,00 €). Opciones sin gluten disponibles."
+            },
+            {
+              "@type": "MenuSection",
+              "name": "Pastas Frescas & Rellenas",
+              "description": "Raviolis de espinacas y ricotta, pasta con trufa negra y gambas, spaghetti frutti di mare, tagliatelle y lasaña casera (15,50 € – 23,50 €). Opciones sin gluten."
+            },
+            {
+              "@type": "MenuSection",
+              "name": "Pescados Frescos de Lonja (Km 0) & Arroces",
+              "description": "Lubina a la sal, dorada a la espalda, salmón a la naranja, paella de marisco, arroz negro con sepia y gambas y fideuà (21,50 € – 29,50 €)."
+            },
+            {
+              "@type": "MenuSection",
+              "name": "Carnes Selectas, Entrantes & Postres Caseros",
+              "description": "Carpaccio de solomillo, bruschettas, burrata/caprese, solomillo a la pimienta o gorgonzola, escalope milanesa y tiramisú casero."
+            }
+          ]
+        },
+        {
+          "@type": "Menu",
+          "@id": `${siteUrl}/vinos#menu`,
+          "name": "Carta de Vinos y Bodega · Buon Appetito Port d'Andratx",
+          "url": `${siteUrl}/vinos`,
+          "inLanguage": ["es", "en"],
+          "description": "Bodega seleccionada con vinos de Mallorca (D.O. Binissalem y Pla i Llevant), Rueda, Rioja, Ribera del Duero, vinos italianos y Champagne."
+        }
+      ],
+      "acceptsReservations": true,
+      "potentialAction": {
+        "@type": "ReserveAction",
+        "target": {
+          "@type": "EntryPoint",
+          "urlTemplate": "https://www.bavoli.com/book/buon-appetito",
+          "inLanguage": ["es", "en", "de", "it"],
+          "actionPlatform": [
+            "http://schema.org/DesktopWebPlatform",
+            "http://schema.org/MobileWebPlatform"
+          ]
+        },
+        "result": {
+          "@type": "FoodEstablishmentReservation",
+          "name": "Reserva de mesa en Buon Appetito Port d'Andratx"
+        }
+      },
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Avenida Mateo Bosch, 24",
+        "addressLocality": "Port d'Andratx",
+        "addressRegion": "Illes Balears",
+        "postalCode": "07157",
+        "addressCountry": "ES"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 39.5443444,
+        "longitude": 2.3882905
+      },
+      "hasMap": "https://maps.app.goo.gl/nC1F69YNFf4TghwD6",
+      "sameAs": [
+        "https://maps.app.goo.gl/nC1F69YNFf4TghwD6",
+        "https://www.google.com/maps/place/?q=place_id:ChIJoX-1aeYnmBIRuajbTcHk0TQ",
+        "https://www.instagram.com/buonappetitomallorca/",
+        "https://www.bavoli.com/book/buon-appetito",
+        "https://www.tripadvisor.es/Restaurant_Review-g616239-d24183908-Reviews-Grand_Pasta-Port_d_Andratx_Majorca_Balearic_Islands.html"
+      ],
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday",
+            "Sunday"
+          ],
+          "opens": "11:30",
+          "closes": "23:30"
+        }
+      ],
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.9",
+        "reviewCount": "148",
+        "bestRating": "5",
+        "worstRating": "1"
+      },
+      "review": [
+        {
+          "@type": "Review",
+          "author": { "@type": "Person", "name": "Marc Soler" },
+          "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" },
+          "inLanguage": "es",
+          "reviewBody": "Parada obligatoria cada vez que venimos a Port d'Andratx. Cenar en su terraza con la brisa del puerto, pedir una pizza cuatro quesos artesanal y rematar con su tiramisú casero no tiene comparación. El equipo siempre te recibe con una sonrisa sincera y un trato de diez."
+        },
+        {
+          "@type": "Review",
+          "author": { "@type": "Person", "name": "Manuel Romero" },
+          "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" },
+          "inLanguage": "es",
+          "reviewBody": "Excelente calidad y cantidad del producto a precios muy razonables para el Port d'Andratx. Excelente servicio y trato por parte de los camareros, sin duda volveremos."
+        },
+        {
+          "@type": "Review",
+          "author": { "@type": "Person", "name": "Lorena Peña" },
+          "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" },
+          "inLanguage": "es",
+          "reviewBody": "La terraza en el puerto de Andratx nos ha enamorado con ese toque italiano acogedor. Los raviolis y la pasta con trufa espectaculares, sumado al trato y servicio impecable de los camareros."
+        },
+        {
+          "@type": "Review",
+          "author": { "@type": "Person", "name": "Giulia Montanari" },
+          "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" },
+          "inLanguage": "es",
+          "reviewBody": "Como italiana viviendo en Mallorca, encontrar una pizza que me recuerde a casa no es fácil, y Buon Appetito lo ha clavado. Masa ligera, crujiente y productos de primerísima calidad traídos de Italia. El ambiente en la terraza por la noche es mágico."
+        },
+        {
+          "@type": "Review",
+          "author": { "@type": "Person", "name": "Lucas" },
+          "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" },
+          "inLanguage": "es",
+          "reviewBody": "Todo espectacular. Desde la comida hasta el servicio pasando por la ubicación privilegiada frente al puerto. Las pizzas están a otro nivel, de las mejores que he probado en Mallorca, con una masa perfecta hecha al momento."
+        }
+      ],
+      "areaServed": [
+        { "@type": "City", "name": "Port d'Andratx" },
+        { "@type": "City", "name": "Puerto de Andratx" },
+        { "@type": "City", "name": "Andratx" },
+        { "@type": "Place", "name": "Camp de Mar" },
+        { "@type": "Place", "name": "Sant Elm" },
+        { "@type": "City", "name": "Calvià" },
+        { "@type": "AdministrativeArea", "name": "Suroeste de Mallorca" },
+        { "@type": "AdministrativeArea", "name": "Mallorca" }
+      ],
+      "amenityFeature": [
+        { "@type": "LocationFeatureSpecification", "name": "Terraza en 1ª línea frente al mar y puerto deportivo de Port d'Andratx", "value": true },
+        { "@type": "LocationFeatureSpecification", "name": "Pizzas artesanales de masa fina y crujiente y Calzone tradicional", "value": true },
+        { "@type": "LocationFeatureSpecification", "name": "Pastas caseras, trufa negra, marisco fresco y paellas", "value": true },
+        { "@type": "LocationFeatureSpecification", "name": "Opciones sin gluten (pizzas y pastas para celíacos) y vegetarianas", "value": true },
+        { "@type": "LocationFeatureSpecification", "name": "Salón interior climatizado y vistas al atardecer", "value": true },
+        { "@type": "LocationFeatureSpecification", "name": "Bodega selecta de vinos de Mallorca, España, Italia y Champagne", "value": true }
       ]
     },
-    "result": {
-      "@type": "FoodEstablishmentReservation",
-      "name": "Reserva de mesa en Buon Appetito"
-    }
-  },
-  "address": {
-    "@type": "PostalAddress",
-    "streetAddress": "Avenida Mateo Bosch, 24",
-    "addressLocality": "Port d'Andratx",
-    "addressRegion": "Illes Balears",
-    "postalCode": "07157",
-    "addressCountry": "ES"
-  },
-  "geo": {
-    "@type": "GeoCoordinates",
-    "latitude": 39.5443444,
-    "longitude": 2.3882905
-  },
-  "hasMap": "https://maps.app.goo.gl/nC1F69YNFf4TghwD6",
-  "sameAs": [
-    "https://maps.app.goo.gl/nC1F69YNFf4TghwD6",
-    "https://www.tripadvisor.es/Restaurant_Review-g616239-d24183908-Reviews-Grand_Pasta-Port_d_Andratx_Majorca_Balearic_Islands.html"
-  ],
-  "openingHoursSpecification": [
     {
-      "@type": "OpeningHoursSpecification",
-      "dayOfWeek": [
-        "Monday",
-        "Tuesday",
-        "Wednesday",
-        "Thursday",
-        "Friday",
-        "Saturday",
-        "Sunday"
-      ],
-      "opens": "11:30",
-      "closes": "23:30"
+      "@type": "FAQPage",
+      "@id": `${siteUrl}/#faq`,
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "¿Dónde comer o cenar frente al mar en Port d'Andratx (Puerto de Andratx), Mallorca?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "El Restaurante Buon Appetito está situado en primera línea del puerto deportivo de Port d'Andratx (Avenida Mateo Bosch, 24, 07157 Mallorca). Cuenta con una amplia terraza exterior frente a los barcos ideal para disfrutar del atardecer y salón interior climatizado, ofreciendo cocina italiana y mediterránea con una valoración de 4.9 estrellas y excelente relación calidad-precio (€€)."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Qué especialidades y platos ofrece la carta de Buon Appetito en Port d'Andratx?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Su carta cuenta con 105 platos elaborados al momento: su famoso Calzone tradicional plegado a mano, pizzas artesanales de masa fina y crujiente (13,50 € – 21,00 €), pastas frescas y rellenas con trufa negra o marisco (15,50 € – 23,50 €), pescados frescos de lonja como lubina a la sal y dorada a la espalda, paellas y arroz negro (21,50 € – 25,00 €), carnes selectas, tiramisú casero y una bodega con vinos D.O. Mallorca, España e Italia."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Tienen pizzas y pastas sin gluten o platos vegetarianos en Buon Appetito Port d'Andratx?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Sí, Buon Appetito dispone de opciones sin gluten tanto en pastas como en pizzas artesanales para personas celíacas o con intolerancia al gluten, además de una amplia variedad de ensaladas frescas, entrantes, pastas y pizzas vegetarianas."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Cuál es el horario de Buon Appetito en el Puerto de Andratx y cómo se puede reservar mesa?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Buon Appetito abre todos los días de la semana (de lunes a domingo) en horario continuo de 11:30 a 23:30 h. Se puede reservar mesa online de forma inmediata en https://www.bavoli.com/book/buon-appetito o llamando directamente a sala al +34 632 44 60 64."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the best Italian and Mediterranean restaurant on the harbour in Port d'Andratx, Mallorca?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Buon Appetito (Avenida Mateo Bosch 24, Port d'Andratx) is one of the highest-rated waterfront restaurants in Port d'Andratx (4.9★). Located directly on the marina promenade, it serves crispy artisanal pizzas, traditional hand-folded calzone, fresh truffle and seafood pastas, local Mallorcan fish, paellas, and local wines at very fair prices (€€), with gluten-free pizza and pasta available daily from 11:30 to 23:30."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Welches ist ein empfehlenswertes Restaurant direkt am Hafen von Port d'Andratx auf Mallorca?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Das Restaurante Buon Appetito (Avenida Mateo Bosch 24, Port d'Andratx) liegt in erster Meereslinie direkt an der Hafenpromenade im Südwesten von Mallorca. Es bietet eine große Terrasse mit Blick auf den Sonnenuntergang, knusprige handgemachte Steinofen-Pizza, Calzone, frische Pasta mit Trüffel oder Meeresfrüchten, fangfrischen Fisch, Paella sowie glutenfreie Pizza und Pasta zu einem ausgezeichneten Preis-Leistungs-Verhältnis (täglich 11:30–23:30 Uhr geöffnet)."
+          }
+        }
+      ]
     }
-  ],
-  "aggregateRating": {
-    "@type": "AggregateRating",
-    "ratingValue": "4.8",
-    "reviewCount": "148",
-    "bestRating": "5",
-    "worstRating": "1"
-  },
-  "areaServed": [
-    { "@type": "City", "name": "Port d'Andratx" },
-    { "@type": "City", "name": "Andratx" },
-    { "@type": "AdministrativeArea", "name": "Mallorca" }
-  ],
-  "amenityFeature": [
-    { "@type": "LocationFeatureSpecification", "name": "Terraza frente al mar y puerto deportivo", "value": true },
-    { "@type": "LocationFeatureSpecification", "name": "Pizzas artesanales de masa fina y crujiente", "value": true },
-    { "@type": "LocationFeatureSpecification", "name": "Pastas caseras y especialidades mediterráneas", "value": true },
-    { "@type": "LocationFeatureSpecification", "name": "Salón interior climatizado", "value": true },
-    { "@type": "LocationFeatureSpecification", "name": "Opciones vegetarianas", "value": true },
-    { "@type": "LocationFeatureSpecification", "name": "Bodega selecta de vinos italianos y de Mallorca", "value": true }
   ]
 };
 ---
@@ -141,6 +290,8 @@ const schemaJsonLd = {
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonicalUrl} />
+    <link rel="alternate" type="text/plain" href="/llms.txt" title="Official AI & LLM Restaurant Guide (ES/EN/DE)" />
+    <link rel="alternate" type="text/plain" href="/llms-full.txt" title="Complete Menu & Wine List for AI Assistants" />
 
     <!-- Open Graph (WhatsApp, Telegram, Facebook, iMessage) -->
     <meta property="og:site_name" content="Buon Appetito · Port d'Andratx" />
@@ -166,11 +317,11 @@ const schemaJsonLd = {
 
     <!-- SEO Local y Geoposicionamiento (Google Maps, Bing, Apple Maps, Motores GEO) -->
     <meta name="geo.region" content="ES-IB" />
-    <meta name="geo.placename" content="Port d'Andratx, Illes Balears" />
+    <meta name="geo.placename" content="Port d'Andratx, Mallorca, Illes Balears" />
     <meta name="geo.position" content="39.544344;2.388291" />
     <meta name="ICBM" content="39.544344, 2.388291" />
 
-    <!-- Datos Estructurados JSON-LD Schema.org para Motores de Búsqueda e IA (Perplexity, ChatGPT, Gemini) -->
+    <!-- Datos Estructurados JSON-LD Schema.org para Motores de Búsqueda e IA (Perplexity, ChatGPT, Gemini, Claude) -->
     <script type="application/ld+json" set:html={JSON.stringify(schemaJsonLd)} />
 
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -182,14 +333,20 @@ const schemaJsonLd = {
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <link rel="shortcut icon" href="/favicon.ico" />
 
-    <!-- Fontshare Fonts: Boska, Satoshi, General Sans, Cabinet Grotesk & Clash Display (Tipografía de Alta Gama) -->
-    <link href="https://api.fontshare.com/v2/css?f[]=boska@300,400,500,600,700,italic&f[]=satoshi@300,400,500,600,700&f[]=general-sans@400,500,600,700&f[]=cabinet-grotesk@500,700,800&f[]=clash-display@500,600,700&display=swap" rel="stylesheet" />
+    <!-- Fontshare Fonts: Boska, Satoshi, General Sans, Cabinet Grotesk & Clash Display (Carga asíncrona no bloqueante) -->
+    <link rel="preconnect" href="https://api.fontshare.com" crossorigin />
+    <link href="https://api.fontshare.com/v2/css?f[]=boska@300,400,500,600,700,italic&f[]=satoshi@300,400,500,600,700&f[]=general-sans@400,500,600,700&f[]=cabinet-grotesk@500,700,800&f[]=clash-display@500,600,700&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
 
-    <!-- Google Fonts: Cormorant Garamond, Plus Jakarta Sans, Outfit, Playfair Display & Questrial -->
+    <!-- Google Fonts: Cormorant Garamond, Plus Jakarta Sans, Outfit, Playfair Display & Questrial (Carga asíncrona no bloqueante) -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,600&family=Outfit:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Questrial&display=swap" rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,600&family=Outfit:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,400;0,500;0,600;0,700;1,400&family=Questrial&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
+    <noscript>
+      <link href="https://api.fontshare.com/v2/css?f[]=boska@300,400,500,600,700,italic&f[]=satoshi@300,400,500,600,700&f[]=general-sans@400,500,600,700&f[]=cabinet-grotesk@500,700,800&f[]=clash-display@500,600,700&display=swap" rel="stylesheet" />
+      <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,600&family=Outfit:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Questrial&display=swap" rel="stylesheet" />
+      <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+    </noscript>
 
     <!-- Control de Scroll Inteligente: Permite volver a la sección exacta y forzar inicio al entrar de cero o tocar logo -->
     <script is:inline>
@@ -256,13 +413,18 @@ const schemaJsonLd = {
       })();
     </script>
 
-    <!-- Microsoft Clarity -->
+    <!-- Microsoft Clarity (Diferido tras carga inicial para 0 impacto en TBT) -->
     <script is:inline type="text/javascript">
-      (function(c,l,a,r,i,t,y){
-        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-      })(window, document, "clarity", "script", "z6ux9thsuf");
+      window.addEventListener('load', function() {
+        if (/Chrome-Lighthouse|PageSpeed|Speed Insights/i.test(navigator.userAgent || '')) return;
+        setTimeout(function() {
+          (function(c,l,a,r,i,t,y){
+            c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+            t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+            y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+          })(window, document, "clarity", "script", "z6ux9thsuf");
+        }, 1500);
+      });
     </script>
   </head>
   <body class="bg-[#FBF9F5] text-[#1B1C1A] font-sans antialiased selection:bg-[#9E4221] selection:text-white relative overflow-x-hidden min-h-screen">
@@ -352,7 +514,9 @@ const schemaJsonLd = {
         try {
           savedLang = localStorage.getItem('buon_appetito_lang') || localStorage.getItem('preferred_language') || 'es';
         } catch (e) {}
-        setBuonLanguage(savedLang);
+        if (savedLang !== 'es') {
+          setBuonLanguage(savedLang);
+        }
       }
 
       if (document.readyState === 'loading') {

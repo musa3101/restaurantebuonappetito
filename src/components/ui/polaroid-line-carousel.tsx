@@ -213,11 +213,28 @@ export default function PolaroidLineCarousel({
   const totalCount = allSlides.length;
 
   const [dragging, setDragging] = React.useState(false);
+  const [inView, setInView] = React.useState(false);
   const [size, setSize] = React.useState({ w: 1200, h: 500, cw: cardWidth });
 
   const rootRef = React.useRef<HTMLDivElement | null>(null);
   const pathRef = React.useRef<SVGPathElement | null>(null);
   const cards = React.useRef<(HTMLDivElement | null)[]>([]);
+
+  React.useEffect(() => {
+    const root = rootRef.current;
+    if (!root) return;
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setInView(true);
+          io.disconnect();
+        }
+      },
+      { rootMargin: "350px 0px" }
+    );
+    io.observe(root);
+    return () => io.disconnect();
+  }, []);
 
   // Simulation physics state
   const sim = React.useRef({
@@ -479,11 +496,12 @@ export default function PolaroidLineCarousel({
           <div className="pl-print">
             <div className="pl-shot">
               <img
-                src={sl.image}
+                src={inView ? sl.image : "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"}
                 alt={sl.alt || sl.title || ""}
                 style={{ objectPosition: sl.objectPosition || "center" }}
                 draggable={false}
                 loading="lazy"
+                decoding="async"
               />
             </div>
             <div className="pl-note">

@@ -1,24 +1,57 @@
-# Robots.txt · Buon Appetito (Port d'Andratx)
+# Robots.txt · Buon Appetito (Port d'Andratx, Mallorca)
 User-agent: *
 Allow: /
 Disallow: /admin
 Disallow: /api/
 
-# AI Crawlers & LLM Search (GEO: Google AI Overviews, Perplexity, OpenAI, Anthropic, Apple)
-User-agent: Google-Extended
+# AI Search & Generative Engine Optimization (GEO: ChatGPT Search, Gemini, Claude, Perplexity, Apple Intelligence)
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
 Allow: /
 
 User-agent: GPTBot
 Allow: /
 
-User-agent: PerplexityBot
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Googlebot
 Allow: /
 
 User-agent: ClaudeBot
 Allow: /
 
+User-agent: Claude-Web
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Perplexity-User
+Allow: /
+
+User-agent: Applebot
+Allow: /
+
 User-agent: Applebot-Extended
 Allow: /
 
-# Sitemap
+User-agent: Meta-ExternalAgent
+Allow: /
+
+User-agent: DuckAssistBot
+Allow: /
+
+User-agent: bingbot
+Allow: /
+
+# Official LLM Guides & Sitemaps
+# LLMs-Txt: https://restaurantebuonappetito.com/llms.txt
+# LLMs-Full-Txt: https://restaurantebuonappetito.com/llms-full.txt
+Sitemap: https://restaurantebuonappetito.com/sitemap-index.xml
 Sitemap: https://restaurantebuonappetito.com/sitemap.xml
