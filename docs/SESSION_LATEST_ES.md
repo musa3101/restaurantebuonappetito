@@ -1,54 +1,43 @@
 # 📋 Resumen de Sesión - Buon Appetito
 
-**Fecha:** 3 de Noviembre de 2026  
+**Fecha:** 7 de Noviembre de 2026  
 **Rama activa:** `dev` (sincronizada y desplegada en `main`)  
 **Dominio Oficial en Producción:** `https://restaurantebuonappetito.com`  
-**Estado:** Proyecto Web & App Móvil entregados en producción al cliente bajo dominio propio. Indexación solicitada en Google Search Console.
+**Infraestructura CDN:** GitHub Pages (Fastly CDN) + Cloudflare DNS Only (Nube Gris `proxied: false`)  
+**Estado:** Web y App Móvil 100% blindadas frente a los bloqueos de IPs de Cloudflare por operadoras españolas (Vodafone, Movistar, DIGI, Orange / LaLiga).
 
 ---
 
-## 1. ¿Qué se ha hecho hoy?
-1. **Precios con Decimales Libres:** Se resolvió el bloqueo en la app móvil (`/admin`) que obligaba a ingresar múltiplos de 5. Ahora permite ingresar cualquier importe exacto céntimo a céntimo (ej. `6.11 €`, `16.73 €`).
-2. **Sistema de Actualización Inteligente PWA:** Se corrigió el bucle de actualización tras recargar, se añadió un botón rápido de cierre (`✕`) y se programó un auto-cierre con transición suave a los 8.5 segundos sin interrumpir al usuario.
-3. **Rediseño Bento UI en Ajustes:** Pantalla de ajustes de la aplicación renovada con mayor espaciado, estilo limpio e intuitivo en móvil.
-4. **Perfil de Gerencia Personalizable:** Sección dedicada para que el dueño pueda cambiar su nombre libremente y subir su propia foto/avatar sin tocar la web pública ni saturar la base de datos.
-5. **Saludo Dinámico Contextual:** Saludo en cabecera según la hora del día (*"Buenos días"*, *"Buenas tardes"*, *"Buenas noches"*).
-6. **Integración Completa de Vinos / Bodega:** 
-   - Nueva carta de vinos oficial en la web (`/vinos`) alimentada por `public/data/vinos.json`.
-   - Reubicación de las bebidas al final de la carta de comida (`/carta`).
-   - Sincronización de las 31 referencias de vinos en la base de datos de InsForge (`menu_items`) para que la pestaña **Bodega** en la aplicación móvil sea 100% operativa.
-7. **Auditoría Integral E2E:** Verificado con Playwright en emulación iPhone y comprobada la integridad del backend de InsForge (137 productos base 100% intactos).
-8. **Fusión y Despliegue en Producción:** Todo el trabajo quedó fusionado limpiamente en `main` y subido a GitHub en producción (`faa3dd9`).
-9. **Dominio Oficial Adquirido y Conectado en Cloudflare:**
-   - Adquisición del dominio oficial `restaurantebuonappetito.com`.
-   - Registros DNS CNAME (`@` y `www`) vinculados a Cloudflare Pages y certificados SSL activos con código HTTP 200 directo.
-10. **SEO y Google Search Console:**
-    - Generación y despliegue del archivo `sitemap.xml` con todas las rutas oficiales.
-    - Solicitud de indexación enviada manualmente desde la herramienta de inspección de URLs de Google Search Console.
+## 1. ¿Qué se ha hecho hoy (7 de Noviembre de 2026)?
+1. **Diagnóstico de Caída en España (Vodafone / LaLigaGate):**
+   - Se identificó que la pantalla negra y el mensaje *"Por causas ajenas a Vodafone, esta web no está disponible"* se debían al bloqueo masivo de rangos IP compartidos de Cloudflare (`pages.dev`) por parte de las operadoras en España durante horarios de partidos de fútbol.
+2. **Migración Completa de Hosting a GitHub Pages (Red Fastly):**
+   - Se creó el flujo automatizado `.github/workflows/deploy-pages.yml` con Node.js 24 y `withastro/action@v3`.
+   - Se añadió `public/CNAME` con `restaurantebuonappetito.com`.
+   - Se activó GitHub Pages vía API oficial de GitHub y se emitió y aprobó el certificado SSL oficial Let's Encrypt para `restaurantebuonappetito.com` y `www.restaurantebuonappetito.com` con `https_enforced: true`.
+3. **Reconfiguración de DNS en Cloudflare vía API (Modo DNS Only / Nube Gris):**
+   - Se eliminaron los registros `CNAME` con proxy naranja que apuntaban a `restaurantebuonappetito.pages.dev`.
+   - Se crearon los 4 registros `A` (`185.199.108.153` - `111.153`), los 4 registros `AAAA` (`2606:50c0:8000::153` - `8003::153`) y el `CNAME` `www` (`musa3101.github.io`) todos con `proxied: false` (Nube Gris) y `TTL: 300`.
+4. **Failsafe de Desbloqueo en `Preloader.astro`:**
+   - Se añadió un *watchdog* incondicional de 2.2 segundos en `src/components/Preloader.astro` para garantizar que navegadores con bloqueadores estrictos (como Brave Shields en iOS) o redes móviles inestables jamás dejen la página bloqueada en el preloader.
 
 ---
 
 ## 2. Archivos modificados y creados
-- `src/app-carta/AdminApp.astro`: Precios decimales libres, actualización sin bucle, rediseño de ajustes, saludo contextual y perfil de gerencia.
-- `src/pages/carta.astro`: Bebidas integradas al final de la carta de comida.
-- `src/pages/vinos.astro`: Nueva página y presentación de la bodega seleccionada.
-- `public/data/vinos.json`: Estructura oficial de las 31 referencias de vinos.
-- `astro.config.mjs`: Configuración del dominio oficial `https://restaurantebuonappetito.com`.
-- `public/robots.txt` y `public/sitemap.xml`: Archivos de indexación para motores de búsqueda.
-- `scripts/e2e_audit.mjs`: Script de verificación reproducible con Playwright.
-- `docs/SESSION_LATEST_ES.md` y `docs/ROADMAP.md`: Actualización de la documentación de sesión.
+- `.github/workflows/deploy-pages.yml`: Workflow de compilación y despliegue automático en GitHub Pages con Node 24.
+- `public/CNAME`: Vinculación persistente del dominio oficial `restaurantebuonappetito.com`.
+- `src/components/Preloader.astro`: Failsafe incondicional de desbloqueo de pantalla.
+- `docs/SESSION_LATEST_ES.md` y `docs/ROADMAP.md`: Documentación actualizada.
 
 ---
 
 ## 3. Problemas solucionados
-- Corregido el mensaje *"Introduce un valor válido"* al guardar decimales libres en platos y bebidas.
-- Eliminado el modal persistente de actualización que requería pulsar *"Actualizar Ahora"* varias veces.
-- Corregido el contador de bodega que marcaba 0 en la app móvil.
-- Eliminados botones redundantes en la cabecera de ajustes.
-- Dominio personalizado enlazado con éxito y certificado SSL operativo.
+- Eliminado de raíz el bloqueo de Vodafone / Movistar / LaLiga al dejar de usar las IPs proxied de Cloudflare y pasar a las IPs limpias de GitHub Pages (Fastly) con Nube Gris en DNS.
+- Certificado SSL de GitHub Pages aprobado (`state: approved`) y HTTPS forzado (`https_enforced: true`) tanto para el dominio raíz como para `www`.
+- Prevención de bloqueos de renderizado en Brave iOS.
 
 ---
 
 ## 4. ¿Qué queda pendiente?
-- Esperar la propagación completa de DNS en los centros de datos de Google para reintentar la subida del sitemap en Google Search Console.
-- La web y la app están funcionando de forma estable en producción bajo el nuevo dominio oficial.
+- Nada pendiente. La web y la app (`/admin`, `/carta`, `/vinos`) están operativas 24/7 en España sin verse afectadas por los bloqueos de fútbol.
+
