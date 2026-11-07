@@ -19,8 +19,25 @@
       if (document.body) {
         document.body.classList.add('preloader-lock');
       }
+      // Failsafe absoluto: si por bloqueadores (Brave Shields) o red móvil inestable el script principal tarda, desbloquear siempre a los 2.2s
+      setTimeout(function() {
+        document.documentElement.classList.remove('preloader-lock');
+        document.documentElement.classList.add('preloader-already-seen');
+        if (document.body) {
+          document.body.classList.remove('preloader-lock');
+          document.body.style.backgroundColor = '';
+        }
+        var p = document.getElementById('site-preloader');
+        if (p) {
+          p.classList.add('preloader-hidden');
+          p.style.pointerEvents = 'none';
+        }
+      }, 2200);
     }
-  } catch (e) {}
+  } catch (e) {
+    document.documentElement.classList.remove('preloader-lock');
+    document.documentElement.classList.add('preloader-already-seen');
+  }
 </script>
 
 <div id="site-preloader" class="site-preloader" aria-hidden="true">
